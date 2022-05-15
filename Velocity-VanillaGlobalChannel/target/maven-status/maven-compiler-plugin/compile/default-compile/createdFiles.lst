@@ -1,0 +1,5 @@
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\PlayerData.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ConfigManager.class
+velocity-plugin.json
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\DataPack.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\VanillaGlobalChannel.class

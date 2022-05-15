@@ -1,0 +1,14 @@
+#中央服务器IP地址
+CentralServer-IP: 127.0.0.1:8084
+#关于该MC服务器的信息
+MinecraftServer:
+  #用于验证连接的编号，账号和密码
+  Net-ServerID: -1
+  Net-Account: none
+  Net-Password: none
+  #玩家默认加入的频道ID，默认为1
+  Net-DefaultChannelID: 1
+#消息过滤
+Message-Filter:
+  - "操你妈"
+  - "傻逼"
