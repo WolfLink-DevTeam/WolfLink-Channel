@@ -1,5 +1,13 @@
 org\vanillacommunity\plugin\velocity\vanillaglobalchannel\PlayerData.class
-org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ConfigManager.class
-velocity-plugin.json
-org\vanillacommunity\plugin\velocity\vanillaglobalchannel\DataPack.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\NetTransManager.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ClientDataPack.class
 org\vanillacommunity\plugin\velocity\vanillaglobalchannel\VanillaGlobalChannel.class
+velocity-plugin.json
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\OnLoginEvent.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ChannelManager$2.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ChannelManager.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\MainCommand.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\Tools.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ConfigManager.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ChannelManager$1.class
+org\vanillacommunity\plugin\velocity\vanillaglobalchannel\OnChatEvent.class

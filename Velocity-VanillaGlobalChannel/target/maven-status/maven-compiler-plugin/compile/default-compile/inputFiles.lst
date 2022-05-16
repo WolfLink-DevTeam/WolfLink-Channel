@@ -1,4 +1,10 @@
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\MainCommand.java
 I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\PlayerData.java
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ChannelManager.java
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\NetTransManager.java
 I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ConfigManager.java
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\OnLoginEvent.java
 I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\VanillaGlobalChannel.java
-I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\DataPack.java
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\ClientDataPack.java
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\OnChatEvent.java
+I:\Minecraft服务器\插件\Velocity-VanillaGlobalChannel\src\main\java\org\vanillacommunity\plugin\velocity\vanillaglobalchannel\Tools.java
