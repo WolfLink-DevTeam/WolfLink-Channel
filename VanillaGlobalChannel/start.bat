@@ -1,1 +1,0 @@
-"C:\Program Files\Java\jdk-17.0.2\bin\java.exe" -jar VanillaGlobalChannel-0.0.1-SNAPSHOT.jar
