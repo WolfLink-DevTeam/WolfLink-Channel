@@ -1,0 +1,8 @@
+org\vanillacommunity\vanillaglobalchannel\velocity\VelocityPlayer.class
+org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnLeaveEvent.class
+org\vanillacommunity\vanillaglobalchannel\velocity\Velocity.class
+org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnLoginEvent.class
+org\vanillacommunity\vanillaglobalchannel\velocity\command\MainCommand.class
+velocity-plugin.json
+org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnChatEvent.class
+org\vanillacommunity\vanillaglobalchannel\velocity\VelocityAdapter.class

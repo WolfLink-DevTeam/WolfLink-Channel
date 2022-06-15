@@ -1,0 +1,5 @@
+name: Bukkit
+version: '${project.version}'
+main: org.vanillacommunity.vanillaglobalchannel.bukkit.Bukkit
+api-version: 1.15
+authors: [ MikkoAyaka ]

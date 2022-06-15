@@ -1,0 +1,46 @@
+package org.vanillacommunity.vanillaglobalchannel.common.player;
+
+import org.vanillacommunity.vanillaglobalchannel.common.channel.ChannelManager;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+public class PlayerData {
+
+    IPlayer iPlayer;
+    public static Map<UUID,PlayerData> dataMap = new HashMap<>();
+
+    private String displayName;
+    private final UUID uuid;
+    private int channelID;
+    public PlayerData(String name,UUID uuid,IPlayer iPlayer)
+    {
+        this.iPlayer = iPlayer;
+        this.displayName = name;
+        this.uuid = uuid;
+        channelID = -1;
+        dataMap.put(uuid,this);
+    }
+
+    public int getChannelID() {
+        return channelID;
+    }
+    public boolean setChannelID(int id)
+    {
+        if(id == -1)
+        {
+            ChannelManager.getInstance().changeChannel(uuid,channelID,-1);
+            channelID = -1;
+            return true;
+        }
+        if(ChannelManager.getInstance().getChannelMap().containsKey(id))
+        {
+            ChannelManager.getInstance().getChannelMap().get(id).showAnnouncement(iPlayer);
+            ChannelManager.getInstance().changeChannel(uuid,channelID,id);
+            channelID = id;
+            return true;
+        }
+        return false;
+    }
+}
