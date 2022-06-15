@@ -14,11 +14,14 @@ import java.util.Map;
 @Data
 public class ChannelManager {
 
-    Map<Integer,Channel> channelMap = new HashMap<>();
-    List<Channel> channelList = new ArrayList<>();
+    Map<Integer,Channel> channelMap;
+    List<Channel> channelList;
 
     public ChannelManager()
-    {}
+    {
+        channelList = new ArrayList<>();
+        channelMap = new HashMap<>();
+    }
     public void init()
     {
         channelList.forEach(channel -> channelMap.put(channel.getId(),channel));

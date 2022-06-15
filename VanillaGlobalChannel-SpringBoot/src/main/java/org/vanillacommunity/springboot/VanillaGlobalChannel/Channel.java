@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Channel {
 
-    private final int id;
-    private final String displayname;
+    private int id;
+    private String displayname;
     private String announcement;
 
     @Override
