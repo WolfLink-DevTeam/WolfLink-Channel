@@ -1,0 +1,18 @@
+#修改Springboot服务端口
+server:
+  port: 14514
+#在这里添加服务器，请确保每个服务器的ID都是独一无二的！其他的无所谓，不为空就行。
+mcserver:
+  serverlist:
+    - id: 1
+      displayname: "§6狼与香辛料亭"
+      account: "spiceandwolf"
+      password: "RZDNKjA8shRWfMrvP6KvCCP8KX8m140ynW7nuMmUDKuU4Ct4DGKt8kCH480kEgxhdTPSiek7LCKm3MuPy5WiBuikNt7cQTm5Brpj7H2mtle5Q09oNM0dIAXu0QfK5Q2W"
+    - id: 2
+      displayname: "§d璎珞"
+      account: "yingluo"
+      password: "B4aX2yd5CEZUH0W6rhVhwmxtMj8OWk8kfeSdRrjm7SmqeaV6BASpt9yQgeliGFPlb1KK36bIKt631AjRZ1HirPGuLbEReIuGHapZnU15qEnx408xMpkXGMfdDO6HQrMj"
+    - id: 3
+      displayname: "§2Miyazono的服务器"
+      account: "miyazono"
+      password: "oPECxgF9r5OEqdpY03FKUdmexxVX58CYLvMIJcENgmnKXn8pVoCtrq9FqY03fmykgx6Ob2xch3aTJOJ8cNbGzi6QXFPAKOkFTfj8A6fQdf0QidRMohj66jIclDSvxfLX"
