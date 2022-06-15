@@ -7,6 +7,7 @@ import org.jetbrains.annotations.NotNull;
 import org.vanillacommunity.vanillaglobalchannel.common.ConfigManager;
 import org.vanillacommunity.vanillaglobalchannel.common.channel.ChannelManager;
 import org.vanillacommunity.vanillaglobalchannel.common.mcserver.MCServerManager;
+import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerData;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,7 +50,13 @@ public class WebSocketListenerImpl extends WebSocketListener {
     @Override
     public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable throwable, Response response) {
         super.onFailure(webSocket, throwable, response);
-        Timer timer = new Timer();
+
+        for(PlayerData playerData : PlayerData.dataMap.values())
+        {
+            playerData.setChannelID(-1);
+        }
+
+            Timer timer = new Timer();
         timer.schedule(new TimerTask() {
                            @Override
                            public void run() {

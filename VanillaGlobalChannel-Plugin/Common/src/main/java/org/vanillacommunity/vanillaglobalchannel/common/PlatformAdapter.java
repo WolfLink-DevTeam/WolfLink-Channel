@@ -16,6 +16,8 @@ public class PlatformAdapter{
             {
                 switch (platformSign) {
                     case VELOCITY -> instance = (PlatformAdapter) Class.forName("org.vanillacommunity.vanillaglobalchannel.velocity.VelocityAdapter").getConstructor().newInstance();
+                    case BUNGEECORD -> instance = (PlatformAdapter) Class.forName("org.vanillacommunity.vanillaglobalchannel.bungeecord.BungeecordAdapter").getConstructor().newInstance();
+                    case BUKKIT -> instance = (PlatformAdapter) Class.forName("org.vanillacommunity.vanillaglobalchannel.bukkit.BukkitAdapter").getConstructor().newInstance();
                 }
             } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e)
             { e.printStackTrace();}
