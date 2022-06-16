@@ -37,11 +37,7 @@ https://www.mcbbs.net/thread-1234992-1-1.html
   
 ## 使用效果
 
-\[图片\]
-\[图片\]
-\[图片\]
-
-好吧好吧开玩笑的啦，我还没截图，今天晚点弄，别急
+![image](https://user-images.githubusercontent.com/77883323/173993829-7ef82ba4-ab3c-4b8a-9205-df129dedd2da.png)
 
 ## 部署方式
   
