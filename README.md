@@ -75,10 +75,11 @@ XXXXX搭建的频道：xx.xx.xx.xx:xxxxx (这里是简要介绍频道特点)
   
 ## 关于源码  
   
-**开源协议** CC BY-NC-SA 4.0 [https://creativecommons.org/licenses/by-nc-sa/4.0/]  
+**开源协议** GNU Affero General Public License v3.0
+[https://choosealicense.com/licenses/agpl-3.0/#]
 
 这里我又忍不住多说两句了。  
-首先这是开源的，我愿意把我写的代码拿出来与任何人分享，  
+首先这是在AGPv3协议下开源的，我愿意把我写的代码拿出来与任何人分享，  
 也不需要大家遵守过多的约定，仅有一条：  
 请勿使用该源码开发付费项目。  
 其他的，包括作者声明什么的，随便大家改都无所谓，  
