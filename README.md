@@ -75,6 +75,8 @@ XXXXX搭建的频道：xx.xx.xx.xx:xxxxx (这里是简要介绍频道特点)
   
 ## 关于源码  
   
+**开源协议** CC BY-NC-SA 4.0 [https://creativecommons.org/licenses/by-nc-sa/4.0/]  
+
 这里我又忍不住多说两句了。  
 首先这是开源的，我愿意把我写的代码拿出来与任何人分享，  
 也不需要大家遵守过多的约定，仅有一条：  
