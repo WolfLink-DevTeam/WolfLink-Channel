@@ -8,7 +8,8 @@ MinecraftServer:
   Net-Password: none
   #玩家默认加入的频道ID，默认为1
   Net-DefaultChannelID: 1
-#消息过滤
+#消息过滤模式：1为出现敏感词汇则整句消息屏蔽，2为遮挡敏感词，0为不做处理
+Message-Filter-Mode: 1
 Message-Filter:
   - "操你妈"
   - "傻逼"

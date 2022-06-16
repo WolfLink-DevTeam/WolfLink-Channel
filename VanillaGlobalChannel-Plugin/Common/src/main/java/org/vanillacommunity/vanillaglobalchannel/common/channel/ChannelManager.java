@@ -1,5 +1,8 @@
 package org.vanillacommunity.vanillaglobalchannel.common.channel;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.vanillacommunity.vanillaglobalchannel.common.*;
 import org.vanillacommunity.vanillaglobalchannel.common.network.DataPack;
 import org.vanillacommunity.vanillaglobalchannel.common.network.NetTransManager;
@@ -107,6 +110,23 @@ public class ChannelManager {
     public void broadcast(int channelID,String message)
     {
         if(!channelUserMap.containsKey(channelID))return;
+
+        switch (ConfigManager.filterMode)
+        {
+            case 1:
+                for(String filterWords : ConfigManager.filterList)
+                {
+                    if(message.contains(filterWords))return;
+                }
+                break;
+            case 2:
+                for(String filterWords : ConfigManager.filterList)
+                {
+                    message = message.replaceAll(filterWords, "*".repeat(filterWords.length()));
+                }
+                break;
+        }
+
         for(UUID uuid : channelUserMap.get(channelID))
         {
             IPlayer iPlayer = PlayerManager.getInstance().getPlayer(uuid);

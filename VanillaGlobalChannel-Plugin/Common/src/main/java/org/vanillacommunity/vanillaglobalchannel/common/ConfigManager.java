@@ -39,6 +39,7 @@ public class ConfigManager {
     public static int serverID;
     public static String centralServerIP;
     public static List<String> filterList;
+    public static int filterMode;
 
     private ConfigManager(){}
 
@@ -88,6 +89,7 @@ public class ConfigManager {
         account = config.getNode("MinecraftServer").getNode("Net-Account").getString("none");
         password = config.getNode("MinecraftServer").getNode("Net-Password").getString("none");
         centralServerIP = config.getNode("CentralServer-IP").getString();
+        filterMode = config.getNode("Message-Filter-Mode").getInt(0);
         filterList = config.getNode("Message-Filter").getList(TypeToken.of(String.class));
         channelMessageFormat = config.getNode("Channel-Message-Format").getString();
         cmdPrefix = config.getNode("Language").getNode("CmdPrefix").getString();

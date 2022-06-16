@@ -1,0 +1,3 @@
+name: Bungeecord-VanillaGlobalChannel
+version: '1.0-SNAPSHOT'
+main: org.vanillacommunity.vanillaglobalchannel.bungeecord.Bungeecord
