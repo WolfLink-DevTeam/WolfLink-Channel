@@ -51,11 +51,11 @@ Bungeecord/Bukkit/Velocity
   
 (提示：Bungeecord服务端需要在服务端启动脚本里面添加 -Dfile.encoding=UTF-8 启动参数，否则中文会乱码哦)
 
-**不同服务端插件生成的配置文件夹名字不同**
-Bukkit服务端：BukkitVGC
-Bungeecord服务端：Bungeecord-VanillaGlobalChannel
-Velocity服务端：velocityglobalchannel
-**但是配置文件内容一致！**
+**不同服务端插件生成的配置文件夹名字不同**  
+Bukkit服务端：BukkitVGC  
+Bungeecord服务端：Bungeecord-VanillaGlobalChannel  
+Velocity服务端：velocityglobalchannel  
+**但是配置文件内容一致！**  
 
 ### 接入大型公开聊天服务器(普通服主推荐方案！)
   
