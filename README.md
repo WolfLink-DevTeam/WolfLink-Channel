@@ -39,6 +39,9 @@ https://www.mcbbs.net/thread-1234992-1-1.html
 因此，服务器与服务器之间即使不处于同一个群组环境下，或者不处于同一个网络环境中，  
 仍然能够实现跨服聊天！  
 一定要找个什么东西来比喻一下的话，这就像是MC内置的简易聊天室吧，就像早期的QQ那样。  
+目前支持的服务端：
+Bungeecord/Bukkit/Velocity
+所有基于Bukkit的服务端理论上都能够正常使用！例如Loliserver，Purpur，Mohist，Spigot...
   
 ## 使用效果
 
