@@ -6,7 +6,7 @@
 
     <groupId>org.vanillacommunity.vanillaglobalchannel</groupId>
     <artifactId>Bungeecord</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.3-Beta</version>
     <packaging>jar</packaging>
 
     <name>Bungeecord</name>

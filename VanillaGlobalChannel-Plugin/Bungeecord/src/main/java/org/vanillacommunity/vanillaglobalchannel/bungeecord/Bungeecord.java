@@ -37,6 +37,8 @@ public final class Bungeecord extends Plugin {
 
     @Override
     public void onDisable() {
+
+        Main.getInstance().onShutdown();
         // Plugin shutdown logic
     }
 }

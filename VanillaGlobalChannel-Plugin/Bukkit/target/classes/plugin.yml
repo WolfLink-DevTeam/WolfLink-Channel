@@ -1,0 +1,9 @@
+name: BukkitVGC
+version: '1.0.2-Beta'
+main: org.vanillacommunity.vanillaglobalchannel.bukkit.Bukkit
+api-version: 1.15
+authors: [ MikkoAyaka ]
+commands:
+  vgc:
+    aliases:
+      - vanillaglobalchannel

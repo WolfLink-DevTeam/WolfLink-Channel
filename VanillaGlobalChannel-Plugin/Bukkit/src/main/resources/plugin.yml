@@ -1,5 +1,9 @@
-name: Bukkit
+name: BukkitVGC
 version: '${project.version}'
 main: org.vanillacommunity.vanillaglobalchannel.bukkit.Bukkit
 api-version: 1.15
 authors: [ MikkoAyaka ]
+commands:
+  vgc:
+    aliases:
+      - vanillaglobalchannel

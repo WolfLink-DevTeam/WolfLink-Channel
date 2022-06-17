@@ -1,0 +1,7 @@
+org\vanillacommunity\vanillaglobalchannel\bukkit\BukkitAdapter.class
+org\vanillacommunity\vanillaglobalchannel\bukkit\BukkitPlayer.class
+org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnLoginEvent.class
+org\vanillacommunity\vanillaglobalchannel\bukkit\command\MainCommand.class
+org\vanillacommunity\vanillaglobalchannel\bukkit\Bukkit.class
+org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnChatEvent.class
+org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnLeaveEvent.class
