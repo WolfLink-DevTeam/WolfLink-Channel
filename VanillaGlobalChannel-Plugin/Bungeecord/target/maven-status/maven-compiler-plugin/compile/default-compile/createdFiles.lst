@@ -1,7 +1,0 @@
-org\vanillacommunity\vanillaglobalchannel\bungeecord\Bungeecord.class
-org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnChatEvent.class
-org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnLoginEvent.class
-org\vanillacommunity\vanillaglobalchannel\bungeecord\BungeecordAdapter.class
-org\vanillacommunity\vanillaglobalchannel\bungeecord\BungeecordPlayer.class
-org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnLeaveEvent.class
-org\vanillacommunity\vanillaglobalchannel\bungeecord\command\MainCommand.class
