@@ -1,0 +1,3 @@
+name: Bungeecord-VanillaGlobalChannel
+version: '${project.version}'
+main: org.vanillacommunity.vanillaglobalchannel.bungeecord.Bungeecord
