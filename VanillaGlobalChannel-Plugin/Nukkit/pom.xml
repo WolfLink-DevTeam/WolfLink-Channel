@@ -5,11 +5,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.vanillacommunity.vanillaglobalchannel</groupId>
-    <artifactId>Nukkit</artifactId>
+    <artifactId>VGC-Nukkit</artifactId>
     <version>1.0.0</version>
     <packaging>jar</packaging>
 
-    <name>Nukkit</name>
+    <name>VGC-Nukkit</name>
 
     <properties>
         <java.version>1.8</java.version>
