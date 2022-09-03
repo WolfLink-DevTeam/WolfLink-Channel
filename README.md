@@ -45,8 +45,8 @@ https://www.mcbbs.net/thread-1234992-1-1.html
 仍然能够实现跨服聊天！  
 一定要找个什么东西来比喻一下的话，这就像是MC内置的简易聊天室吧，就像早期的QQ那样。  
 目前支持的服务端：
-Bungeecord/Bukkit/Velocity
-所有基于Bukkit的服务端理论上都能够正常使用！例如Loliserver，Purpur，Mohist，Spigot...
+Bungeecord/Bukkit/Velocity/Nukkit
+所有基于Bukkit/Nukkit的服务端理论上都能够正常使用！例如Loliserver，Purpur，Mohist，Spigot, NukkitX, PNX…
   
 ## 使用效果
 
@@ -58,6 +58,7 @@ Bungeecord/Bukkit/Velocity
 
 **不同服务端插件生成的配置文件夹名字不同**  
 Bukkit服务端：BukkitVGC  
+Nukkit服务端：NukkitVGC
 Bungeecord服务端：Bungeecord-VanillaGlobalChannel  
 Velocity服务端：velocityglobalchannel  
 **但是配置文件内容一致！**  
@@ -67,6 +68,7 @@ Velocity服务端：velocityglobalchannel
 目前存在的大型公开聊天服务器如下：  
   
 MikkoAyaka搭建的频道：43.248.79.66:30004 (氛围温馨，正版公益服居多，素质高，聊天人数较少)  
+刀鸽搭建的频道：r9-1.s.imc.re:34021 (多为Nukkit服，需要接入请联系QQ: 3523206925)
 XXXXX搭建的频道：xx.xx.xx.xx:xxxxx (这里是简要介绍频道特点)  
   
 1. 下载VanillaGlobalChannel-Plugin插件，根据自己服务端类型下载对应的插件。

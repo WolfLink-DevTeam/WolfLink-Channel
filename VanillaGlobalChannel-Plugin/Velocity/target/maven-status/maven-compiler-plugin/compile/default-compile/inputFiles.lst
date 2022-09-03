@@ -1,7 +1,7 @@
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\command\MainCommand.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\VelocityAdapter.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnLeaveEvent.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\VelocityPlayer.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnLoginEvent.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\Velocity.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnChatEvent.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnLeaveEvent.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnLoginEvent.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\command\MainCommand.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\VelocityAdapter.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\VelocityPlayer.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\Velocity.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Velocity\src\main\java\org\vanillacommunity\vanillaglobalchannel\velocity\listener\OnChatEvent.java
