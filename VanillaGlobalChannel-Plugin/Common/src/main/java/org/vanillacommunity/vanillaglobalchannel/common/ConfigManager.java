@@ -64,7 +64,7 @@ public class ConfigManager {
         }
 
         if (!file.exists()) {
-            try (InputStream input = getClass().getResourceAsStream("/" + file.getName())) {
+            try (InputStream input = getClass().getModule().getResourceAsStream("/" + file.getName())) {
                 if (input != null) {
                     Files.copy(input, file.toPath());
                 } else {
