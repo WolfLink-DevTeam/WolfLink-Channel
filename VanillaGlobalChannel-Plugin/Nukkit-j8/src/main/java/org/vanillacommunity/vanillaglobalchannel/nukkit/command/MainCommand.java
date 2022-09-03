@@ -13,8 +13,7 @@ import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerData;
 public class MainCommand extends Command {
 
     public MainCommand(String name) {
-        super(name);
-        this.commandParameters.clear();
+        super(name, "聊天频道插件");
         this.commandParameters.put("help",new CommandParameter[]{});
         this.commandParameters.put("channel-default",new CommandParameter[]{
                 CommandParameter.newEnum("channel", new String[]{"channel"})
