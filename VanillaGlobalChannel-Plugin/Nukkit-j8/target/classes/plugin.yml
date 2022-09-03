@@ -1,0 +1,5 @@
+name: NukkitVGC
+version: '1.0.0'
+main: org.vanillacommunity.vanillaglobalchannel.nukkit.Nukkit
+api: ["1.0.13"]
+author: daoge_cmd

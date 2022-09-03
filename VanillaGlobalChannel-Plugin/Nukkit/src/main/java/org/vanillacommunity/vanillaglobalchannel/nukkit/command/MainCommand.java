@@ -3,6 +3,8 @@ package org.vanillacommunity.vanillaglobalchannel.nukkit.command;
 import cn.nukkit.Player;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
+import cn.nukkit.command.data.CommandParamType;
+import cn.nukkit.command.data.CommandParameter;
 import org.vanillacommunity.vanillaglobalchannel.common.ConfigManager;
 import org.vanillacommunity.vanillaglobalchannel.common.channel.ChannelManager;
 import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerData;
@@ -12,7 +14,18 @@ public class MainCommand extends Command {
 
     public MainCommand(String name) {
         super(name);
-        this.setPermission("nukkitvgc.maincommand");
+        this.commandParameters.clear();
+        this.commandParameters.put("help",new CommandParameter[]{});
+        this.commandParameters.put("channel-default",new CommandParameter[]{
+                CommandParameter.newEnum("channel", new String[]{"channel"})
+        });
+        this.commandParameters.put("channel",new CommandParameter[]{
+                CommandParameter.newEnum("channel", new String[]{"channel"}),
+                CommandParameter.newType("id", CommandParamType.INT)
+        });
+        this.commandParameters.put("leave",new CommandParameter[]{
+                CommandParameter.newEnum("leave", new String[]{"leave"})
+        });
     }
 
     @Override
