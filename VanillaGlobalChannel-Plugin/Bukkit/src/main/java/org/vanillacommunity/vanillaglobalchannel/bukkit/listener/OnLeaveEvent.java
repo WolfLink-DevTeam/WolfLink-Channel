@@ -21,5 +21,7 @@ public class OnLeaveEvent implements Listener {
         
         PlayerData.dataMap.remove(p.getUniqueId());
         PlayerManager.getInstance().getPlayerMap().remove(p.getUniqueId());
+        PlayerData playerData = PlayerData.dataMap.get(p.getUniqueId());
+        playerData.setChannelID(-1);
     }
 }
