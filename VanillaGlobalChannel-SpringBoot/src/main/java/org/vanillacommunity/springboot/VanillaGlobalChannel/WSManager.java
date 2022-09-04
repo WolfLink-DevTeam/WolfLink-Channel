@@ -1,19 +1,24 @@
 package org.vanillacommunity.springboot.VanillaGlobalChannel;
 
 import lombok.Getter;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.Session;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.Map;
 
 @Component("wsManager")
+@EnableScheduling
 public class WSManager {
 
     @Getter
     // 服务器ID → 当前链接
     private final HashMap<Integer, Session> sessionMap = new HashMap<>();
-
     public void add(int serverID,Session session)
     {
         sessionMap.put(serverID,session);
@@ -69,6 +74,13 @@ public class WSManager {
         {
             if(session == null)continue;
             sendMessage(session,message);
+        }
+    }
+
+    @Scheduled(fixedRate=30*1000)
+    private void heartBeat() throws IOException {
+        for (Map.Entry<Integer, Session> sessionEntry : sessionMap.entrySet()) {
+            sessionEntry.getValue().getBasicRemote().sendPing(ByteBuffer.wrap("heartbeat".getBytes()));
         }
     }
 }
