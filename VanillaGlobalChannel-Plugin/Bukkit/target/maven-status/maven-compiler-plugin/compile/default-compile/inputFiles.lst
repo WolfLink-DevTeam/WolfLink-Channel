@@ -1,7 +1,7 @@
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\Bukkit.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\command\MainCommand.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnChatEvent.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\BukkitPlayer.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\BukkitAdapter.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnLeaveEvent.java
-D:\编程开发\项目源码\Minecraft\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnLoginEvent.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\BukkitPlayer.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\BukkitAdapter.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnChatEvent.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnLoginEvent.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\Bukkit.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\command\MainCommand.java
+C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bukkit\src\main\java\org\vanillacommunity\vanillaglobalchannel\bukkit\listener\OnLeaveEvent.java

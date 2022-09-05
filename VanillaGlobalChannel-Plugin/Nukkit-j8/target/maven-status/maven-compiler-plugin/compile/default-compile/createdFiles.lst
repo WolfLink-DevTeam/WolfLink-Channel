@@ -1,0 +1,7 @@
+org\vanillacommunity\vanillaglobalchannel\nukkit\listener\OnChatEvent.class
+org\vanillacommunity\vanillaglobalchannel\nukkit\NukkitAdapter.class
+org\vanillacommunity\vanillaglobalchannel\nukkit\NukkitPlayer.class
+org\vanillacommunity\vanillaglobalchannel\nukkit\Nukkit.class
+org\vanillacommunity\vanillaglobalchannel\nukkit\listener\OnLeaveEvent.class
+org\vanillacommunity\vanillaglobalchannel\nukkit\listener\OnLoginEvent.class
+org\vanillacommunity\vanillaglobalchannel\nukkit\command\MainCommand.class
