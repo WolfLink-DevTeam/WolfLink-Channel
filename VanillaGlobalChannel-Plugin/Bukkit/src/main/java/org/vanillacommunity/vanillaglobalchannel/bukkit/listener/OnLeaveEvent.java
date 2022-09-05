@@ -4,6 +4,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.vanillacommunity.vanillaglobalchannel.common.ConfigManager;
+import org.vanillacommunity.vanillaglobalchannel.common.channel.ChannelManager;
 import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerData;
 import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerManager;
 
