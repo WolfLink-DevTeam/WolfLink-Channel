@@ -32,4 +32,8 @@ public final class Nukkit extends PluginBase {
         this.getServer().getPluginManager().registerEvents(new OnLeaveEvent(),this);
         this.getServer().getPluginManager().registerEvents(new OnLoginEvent(),this);
     }
+    @Override
+    public void onDisable(){
+        Main.getInstance().onShutdown();
+    }
 }

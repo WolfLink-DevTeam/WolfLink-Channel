@@ -15,6 +15,7 @@ public class NetTransManager {
             .readTimeout(10L,TimeUnit.SECONDS)
             .writeTimeout(10L,TimeUnit.SECONDS)
             .connectTimeout(10L,TimeUnit.SECONDS)
+            .pingInterval(15,TimeUnit.SECONDS)
             .build();
 
     private WebSocket webSocket;
@@ -35,6 +36,7 @@ public class NetTransManager {
         Request request = new Request.Builder().url(connectURL).build();
 
         webSocket = httpClient.newWebSocket(request,new WebSocketListenerImpl());
+
     }
     public void parseDataPack(String dataPackStr)
     {

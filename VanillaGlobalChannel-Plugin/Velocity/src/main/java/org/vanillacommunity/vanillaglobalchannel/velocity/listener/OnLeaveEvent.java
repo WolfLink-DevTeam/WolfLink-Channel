@@ -3,6 +3,7 @@ package org.vanillacommunity.vanillaglobalchannel.velocity.listener;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.DisconnectEvent;
 import com.velocitypowered.api.proxy.Player;
+import net.kyori.adventure.text.Component;
 import org.vanillacommunity.vanillaglobalchannel.common.ConfigManager;
 import org.vanillacommunity.vanillaglobalchannel.common.channel.ChannelManager;
 import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerData;

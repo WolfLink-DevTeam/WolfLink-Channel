@@ -53,7 +53,12 @@
             </resource>
         </resources>
     </build>
-
+    <repositories>
+        <repository>
+            <id>opencollab-repo-snapshot</id>
+            <url>https://repo.opencollab.dev/maven-snapshots/</url>
+        </repository>
+    </repositories>
     <dependencies>
         <dependency>
             <groupId>cn.nukkit</groupId>
