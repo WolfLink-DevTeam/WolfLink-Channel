@@ -5,10 +5,8 @@
 关于这个异地跨服聊天系统，有什么建议或者Bug的话，最好是发issues里面哦  
 如果不想发issue，嫌麻烦，可以加我QQ 3401286177 私聊直接告诉我也可以  
 
-别骂啦别骂啦，我知道这个系统目前存在感很低，主要是玩家大多数不知道有这么个频道，  
-而且不进频道没有任何提示消息，我在下次更新中会做出相应的改进的！  
-比如当频道静默许久，突然有人说话，这时在所有收到消息的服务器广播一条公告，  
-类似这样："\[公告\]跨服频道里有人正在聊天哦？加入频道请输入/vgc channel"
+Velocity那边的无法正常使用...等断时间我重构吧  
+Bukkit的我自己一直用着的，目前没发现任何Bug哦  
   
 ## 开发理念
   
@@ -58,7 +56,7 @@ Bungeecord/Bukkit/Velocity/Nukkit
 
 **不同服务端插件生成的配置文件夹名字不同**  
 Bukkit服务端：BukkitVGC  
-Nukkit服务端：NukkitVGC
+Nukkit服务端：NukkitVGC  
 Bungeecord服务端：Bungeecord-VanillaGlobalChannel  
 Velocity服务端：velocityglobalchannel  
 **但是配置文件内容一致！**  
@@ -68,7 +66,7 @@ Velocity服务端：velocityglobalchannel
 目前存在的大型公开聊天服务器如下：  
   
 MikkoAyaka搭建的频道：43.248.79.66:30004 (氛围温馨，正版公益服居多，素质高，聊天人数较少)  
-刀鸽搭建的频道：r9-1.s.imc.re:34021 (多为Nukkit服，需要接入请联系QQ: 3523206925)
+刀鸽搭建的频道：r9-1.s.imc.re:34021 (多为Nukkit服，需要接入请联系QQ: 3523206925)  
 XXXXX搭建的频道：xx.xx.xx.xx:xxxxx (这里是简要介绍频道特点)  
   
 1. 下载VanillaGlobalChannel-Plugin插件，根据自己服务端类型下载对应的插件。
