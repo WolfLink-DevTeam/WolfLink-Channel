@@ -16,9 +16,6 @@ public class OnLeaveEvent implements Listener {
         ProxiedPlayer p = e.getPlayer();
         PlayerData playerData = PlayerData.dataMap.get(p.getUniqueId());
         playerData.setChannelID(-1);
-        p.sendMessage(ConfigManager.commandLeave);
-        // On player leave game -> channel gc
-
         PlayerData.dataMap.remove(p.getUniqueId());
         PlayerManager.getInstance().getPlayerMap().remove(p.getUniqueId());
     }

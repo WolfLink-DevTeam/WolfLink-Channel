@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Component("wsManager")
-@EnableScheduling
 public class WSManager {
 
     @Getter
@@ -72,15 +71,8 @@ public class WSManager {
     {
         for(Session session : sessionMap.values())
         {
-            if(session == null)continue;
+            if(session == null || !session.isOpen())continue;
             sendMessage(session,message);
-        }
-    }
-
-    @Scheduled(fixedRate=30*1000)
-    private void heartBeat() throws IOException {
-        for (Map.Entry<Integer, Session> sessionEntry : sessionMap.entrySet()) {
-            sessionEntry.getValue().getBasicRemote().sendPing(ByteBuffer.wrap("heartbeat".getBytes()));
         }
     }
 }

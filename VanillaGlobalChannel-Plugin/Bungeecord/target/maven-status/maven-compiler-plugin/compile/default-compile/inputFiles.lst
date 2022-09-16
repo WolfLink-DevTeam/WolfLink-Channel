@@ -1,7 +1,7 @@
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\Bungeecord.java
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\BungeecordPlayer.java
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnLeaveEvent.java
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\command\MainCommand.java
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnChatEvent.java
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\BungeecordAdapter.java
-C:\Users\连远皓\IdeaProjects\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnLoginEvent.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\BungeecordPlayer.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnChatEvent.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\BungeecordAdapter.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnLeaveEvent.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\command\MainCommand.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\listener\OnLoginEvent.java
+D:\编程开发\项目源码\VanillaGlobalChannel\VanillaGlobalChannel-Plugin\Bungeecord\src\main\java\org\vanillacommunity\vanillaglobalchannel\bungeecord\Bungeecord.java
