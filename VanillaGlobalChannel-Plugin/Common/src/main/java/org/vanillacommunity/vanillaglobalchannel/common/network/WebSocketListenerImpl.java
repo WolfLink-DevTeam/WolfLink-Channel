@@ -30,14 +30,14 @@ public class WebSocketListenerImpl extends WebSocketListener {
     @Override
     public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
         super.onMessage(webSocket, text);
-        if(text.startsWith("[频道信息]"))
+        if(text.startsWith("[Channel]"))
         {
-            ChannelManager.getInstance().bindChannelsInfo(text.substring(6));
+            ChannelManager.getInstance().bindChannelsInfo(text.substring(9));
             return;
         }
-        if(text.startsWith("[服务器信息]"))
+        if(text.startsWith("[MCServer]"))
         {
-            MCServerManager.getInstance().bindServerInfo(text.substring(7));
+            MCServerManager.getInstance().bindServerInfo(text.substring(10));
             return;
         }
         NetTransManager.getInstance().parseDataPack(text);

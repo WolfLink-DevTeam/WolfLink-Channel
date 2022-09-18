@@ -65,7 +65,7 @@ public class ChannelManager {
     }
     public void lookupChannelsInfo()
     {
-        NetTransManager.getInstance().getWebSocket().send("获取所有频道信息");
+        NetTransManager.getInstance().getWebSocket().send("GetChannelInfo");
     }
     public void bindChannelsInfo(String str)
     {

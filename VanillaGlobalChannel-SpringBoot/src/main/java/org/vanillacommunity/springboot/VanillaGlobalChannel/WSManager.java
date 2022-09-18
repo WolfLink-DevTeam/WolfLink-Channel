@@ -53,7 +53,7 @@ public class WSManager {
     {
         if(session == null)
         {
-            System.out.println("[DEBUG] 尝试给一个关闭的连接发送消息！");
+            System.out.println("[DEBUG] connection had been closed！");
             return false;
         }
         try
@@ -62,7 +62,7 @@ public class WSManager {
             return true;
         } catch (IOException e)
         {
-            System.out.println("[DEBUG] 消息发送失败");
+            System.out.println("[DEBUG] message failed to send");
             e.printStackTrace();
             return false;
         }

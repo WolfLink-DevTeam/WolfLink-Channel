@@ -27,7 +27,7 @@ public class MCServerManager{
     public void init()
     {
         System.out.println(ConfigManager.serverInfo1);
-        NetTransManager.getInstance().getWebSocket().send("获取所有服务器信息");
+        NetTransManager.getInstance().getWebSocket().send("GetServerInfo");
     }
     public void bindServerInfo(String str)
     {
