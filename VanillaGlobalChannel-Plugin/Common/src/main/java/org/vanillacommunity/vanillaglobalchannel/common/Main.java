@@ -1,6 +1,6 @@
 package org.vanillacommunity.vanillaglobalchannel.common;
 
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
+import org.spongepowered.configurate.serialize.SerializationException;
 import org.vanillacommunity.vanillaglobalchannel.common.channel.ChannelManager;
 import org.vanillacommunity.vanillaglobalchannel.common.network.NetTransManager;
 
@@ -21,9 +21,8 @@ public class Main {
         try
         {
             ConfigManager.getInstance().init();
-        } catch (ObjectMappingException e)
-        {
-            e.printStackTrace();
+        } catch (SerializationException e) {
+            throw new RuntimeException(e);
         }
         NetTransManager.getInstance().init();
     }

@@ -6,7 +6,7 @@
 
     <groupId>org.vanillacommunity.vanillaglobalchannel</groupId>
     <artifactId>Common</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3</version>
     <dependencies>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -21,13 +21,13 @@
         <dependency>
             <groupId>org.spongepowered</groupId>
             <artifactId>configurate-core</artifactId>
-            <version>3.7.2</version>
+            <version>4.1.2</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.spongepowered</groupId>
             <artifactId>configurate-yaml</artifactId>
-            <version>3.7.2</version>
+            <version>4.1.2</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

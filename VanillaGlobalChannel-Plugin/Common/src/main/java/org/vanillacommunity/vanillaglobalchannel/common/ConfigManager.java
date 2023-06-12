@@ -1,9 +1,8 @@
 package org.vanillacommunity.vanillaglobalchannel.common;
-
-import com.google.common.reflect.TypeToken;
-import ninja.leaping.configurate.ConfigurationNode;
-import ninja.leaping.configurate.objectmapping.ObjectMappingException;
-import ninja.leaping.configurate.yaml.YAMLConfigurationLoader;
+import io.leangen.geantyref.TypeToken;
+import org.spongepowered.configurate.ConfigurationNode;
+import org.spongepowered.configurate.serialize.SerializationException;
+import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,7 +63,7 @@ public class ConfigManager {
         }
 
         if (!file.exists()) {
-            try (InputStream input = getClass().getModule().getResourceAsStream("/" + file.getName())) {
+            try (InputStream input = getClass().getResourceAsStream("/" + file.getName())) {
                 if (input != null) {
                     Files.copy(input, file.toPath());
                 } else {
@@ -78,7 +77,7 @@ public class ConfigManager {
         ConfigurationNode result = null;
         try
         {
-            result = YAMLConfigurationLoader.builder().setFile(file).build().load();
+            result = YamlConfigurationLoader.builder().file(file).build().load();
         } catch (IOException e)
         {
             e.printStackTrace();
@@ -86,50 +85,50 @@ public class ConfigManager {
         return result;
     }
 
-    public void init() throws ObjectMappingException {
+    public void init() throws SerializationException {
         if(config == null)config = loadConfig(PlatformAdapter.getInstance().getPath());
-        defaultChannelID = config.getNode("MinecraftServer").getNode("Net-DefaultChannelID").getInt(1);
-        serverID = config.getNode("MinecraftServer").getNode("Net-ServerID").getInt(-1);
-        account = config.getNode("MinecraftServer").getNode("Net-Account").getString("none");
-        password = config.getNode("MinecraftServer").getNode("Net-Password").getString("none");
-        centralServerIP = config.getNode("CentralServer-IP").getString();
-        filterMode = config.getNode("Message-Filter-Mode").getInt(0);
-        filterList = config.getNode("Message-Filter").getList(TypeToken.of(String.class));
-        channelMessageFormat = config.getNode("Channel-Message-Format").getString();
-        cmdPrefix = config.getNode("Language").getNode("CmdPrefix").getString();
-        msgPrefix = config.getNode("Language").getNode("MsgPrefix").getString();
+        defaultChannelID = config.node( "MinecraftServer").node("Net-DefaultChannelID").getInt(1);
+        serverID = config.node("MinecraftServer").node("Net-ServerID").getInt(-1);
+        account = config.node("MinecraftServer").node("Net-Account").getString("none");
+        password = config.node("MinecraftServer").node("Net-Password").getString("none");
+        centralServerIP = config.node("CentralServer-IP").getString();
+        filterMode = config.node("Message-Filter-Mode").getInt(0);
+        filterList = config.node("Message-Filter").getList(TypeToken.get(String.class));
+        channelMessageFormat = config.node("Channel-Message-Format").getString();
+        cmdPrefix = config.node("Language").node("CmdPrefix").getString();
+        msgPrefix = config.node("Language").node("MsgPrefix").getString();
 
-        pluginStart = config.getNode("Language").getNode("Plugin-Start").getString();
+        pluginStart = config.node("Language").node("Plugin-Start").getString();
         pluginStart = parsePlaceHolder(pluginStart);
-        pluginStart1 = config.getNode("Language").getNode("Plugin-Start1").getString();
+        pluginStart1 = config.node("Language").node("Plugin-Start1").getString();
         pluginStart1 = parsePlaceHolder(pluginStart1);
-        pluginStart2 = config.getNode("Language").getNode("Plugin-Start2").getString();
+        pluginStart2 = config.node("Language").node("Plugin-Start2").getString();
         pluginStart2 = parsePlaceHolder(pluginStart2);
-        pluginStart3 = config.getNode("Language").getNode("Plugin-Start3").getString();
+        pluginStart3 = config.node("Language").node("Plugin-Start3").getString();
         pluginStart3 = parsePlaceHolder(pluginStart3);
 
-        serverInfo1 = config.getNode("Language").getNode("Server-GetInfo1").getString();
+        serverInfo1 = config.node("Language").node("Server-GetInfo1").getString();
         serverInfo1 = parsePlaceHolder(serverInfo1);
 
-        serverInfoFinish = config.getNode("Language").getNode("Server-GetInfo-Finish").getString();
+        serverInfoFinish = config.node("Language").node("Server-GetInfo-Finish").getString();
         serverInfoFinish = parsePlaceHolder(serverInfoFinish);
 
-        pluginStartFinish = config.getNode("Language").getNode("Plugin-Start-Finish").getString();
+        pluginStartFinish = config.node("Language").node("Plugin-Start-Finish").getString();
         pluginStartFinish = parsePlaceHolder(pluginStartFinish);
-        commandHelp = config.getNode("Language").getNode("Command-Help").getList(TypeToken.of(String.class));
-        commandLeave = config.getNode("Language").getNode("Command-Leave").getString();
+        commandHelp = config.node("Language").node("Command-Help").getList(TypeToken.get(String.class));
+        commandLeave = config.node("Language").node("Command-Leave").getString();
         commandLeave = parsePlaceHolder(commandLeave);
-        commandChannelDefault = config.getNode("Language").getNode("Command-Channel-Default").getString();
+        commandChannelDefault = config.node("Language").node("Command-Channel-Default").getString();
         commandChannelDefault = parsePlaceHolder(commandChannelDefault);
-        commandChannelDefaultNotfound = config.getNode("Language").getNode("Command-Channel-Default-Notfound").getString();
+        commandChannelDefaultNotfound = config.node("Language").node("Command-Channel-Default-Notfound").getString();
         commandChannelDefaultNotfound = parsePlaceHolder(commandChannelDefaultNotfound);
-        commandChannelID = config.getNode("Language").getNode("Command-Channel-ID").getString();
+        commandChannelID = config.node("Language").node("Command-Channel-ID").getString();
         commandChannelID = parsePlaceHolder(commandChannelID);
-        commandChannelIDNotfound = config.getNode("Language").getNode("Command-Channel-ID-Notfound").getString();
+        commandChannelIDNotfound = config.node("Language").node("Command-Channel-ID-Notfound").getString();
         commandChannelIDNotfound = parsePlaceHolder(commandChannelIDNotfound);
 
-        showTips = config.getNode("ShowTips").getInt(3600);
-        autoJoinChannel = config.getNode("AutoJoinChannel").getBoolean(false);
+        showTips = config.node("ShowTips").getInt(3600);
+        autoJoinChannel = config.node("AutoJoinChannel").getBoolean(false);
 
     }
 
