@@ -1,16 +1,11 @@
 package org.vanillacommunity.springboot.VanillaGlobalChannel;
 
+import jakarta.websocket.Session;
 import lombok.Getter;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.websocket.Session;
 import java.io.IOException;
-import java.nio.ByteBuffer;
 import java.util.HashMap;
-import java.util.Map;
 
 @Component("wsManager")
 public class WSManager {
@@ -18,7 +13,7 @@ public class WSManager {
     @Getter
     // 服务器ID → 当前链接
     private final HashMap<Integer, Session> sessionMap = new HashMap<>();
-    public void add(int serverID,Session session)
+    public void add(int serverID, Session session)
     {
         sessionMap.put(serverID,session);
     }

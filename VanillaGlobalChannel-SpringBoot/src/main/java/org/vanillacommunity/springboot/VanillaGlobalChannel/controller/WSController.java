@@ -1,12 +1,13 @@
 package org.vanillacommunity.springboot.VanillaGlobalChannel.controller;
 
+import jakarta.websocket.*;
+import jakarta.websocket.server.PathParam;
+import jakarta.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
 import org.vanillacommunity.springboot.VanillaGlobalChannel.Application;
 import org.vanillacommunity.springboot.VanillaGlobalChannel.MCServer;
 
-import javax.websocket.*;
-import javax.websocket.server.PathParam;
-import javax.websocket.server.ServerEndpoint;
+
 import java.io.IOException;
 
 @ServerEndpoint("/ws/{serverID}/{serverAccount}/{serverPassword}")
@@ -14,7 +15,7 @@ import java.io.IOException;
 public class WSController {
     //建立连接
     @OnOpen
-    public void onOpen(@PathParam("serverID") int serverID,@PathParam("serverAccount") String account,@PathParam("serverPassword") String password, Session session)
+    public void onOpen(@PathParam("serverID") int serverID, @PathParam("serverAccount") String account, @PathParam("serverPassword") String password, Session session)
     {
         if(Application.mcServerManager.getServerMap().containsKey(serverID))
         {
