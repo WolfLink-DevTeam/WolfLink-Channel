@@ -5,7 +5,7 @@ import jakarta.websocket.server.PathParam;
 import jakarta.websocket.server.ServerEndpoint;
 import org.springframework.stereotype.Component;
 import org.vanillacommunity.springboot.VanillaGlobalChannel.Application;
-import org.vanillacommunity.springboot.VanillaGlobalChannel.MCServer;
+import org.vanillacommunity.springboot.VanillaGlobalChannel.mcserver.MCServer;
 
 
 import java.io.IOException;
