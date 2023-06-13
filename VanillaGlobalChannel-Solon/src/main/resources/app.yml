@@ -1,0 +1,7 @@
+server.port: 8080
+
+solon.app:
+  name: 'vgc-app'
+  group: 'vgc'
+solon.config.load:
+  - "providers.yml"
