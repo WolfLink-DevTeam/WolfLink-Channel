@@ -12,6 +12,7 @@ import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.ClientRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.service.ClientService;
+import org.vanillacommunity.solon.service.WebSocketService;
 
 import java.io.IOException;
 
@@ -27,6 +28,8 @@ public class WSController implements Listener {
     ChannelRepository channelRepository;
     @Inject
     ClientService clientService;
+    @Inject
+    WebSocketService webSocketService;
     @Override
     public void onOpen(Session session) {
         String account = session.param("account");
@@ -58,6 +61,7 @@ public class WSController implements Listener {
 
     @Override
     public void onMessage(Session session, Message message) {
+        webSocketService.analyseMessage(message);
         logger.info(session.getRemoteAddress()+"发来了一条消息："+ message.bodyAsString());
     }
 

@@ -24,7 +24,7 @@ public class GlobalMessage {
     public static GlobalMessage fromJson(String joStr) {
         return fromJson(JsonParser.parseString(joStr).getAsJsonObject());
     }
-    private static GlobalMessage fromJson(JsonObject jo) {
+    public static GlobalMessage fromJson(JsonObject jo) {
         return GlobalMessage.builder()
                 .sendDate(new Date(jo.get("send_date").getAsLong()))
                 .clientAccount(jo.get("client_account").getAsString())
