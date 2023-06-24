@@ -7,8 +7,7 @@ import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.provider.OnlineProvider;
-import org.vanillacommunity.solon.entity.provider.Provider;
-import org.vanillacommunity.solon.repository.ProviderRepository;
+import org.vanillacommunity.solon.repository.OnlineProviderRepository;
 
 import java.util.Date;
 
@@ -16,7 +15,7 @@ import java.util.Date;
 @Component
 public class ProviderService {
     @Inject
-    ProviderRepository providerRepository;
+    OnlineProviderRepository onlineProviderRepository;
     @Inject
     Logger logger;
     public void login(Session session) {
@@ -25,17 +24,15 @@ public class ProviderService {
         @NonNull
         String token = session.param("token");
         int channelId = Integer.parseInt(session.param("channel_id"));
-        providerRepository.update(new OnlineProvider(account, token, channelId, session, new Date()));
+        onlineProviderRepository.update(new OnlineProvider(account, token, channelId, session, new Date()));
         logger.info(account+" 成功登录，所在频道 "+channelId);
     }
 
     public void logout(Session session) {
         @NonNull
         String account = session.param("account");
-        @NonNull
-        String token = session.param("token");
         int channelId = Integer.parseInt(session.param("channel_id"));
-        providerRepository.update(new Provider(account, token));
+        onlineProviderRepository.delete(account);
         logger.info(account+" 已离线，所在频道 "+channelId);
     }
 
