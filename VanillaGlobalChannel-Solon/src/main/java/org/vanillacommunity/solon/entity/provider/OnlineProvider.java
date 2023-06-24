@@ -1,7 +1,6 @@
 package org.vanillacommunity.solon.entity.provider;
 
 import org.noear.solon.core.message.Session;
-import org.vanillacommunity.solon.api.enums.PlatformType;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -15,12 +14,9 @@ public class OnlineProvider extends Provider{
     Session session;
     // 建立连接的时间
     Date onlineTime;
-    // 当前在线的设备
-    Set<PlatformType> onlinePlatforms;
-    public OnlineProvider(String account, String token, Set<PlatformType> allowedPlatforms,Session session,Date onlineTime) {
-        super(account, token, allowedPlatforms);
+    public OnlineProvider(String account, String token, Session session,Date onlineTime) {
+        super(account, token);
         this.session = session;
         this.onlineTime = onlineTime;
-        this.onlinePlatforms = new HashSet<>();
     }
 }

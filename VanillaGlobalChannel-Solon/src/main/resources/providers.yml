@@ -1,10 +1,5 @@
 providers:
     "3401286177":
       token: "wcnmm"
-      allowed_platforms:
-        - "minecraft_server"
     "2333455567":
       token: "wrnm"
-      allowed_platforms:
-        - "qq"
-        - "kook"

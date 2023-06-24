@@ -1,0 +1,11 @@
+channels:
+  "1":
+    name: "§d桃源仙境"
+    channel_type: common
+    announcement:
+      - ""
+      - "[ 频道公告 ]"
+      - ""
+      - "频道内与他人交流时请注意礼貌哦！"
+      - "禁止在频道内打广告，违规引流。"
+      - ""

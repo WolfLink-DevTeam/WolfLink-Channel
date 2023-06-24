@@ -3,15 +3,12 @@ package org.vanillacommunity.solon.config;
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Singleton;
-import org.noear.solon.proxy.BeanProxy;
 import org.vanillacommunity.solon.IOC;
-import org.vanillacommunity.solon.api.enums.PlatformType;
 import org.vanillacommunity.solon.entity.provider.Provider;
 import org.vanillacommunity.solon.repository.ProviderRepository;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Singleton(true)
 @Component
@@ -28,17 +25,7 @@ public class ProvidersConfig implements ILoadable{
         ProviderRepository providerRepository = application.context().getBean(ProviderRepository.class);
         providerAccounts.forEach(account -> {
             String token = application.cfg().getProperty("providers."+account+".token");
-            Set<PlatformType> allowedPlatforms = application.cfg().getList("providers."+account+".allowed_platforms")
-                    .stream()
-                    .map(it -> {
-                        try {
-                            return PlatformType.valueOf(it.toUpperCase());
-                        } catch (Exception e) {
-                            return null;
-                        }
-                    })
-                    .collect(Collectors.toSet());
-            providerRepository.update(new Provider(account,token,allowedPlatforms));
+            providerRepository.update(new Provider(account,token));
         });
     }
 }

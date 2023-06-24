@@ -8,6 +8,8 @@ import org.noear.solon.core.message.Listener;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.App;
+import org.vanillacommunity.solon.IOC;
+import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.provider.Provider;
 import org.vanillacommunity.solon.repository.ProviderRepository;
 
@@ -15,6 +17,8 @@ import java.io.IOException;
 
 @ServerEndpoint(path = "/ws/{account}")
 public class WSController implements Listener {
+    @Inject
+    Logger logger;
     @Inject
     ProviderRepository providerRepository;
     @Override
@@ -30,6 +34,7 @@ public class WSController implements Listener {
             closeSession(session,"Token 不匹配");
             return;
         }
+        logger.info(session.getRemoteAddress()+"成功建立连接");
     }
 
     @Override
@@ -49,8 +54,7 @@ public class WSController implements Listener {
     void closeSession(Session session,String reason) {
         try {
             session.close();
-            System.out.println("尝试关闭来自 "+session.getRemoteAddress()+" 的连接，理由：");
-            System.out.println(reason);
+            logger.warn("尝试关闭来自 "+session.getRemoteAddress()+" 的连接，理由："+reason);
         } catch (IOException e) {
             e.printStackTrace();
         }
