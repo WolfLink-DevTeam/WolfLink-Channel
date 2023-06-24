@@ -5,6 +5,10 @@ import org.vanillacommunity.vanillaglobalchannel.common.player.IPlayer;
 
 import java.util.List;
 
+/**
+ * 基本频道对象
+ * 可参考 Solon 端的 Channel 和 CommonChannel
+ */
 @Data
 public class Channel {
 

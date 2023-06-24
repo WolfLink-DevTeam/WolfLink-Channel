@@ -6,6 +6,10 @@ import org.vanillacommunity.solon.entity.message.MessageContainer;
 
 import java.util.List;
 
+/**
+ * 抽象频道对象
+ * 目前只有 CommonChannel 一个实现
+ */
 @Data
 @AllArgsConstructor
 public abstract class Channel {
@@ -13,10 +17,10 @@ public abstract class Channel {
     private final int id;
     // 频道名称
     private final String name;
-    // 频道口令
+    // 进入频道需要的口令
     private final String password;
     // 频道置顶公告
     private final List<String> announcement;
-    // 消息容器
+    // 消息容器，存储消息历史记录
     private final MessageContainer messageContainer;
 }

@@ -11,8 +11,10 @@ import org.vanillacommunity.solon.MsgType;
 import org.vanillacommunity.solon.entity.message.GlobalMessage;
 import org.vanillacommunity.solon.entity.client.Client;
 import org.vanillacommunity.solon.entity.client.OnlineClient;
+import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 
+import java.io.IOException;
 import java.util.Date;
 
 /**
@@ -23,8 +25,20 @@ import java.util.Date;
 public class ClientService {
     @Inject OnlineClientRepository onlineClientRepository;
     @Inject WebSocketService webSocketService;
+    @Inject ChannelRepository channelRepository;
     @Inject Logger logger;
     public void login(Client client,Session session,int channelId) {
+        String channelPassword = session.param("channel_password");
+        if(!channelPassword.equals(channelRepository.find(channelId).getPassword())) {
+            logger.warn("客户端 "+client.getAccount()+" 尝试登录频道 "+channelId+" 但密码错误，阻止本次连接。");
+            try {
+                // 关闭用户连接
+                session.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
         OnlineClient onlineClient = new OnlineClient(client.getAccount(), client.getToken(), channelId, session, new Date());
         onlineClientRepository.update(onlineClient);
         logger.info(client.getAccount()+" 成功登录，所在频道 "+channelId);
