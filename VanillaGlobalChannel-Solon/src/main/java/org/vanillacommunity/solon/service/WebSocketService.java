@@ -1,5 +1,7 @@
 package org.vanillacommunity.solon.service;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
@@ -7,16 +9,25 @@ import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Message;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.MsgType;
+import org.vanillacommunity.solon.entity.channel.Channel;
 import org.vanillacommunity.solon.entity.client.OnlineClient;
 import org.vanillacommunity.solon.entity.data.DataPack;
 import org.vanillacommunity.solon.entity.message.GlobalMessage;
+import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+
+import java.util.List;
+import java.util.Set;
 
 @Singleton(true)
 @Component
 public class WebSocketService {
     @Inject
     ChannelService channelService;
+    @Inject
+    ClientService clientService;
+    @Inject
+    ChannelRepository channelRepository;
     @Inject
     OnlineClientRepository onlineClientRepository;
     @Inject
@@ -28,6 +39,9 @@ public class WebSocketService {
      */
     public String formatData(MsgType msgType,GlobalMessage globalMessage) {
         return new DataPack(msgType,globalMessage.toJson().toString()).toJson().toString();
+    }
+    public String formatData(MsgType msgType, JsonElement jsonElement) {
+        return new DataPack(msgType,jsonElement.toString()).toJson().toString();
     }
 
     /**
@@ -42,19 +56,50 @@ public class WebSocketService {
     /**
      * 解析客户端发来的数据
      */
-    public void analyseMessage(Message message) {
+    public void analyseMessage(OnlineClient onlineClient,Message message) {
         DataPack dataPack = unpackData(message.bodyAsString());
+        int channelId = onlineClient.getChannelId();
+        Channel channel = channelRepository.find(channelId);
+        if(channel == null) {
+            logger.err("不存在ID为 "+channelId+" 的频道，来自在线用户 "+onlineClient.getAccount());
+            return;
+        }
         // 客户端发来频道消息，则需要广播这条频道消息到客户端所处频道中
         if(dataPack.getType() == MsgType.CHANNEL) {
             GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent());
-            OnlineClient onlineClient = onlineClientRepository.find(globalMessage.getClientAccount());
-            if(onlineClient == null) {
-                logger.warn("收到了来自 "+globalMessage.getClientAccount()+" 的数据包，但该客户端当前不在线。");
-                return;
-            }
-            int channelId = onlineClient.getChannelId();
             // 把这条消息广播给对应频道
             channelService.broadcast(channelId,MsgType.CHANNEL,globalMessage);
+        }
+        // 客户端发来系统消息
+        if(dataPack.getType() == MsgType.SYSTEM) {
+            String command = dataPack.getContent();
+            switch (command) {
+                case "lookup_history": {
+                    JsonArray jsonArray = new JsonArray();
+                    List<GlobalMessage> msgHistory = channel.getMessageContainer().lookup(100);
+                    msgHistory.forEach(globalMessage -> jsonArray.add(globalMessage.toJson().toString()));
+                    clientService.sendSystemMsg(onlineClient,jsonArray);
+                    break;
+                }
+                case "query_online": {
+                    Set<OnlineClient> onlineClients = onlineClientRepository.filterByChannelId(channelId);
+                    JsonObject jsonObject = new JsonObject();
+                    JsonArray jsonArray = new JsonArray();
+                    onlineClients.forEach(onlineClient1 -> {
+                        JsonObject jsonObject1 = new JsonObject();
+                        jsonObject1.addProperty("name",onlineClient1.getName());
+                        jsonObject1.addProperty("display_name",onlineClient1.getDisplayName());
+                        jsonObject1.addProperty("account",onlineClient1.getAccount());
+                        jsonObject1.addProperty("online_time",onlineClient1.getOnlineTime().toString());
+                        jsonArray.add(jsonObject1);
+                    });
+                    jsonObject.addProperty("online_count",onlineClients.size());
+                    jsonObject.add("online_clients",jsonArray);
+                    clientService.sendSystemMsg(onlineClient,jsonArray);
+                    break;
+                }
+                default:
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package org.vanillacommunity.solon.service;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
@@ -35,9 +36,9 @@ public class ClientService {
     /**
      * 发送系统消息
      */
-    public void sendSystemMsg(OnlineClient onlineClient,GlobalMessage globalMessage) {
+    public void sendSystemMsg(OnlineClient onlineClient, JsonElement jsonElement) {
         onlineClient.getSession().sendAsync(
-                webSocketService.formatData(MsgType.SYSTEM,globalMessage)
+                webSocketService.formatData(MsgType.SYSTEM,jsonElement)
         );
     }
 

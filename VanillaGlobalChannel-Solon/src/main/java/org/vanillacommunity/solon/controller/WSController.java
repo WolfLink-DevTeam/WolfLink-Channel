@@ -34,7 +34,7 @@ public class WSController implements Listener {
     public void onOpen(Session session) {
         String account = session.param("account");
         String token = session.param("token");
-        int channelId = -1;
+        int channelId;
         try {
             channelId = Integer.parseInt(session.param("channel_id"));
         } catch (Exception ignore) {
@@ -61,7 +61,12 @@ public class WSController implements Listener {
 
     @Override
     public void onMessage(Session session, Message message) {
-        webSocketService.analyseMessage(message);
+        OnlineClient onlineClient = onlineClientRepository.find(session.param("account"));
+        if(onlineClient == null) {
+            logger.warn("收到了来自 "+session.param("account")+" 的消息，但该客户端不在线。");
+            return;
+        }
+        webSocketService.analyseMessage(onlineClient,message);
         logger.info(session.getRemoteAddress()+"发来了一条消息："+ message.bodyAsString());
     }
 
