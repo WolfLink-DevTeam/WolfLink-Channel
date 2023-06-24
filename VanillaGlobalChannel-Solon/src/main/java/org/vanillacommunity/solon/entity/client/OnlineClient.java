@@ -1,5 +1,7 @@
 package org.vanillacommunity.solon.entity.client;
 
+import lombok.Data;
+import lombok.Getter;
 import org.noear.solon.core.message.Session;
 
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.Date;
  * 在线的消息提供者对象
  */
 public class OnlineClient extends Client {
+    @Getter
     // 连接信息
     Session session;
     // 建立连接的时间

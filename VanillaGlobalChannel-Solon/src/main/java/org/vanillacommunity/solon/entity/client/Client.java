@@ -2,6 +2,7 @@ package org.vanillacommunity.solon.entity.client;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
