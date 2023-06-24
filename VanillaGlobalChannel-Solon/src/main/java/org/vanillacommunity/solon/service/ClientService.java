@@ -33,13 +33,20 @@ public class ClientService {
     }
 
     /**
+     * 打包将要发送的数据
+     */
+    private JsonObject packData(MsgType msgType,GlobalMessage globalMessage) {
+        JsonObject jo = new JsonObject();
+        jo.addProperty("type",msgType.name());
+        jo.add("msg_json",globalMessage.toJson());
+        return jo;
+    }
+    /**
      * 发送系统消息
      */
     public void sendSystemMsg(OnlineClient onlineClient,GlobalMessage globalMessage) {
-        JsonObject jo = new JsonObject();
-        jo.addProperty("type", MsgType.SYSTEM.name());
-        jo.add("msg",globalMessage.toJson());
-        onlineClient.getSession().sendAsync(jo.toString());
+        JsonObject data = packData(MsgType.SYSTEM,globalMessage);
+        onlineClient.getSession().sendAsync(data.toString());
     }
 
     /**
@@ -48,19 +55,15 @@ public class ClientService {
      * @param globalMessage     消息对象
      */
     public void sendAnnouncementMsg(OnlineClient onlineClient,GlobalMessage globalMessage) {
-        JsonObject jo = new JsonObject();
-        jo.addProperty("type", MsgType.ANNOUNCEMENT.name());
-        jo.add("msg",globalMessage.toJson());
-        onlineClient.getSession().sendAsync(jo.toString());
+        JsonObject data = packData(MsgType.ANNOUNCEMENT,globalMessage);
+        onlineClient.getSession().sendAsync(data.toString());
     }
     /**
      * 发送频道消息
      */
     public void sendChannelMsg(OnlineClient onlineClient, GlobalMessage globalMessage) {
-        JsonObject jo = new JsonObject();
-        jo.addProperty("type",MsgType.CHANNEL.name());
-        jo.add("msg", globalMessage.toJson());
-        onlineClient.getSession().sendAsync(jo.toString());
+        JsonObject data = packData(MsgType.CHANNEL,globalMessage);
+        onlineClient.getSession().sendAsync(data.toString());
     }
 
 }
