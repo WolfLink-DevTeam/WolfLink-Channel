@@ -3,6 +3,8 @@ package org.vanillacommunity.solon.config;
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Singleton;
+import org.noear.solon.proxy.BeanProxy;
+import org.vanillacommunity.solon.IOC;
 import org.vanillacommunity.solon.api.enums.PlatformType;
 import org.vanillacommunity.solon.entity.provider.Provider;
 import org.vanillacommunity.solon.repository.ProviderRepository;
@@ -13,8 +15,9 @@ import java.util.stream.Collectors;
 
 @Singleton(true)
 @Component
-public class ProvidersConfig {
-    public void load(SolonApp application) {
+public class ProvidersConfig implements ILoadable{
+    public void load() {
+        SolonApp application = IOC.get(SolonApp.class);
         // load provider accounts
         Set<String> providerAccounts = new HashSet<>();
         application.cfg().getMap("providers").forEach((k,v)->{
