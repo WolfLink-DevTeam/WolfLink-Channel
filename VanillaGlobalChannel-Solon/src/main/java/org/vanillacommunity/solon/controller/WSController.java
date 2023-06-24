@@ -10,6 +10,7 @@ import org.vanillacommunity.solon.entity.client.OnlineClient;
 import org.vanillacommunity.solon.entity.client.Client;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.ClientRepository;
+import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.service.ClientService;
 
 import java.io.IOException;
@@ -20,6 +21,8 @@ public class WSController implements Listener {
     Logger logger;
     @Inject
     ClientRepository clientRepository;
+    @Inject
+    OnlineClientRepository onlineClientRepository;
     @Inject
     ChannelRepository channelRepository;
     @Inject
@@ -50,7 +53,7 @@ public class WSController implements Listener {
             return;
         }
         logger.info(session.getRemoteAddress()+"成功建立连接");
-        clientService.login(session);
+        clientService.login(client,session,channelId);
     }
 
     @Override
@@ -60,9 +63,8 @@ public class WSController implements Listener {
 
     @Override
     public void onClose(Session session) {
-        if(clientRepository.find(session.param("account")) instanceof OnlineClient) {
-            clientService.logout(session);
-        }
+        OnlineClient onlineClient = onlineClientRepository.find(session.param("account"));
+        if(onlineClient != null) { clientService.logout(onlineClient); }
         logger.info(session.getRemoteAddress()+"断开了连接");
     }
 

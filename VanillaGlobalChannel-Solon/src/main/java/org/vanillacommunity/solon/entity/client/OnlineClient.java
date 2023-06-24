@@ -13,8 +13,10 @@ public class OnlineClient extends Client {
     @Getter
     // 连接信息
     Session session;
+    @Getter
     // 建立连接的时间
     Date onlineTime;
+    @Getter
     int channelId;
 
     public OnlineClient(String account, String token, int channelId, Session session, Date onlineTime) {
