@@ -28,7 +28,7 @@ public class GlobalMessage {
         return GlobalMessage.builder()
                 .sendDate(new Date(jo.get("send_date").getAsLong()))
                 .clientAccount(jo.get("client_account").getAsString())
-                .sender(jo.get("sender").getAsString())
+                .senderDisplayName(jo.get("sender_display_name").getAsString())
                 .content(jo.get("content").getAsString())
                 .build();
 
@@ -37,7 +37,7 @@ public class GlobalMessage {
         JsonObject jo = new JsonObject();
         jo.addProperty("send_date",sendDate.getTime());
         jo.addProperty("client_account",clientAccount);
-        jo.addProperty("sender",sender);
+        jo.addProperty("sender_display_name",senderDisplayName);
         jo.addProperty("content",content);
         return jo;
     }
