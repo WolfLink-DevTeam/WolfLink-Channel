@@ -10,8 +10,6 @@ import org.vanillacommunity.solon.entity.message.GlobalMessage;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 
-import java.util.Objects;
-
 /**
  * 频道层面的业务类
  * 向指定频道发送广播消息
@@ -32,14 +30,15 @@ public class ChannelService {
     /**
      * 向指定频道内的在线客户端广播，客户端将收到 Json 格式的消息包
      * 同时会把消息存储在对应频道的消息容器中
-     * @param channelId         频道ID
-     * @param msgType           消息类型
-     * @param globalMessage     消息对象
+     *
+     * @param channelId     频道ID
+     * @param msgType       消息类型
+     * @param globalMessage 消息对象
      */
     public void broadcast(int channelId, MsgType msgType, GlobalMessage globalMessage) {
         Channel channel = channelRepository.find(channelId);
-        if(channel == null) {
-            logger.err("在尝试向ID为 "+channelId+" 的频道播报消息时出现错误，并不存在该ID的频道！");
+        if (channel == null) {
+            logger.err("在尝试向ID为 " + channelId + " 的频道播报消息时出现错误，并不存在该ID的频道！");
             return;
         }
         switch (msgType) {
@@ -67,12 +66,13 @@ public class ChannelService {
 
     /**
      * 向所有在线客户端广播，客户端将收到 Json 格式的消息包
-     * @param msgType           消息类型
-     * @param globalMessage     消息对象
+     *
+     * @param msgType       消息类型
+     * @param globalMessage 消息对象
      */
-    public void broadcast(MsgType msgType,GlobalMessage globalMessage) {
+    public void broadcast(MsgType msgType, GlobalMessage globalMessage) {
         channelRepository.findAll().forEach(channel -> {
-            broadcast(channel.getId(),msgType,globalMessage);
+            broadcast(channel.getId(), msgType, globalMessage);
         });
     }
 }

@@ -21,9 +21,11 @@ public class GlobalMessage {
     private String senderDisplayName;
     // 消息内容
     private String content;
+
     public static GlobalMessage fromJson(String joStr) {
         return fromJson(JsonParser.parseString(joStr).getAsJsonObject());
     }
+
     public static GlobalMessage fromJson(JsonObject jo) {
         return GlobalMessage.builder()
                 .sendDate(new Date(jo.get("send_date").getAsLong()))
@@ -33,12 +35,13 @@ public class GlobalMessage {
                 .build();
 
     }
+
     public JsonObject toJson() {
         JsonObject jo = new JsonObject();
-        jo.addProperty("send_date",sendDate.getTime());
-        jo.addProperty("client_account",clientAccount);
-        jo.addProperty("sender_display_name",senderDisplayName);
-        jo.addProperty("content",content);
+        jo.addProperty("send_date", sendDate.getTime());
+        jo.addProperty("client_account", clientAccount);
+        jo.addProperty("sender_display_name", senderDisplayName);
+        jo.addProperty("content", content);
         return jo;
     }
 }

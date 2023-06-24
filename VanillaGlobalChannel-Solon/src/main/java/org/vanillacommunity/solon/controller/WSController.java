@@ -30,6 +30,7 @@ public class WSController implements Listener {
     ClientService clientService;
     @Inject
     WebSocketService webSocketService;
+
     @Override
     public void onOpen(Session session) {
         String account = session.param("account");
@@ -38,53 +39,56 @@ public class WSController implements Listener {
         try {
             channelId = Integer.parseInt(session.param("channel_id"));
         } catch (Exception ignore) {
-            closeSession(session,"频道ID "+session.param("channel_id")+" 不合法");
+            closeSession(session, "频道ID " + session.param("channel_id") + " 不合法");
             return;
         }
-        if(channelRepository.find(channelId) == null) {
-            closeSession(session,"频道ID "+channelId+" 未找到");
+        if (channelRepository.find(channelId) == null) {
+            closeSession(session, "频道ID " + channelId + " 未找到");
             return;
         }
 
         Client client = clientRepository.find(account);
         if (client == null) {
-            closeSession(session,"未能找到："+account+" 用户");
+            closeSession(session, "未能找到：" + account + " 用户");
             return;
         }
         if (token == null || (!token.equals(client.getToken()))) {
-            closeSession(session,"Token 不匹配");
+            closeSession(session, "Token 不匹配");
             return;
         }
-        logger.info(session.getRemoteAddress()+"成功建立连接");
-        clientService.login(client,session,channelId);
+        logger.info(session.getRemoteAddress() + "成功建立连接");
+        clientService.login(client, session, channelId);
     }
 
     @Override
     public void onMessage(Session session, Message message) {
         OnlineClient onlineClient = onlineClientRepository.find(session.param("account"));
-        if(onlineClient == null) {
-            logger.warn("收到了来自 "+session.param("account")+" 的消息，但该客户端不在线。");
+        if (onlineClient == null) {
+            logger.warn("收到了来自 " + session.param("account") + " 的消息，但该客户端不在线。");
             return;
         }
-        webSocketService.analyseMessage(onlineClient,message);
-        logger.info(session.getRemoteAddress()+"发来了一条消息："+ message.bodyAsString());
+        webSocketService.analyseMessage(onlineClient, message);
+        logger.info(session.getRemoteAddress() + "发来了一条消息：" + message.bodyAsString());
     }
 
     @Override
     public void onClose(Session session) {
         OnlineClient onlineClient = onlineClientRepository.find(session.param("account"));
-        if(onlineClient != null) { clientService.logout(onlineClient); }
-        logger.info(session.getRemoteAddress()+"断开了连接");
+        if (onlineClient != null) {
+            clientService.logout(onlineClient);
+        }
+        logger.info(session.getRemoteAddress() + "断开了连接");
     }
 
     @Override
     public void onError(Session session, Throwable error) {
-        logger.err(session.getRemoteAddress()+"触发了一个错误："+error.toString());
+        logger.err(session.getRemoteAddress() + "触发了一个错误：" + error.toString());
     }
-    void closeSession(Session session,String reason) {
+
+    void closeSession(Session session, String reason) {
         try {
             session.close();
-            logger.warn("尝试关闭来自 "+session.getRemoteAddress()+" 的连接，理由："+reason);
+            logger.warn("尝试关闭来自 " + session.getRemoteAddress() + " 的连接，理由：" + reason);
         } catch (IOException e) {
             e.printStackTrace();
         }

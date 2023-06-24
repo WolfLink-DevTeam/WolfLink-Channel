@@ -12,22 +12,23 @@ import java.util.Set;
 
 @Singleton(true)
 @Component
-public class ClientsConfig implements ILoadable{
+public class ClientsConfig implements ILoadable {
     @Inject
     ClientRepository clientRepository;
+
     public void load(SolonApp solonApp) {
         // load provider accounts
         Set<String> clientAccounts = new HashSet<>();
-        solonApp.cfg().getMap("clients").forEach((k,v)->{
-            String[] nodes =  k.split("\\.");
+        solonApp.cfg().getMap("clients").forEach((k, v) -> {
+            String[] nodes = k.split("\\.");
             clientAccounts.add(nodes[1]);
         });
         // foreach providers data
         clientAccounts.forEach(account -> {
-            String token = solonApp.cfg().getProperty("clients."+account+".token");
-            String name = solonApp.cfg().getProperty("clients."+account+".name");
-            String displayName = solonApp.cfg().getProperty("clients."+account+".display_name");
-            Client client = new Client(account,token);
+            String token = solonApp.cfg().getProperty("clients." + account + ".token");
+            String name = solonApp.cfg().getProperty("clients." + account + ".name");
+            String displayName = solonApp.cfg().getProperty("clients." + account + ".display_name");
+            Client client = new Client(account, token);
             client.setName(name);
             client.setDisplayName(displayName);
             clientRepository.update(client);
