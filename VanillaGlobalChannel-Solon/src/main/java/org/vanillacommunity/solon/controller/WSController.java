@@ -12,6 +12,7 @@ import org.vanillacommunity.solon.IOC;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.provider.Provider;
 import org.vanillacommunity.solon.repository.ProviderRepository;
+import org.vanillacommunity.solon.service.ProviderService;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -22,6 +23,8 @@ public class WSController implements Listener {
     Logger logger;
     @Inject
     ProviderRepository providerRepository;
+    @Inject
+    ProviderService providerService;
     @Override
     public void onOpen(Session session) {
         String account = session.param("account");
@@ -36,6 +39,7 @@ public class WSController implements Listener {
             return;
         }
         logger.info(session.getRemoteAddress()+"成功建立连接");
+        providerService.login(session);
     }
 
     @Override
@@ -45,6 +49,7 @@ public class WSController implements Listener {
 
     @Override
     public void onClose(Session session) {
+        providerService.logout(session);
         logger.info(session.getRemoteAddress()+"断开了连接");
     }
 
