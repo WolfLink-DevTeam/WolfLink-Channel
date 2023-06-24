@@ -14,6 +14,7 @@ import org.vanillacommunity.solon.entity.provider.Provider;
 import org.vanillacommunity.solon.repository.ProviderRepository;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @ServerEndpoint(path = "/ws/{account}")
 public class WSController implements Listener {
@@ -39,17 +40,17 @@ public class WSController implements Listener {
 
     @Override
     public void onMessage(Session session, Message message) {
-
+        logger.info(session.getRemoteAddress()+"发来了一条消息："+ message.bodyAsString());
     }
 
     @Override
     public void onClose(Session session) {
-        Listener.super.onClose(session);
+        logger.info(session.getRemoteAddress()+"断开了连接");
     }
 
     @Override
     public void onError(Session session, Throwable error) {
-        Listener.super.onError(session, error);
+        logger.err(session.getRemoteAddress()+"触发了一个错误："+error.toString());
     }
     void closeSession(Session session,String reason) {
         try {
