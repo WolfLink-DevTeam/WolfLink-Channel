@@ -3,7 +3,7 @@ package org.vanillacommunity.solon.service;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
-import org.vanillacommunity.solon.repository.OnlineProviderRepository;
+import org.vanillacommunity.solon.repository.OnlineClientRepository;
 
 /**
  * 消息服务
@@ -14,7 +14,7 @@ import org.vanillacommunity.solon.repository.OnlineProviderRepository;
 @Component
 public class MessageService {
     @Inject
-    OnlineProviderRepository onlineProviderRepository;
+    OnlineClientRepository onlineClientRepository;
     public void broadcast(int channelId,String text) {
 
     }

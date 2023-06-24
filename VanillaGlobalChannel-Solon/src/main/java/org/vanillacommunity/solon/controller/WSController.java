@@ -1,34 +1,29 @@
 package org.vanillacommunity.solon.controller;
 
 import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Mapping;
-import org.noear.solon.annotation.Param;
 import org.noear.solon.annotation.ServerEndpoint;
 import org.noear.solon.core.message.Listener;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.core.message.Session;
-import org.vanillacommunity.solon.App;
-import org.vanillacommunity.solon.IOC;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entity.provider.OnlineProvider;
-import org.vanillacommunity.solon.entity.provider.Provider;
+import org.vanillacommunity.solon.entity.client.OnlineClient;
+import org.vanillacommunity.solon.entity.client.Client;
 import org.vanillacommunity.solon.repository.ChannelRepository;
-import org.vanillacommunity.solon.repository.ProviderRepository;
-import org.vanillacommunity.solon.service.ProviderService;
+import org.vanillacommunity.solon.repository.ClientRepository;
+import org.vanillacommunity.solon.service.ClientService;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 @ServerEndpoint(path = "/ws/{account}")
 public class WSController implements Listener {
     @Inject
     Logger logger;
     @Inject
-    ProviderRepository providerRepository;
+    ClientRepository clientRepository;
     @Inject
     ChannelRepository channelRepository;
     @Inject
-    ProviderService providerService;
+    ClientService clientService;
     @Override
     public void onOpen(Session session) {
         String account = session.param("account");
@@ -45,17 +40,17 @@ public class WSController implements Listener {
             return;
         }
 
-        Provider provider = providerRepository.find(account);
-        if (provider == null) {
+        Client client = clientRepository.find(account);
+        if (client == null) {
             closeSession(session,"未能找到："+account+" 用户");
             return;
         }
-        if (token == null || (!token.equals(provider.getToken()))) {
+        if (token == null || (!token.equals(client.getToken()))) {
             closeSession(session,"Token 不匹配");
             return;
         }
         logger.info(session.getRemoteAddress()+"成功建立连接");
-        providerService.login(session);
+        clientService.login(session);
     }
 
     @Override
@@ -65,8 +60,8 @@ public class WSController implements Listener {
 
     @Override
     public void onClose(Session session) {
-        if(providerRepository.find(session.param("account")) instanceof OnlineProvider) {
-            providerService.logout(session);
+        if(clientRepository.find(session.param("account")) instanceof OnlineClient) {
+            clientService.logout(session);
         }
         logger.info(session.getRemoteAddress()+"断开了连接");
     }
