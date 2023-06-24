@@ -1,6 +1,5 @@
 package org.vanillacommunity.solon.entity.client;
 
-import lombok.Data;
 import lombok.Getter;
 import org.noear.solon.core.message.Session;
 
