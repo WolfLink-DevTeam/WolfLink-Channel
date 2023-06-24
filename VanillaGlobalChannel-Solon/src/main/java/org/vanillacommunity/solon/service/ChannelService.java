@@ -5,7 +5,9 @@ import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.MsgType;
+import org.vanillacommunity.solon.entity.channel.Channel;
 import org.vanillacommunity.solon.entity.message.GlobalMessage;
+import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 
 import java.util.Objects;
@@ -18,6 +20,8 @@ import java.util.Objects;
 @Singleton(true)
 @Component
 public class ChannelService {
+    @Inject
+    ChannelRepository channelRepository;
     @Inject
     OnlineClientRepository onlineClientRepository;
     @Inject
@@ -33,16 +37,27 @@ public class ChannelService {
      * @param globalMessage     消息对象
      */
     public void broadcast(int channelId, MsgType msgType, GlobalMessage globalMessage) {
+        Channel channel = channelRepository.find(channelId);
+        if(channel == null) {
+            logger.err("在尝试向ID为 "+channelId+" 的频道播报消息时出现错误，并不存在该ID的频道！");
+            return;
+        }
         switch (msgType) {
             case SYSTEM:
                 logger.warn("不应该广播发送这条系统消息，请检查代码，系统消息如下：" + globalMessage.toString());
                 break;
             case ANNOUNCEMENT:
+                // 将消息添加到聊天记录中
+                channel.getMessageContainer().add(globalMessage);
+                // 发送消息
                 onlineClientRepository.filterByChannelId(channelId).forEach(onlineClient -> {
                     clientService.sendAnnouncementMsg(onlineClient, globalMessage);
                 });
                 break;
             case CHANNEL:
+                // 将消息添加到聊天记录中
+                channel.getMessageContainer().add(globalMessage);
+                // 发送消息
                 onlineClientRepository.filterByChannelId(channelId).forEach(onlineClient -> {
                     clientService.sendChannelMsg(onlineClient, globalMessage);
                 });
@@ -56,20 +71,8 @@ public class ChannelService {
      * @param globalMessage     消息对象
      */
     public void broadcast(MsgType msgType,GlobalMessage globalMessage) {
-        switch (msgType) {
-            case CHANNEL:
-                onlineClientRepository.findAll().forEach(onlineClient -> {
-                    clientService.sendChannelMsg(onlineClient,globalMessage);
-                });
-                break;
-            case ANNOUNCEMENT:
-                onlineClientRepository.findAll().forEach(onlineClient -> {
-                    clientService.sendAnnouncementMsg(onlineClient,globalMessage);
-                });
-                break;
-            case SYSTEM:
-                logger.warn("不应该广播发送这条系统消息，请检查代码，系统消息如下：" + globalMessage.toString());
-                break;
-        }
+        channelRepository.findAll().forEach(channel -> {
+            broadcast(channel.getId(),msgType,globalMessage);
+        });
     }
 }
