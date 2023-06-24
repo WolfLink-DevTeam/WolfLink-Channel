@@ -1,6 +1,6 @@
 package org.vanillacommunity.solon.entity.channel;
 
-import org.vanillacommunity.solon.entity.MessageContainer;
+import org.vanillacommunity.solon.entity.message.MessageContainer;
 
 import java.util.List;
 

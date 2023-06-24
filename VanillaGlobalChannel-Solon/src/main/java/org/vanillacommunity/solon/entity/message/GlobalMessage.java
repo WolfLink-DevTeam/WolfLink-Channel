@@ -1,4 +1,4 @@
-package org.vanillacommunity.solon.entity;
+package org.vanillacommunity.solon.entity.message;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -7,22 +7,25 @@ import lombok.Data;
 
 import java.util.Date;
 
+/**
+ * 一条全局消息，本身不属于任何一个频道
+ */
 @Data
 @Builder
-public class ChannelMessage {
+public class GlobalMessage {
     // 消息发送的日期时间戳
     private Date sendDate;
     // 消息归属的客户端账户
     private String clientAccount;
-    // 消息发送者名称
-    private String sender;
+    // 消息发送者显示名称
+    private String senderDisplayName;
     // 消息内容
     private String content;
-    public static ChannelMessage fromJson(String joStr) {
+    public static GlobalMessage fromJson(String joStr) {
         return fromJson(JsonParser.parseString(joStr).getAsJsonObject());
     }
-    private static ChannelMessage fromJson(JsonObject jo) {
-        return ChannelMessage.builder()
+    private static GlobalMessage fromJson(JsonObject jo) {
+        return GlobalMessage.builder()
                 .sendDate(new Date(jo.get("send_date").getAsLong()))
                 .clientAccount(jo.get("client_account").getAsString())
                 .sender(jo.get("sender").getAsString())

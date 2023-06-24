@@ -1,4 +1,4 @@
-package org.vanillacommunity.solon.entity;
+package org.vanillacommunity.solon.entity.message;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,16 +13,16 @@ public class MessageContainer {
     /**
      * 消息历史记录，索引越小则代表消息越早发送
      */
-    private final List<ChannelMessage> history = new ArrayList<>();
-    public void add(ChannelMessage channelMessage) {
-        history.add(channelMessage);
+    private final List<GlobalMessage> history = new ArrayList<>();
+    public void add(GlobalMessage globalMessage) {
+        history.add(globalMessage);
     }
     /**
      * 查看最近发送的消息
      * @param count     指定查看的消息数量
      * @return          List索引越小的消息越早
      */
-    public List<ChannelMessage> lookup(int count) {
+    public List<GlobalMessage> lookup(int count) {
         int length = history.size();
         if(count > length) count = length;
         return history.subList(length-count,length);
