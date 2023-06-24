@@ -19,6 +19,6 @@ public class App {
     }
     private static void initCfg() {
         ProvidersConfig providersConfig = IOC.get(ProvidersConfig.class);
-        providersConfig.load();
+        providersConfig.load(solonApp);
     }
 }
