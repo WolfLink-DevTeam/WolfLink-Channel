@@ -16,19 +16,22 @@ import java.util.Date;
 public class ProviderService {
     @Inject
     ProviderRepository providerRepository;
+
     public void login(Session session) {
         @NonNull
         String account = session.param("account");
         @NonNull
         String token = session.param("token");
-        providerRepository.update(new OnlineProvider(account,token,session, new Date()));
+        int channelId = Integer.parseInt(session.param("channel_id"));
+        providerRepository.update(new OnlineProvider(account, token, channelId, session, new Date()));
     }
+
     public void logout(Session session) {
         @NonNull
         String account = session.param("account");
         @NonNull
         String token = session.param("token");
-        providerRepository.update(new Provider(account,token));
+        providerRepository.update(new Provider(account, token));
     }
 
 }

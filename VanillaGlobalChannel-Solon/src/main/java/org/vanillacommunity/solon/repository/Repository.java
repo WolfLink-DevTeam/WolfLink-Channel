@@ -15,6 +15,7 @@ public abstract class Repository<K,V> {
         map.put(getPrimaryKey.apply(value),value);
     }
     public V find(K key) {
+        if(key == null)return null;
         return map.get(key);
     }
     public void delete(K key) {

@@ -10,7 +10,9 @@ import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.App;
 import org.vanillacommunity.solon.IOC;
 import org.vanillacommunity.solon.Logger;
+import org.vanillacommunity.solon.entity.provider.OnlineProvider;
 import org.vanillacommunity.solon.entity.provider.Provider;
+import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.ProviderRepository;
 import org.vanillacommunity.solon.service.ProviderService;
 
@@ -24,11 +26,25 @@ public class WSController implements Listener {
     @Inject
     ProviderRepository providerRepository;
     @Inject
+    ChannelRepository channelRepository;
+    @Inject
     ProviderService providerService;
     @Override
     public void onOpen(Session session) {
         String account = session.param("account");
         String token = session.param("token");
+        int channelId = -1;
+        try {
+            channelId = Integer.parseInt(session.param("channel_id"));
+        } catch (Exception ignore) {
+            closeSession(session,"频道ID "+session.param("channel_id")+" 不合法");
+            return;
+        }
+        if(channelRepository.find(channelId) == null) {
+            closeSession(session,"频道ID "+channelId+" 未找到");
+            return;
+        }
+
         Provider provider = providerRepository.find(account);
         if (provider == null) {
             closeSession(session,"未能找到："+account+" 用户");
@@ -49,7 +65,9 @@ public class WSController implements Listener {
 
     @Override
     public void onClose(Session session) {
-        providerService.logout(session);
+        if(providerRepository.find(session.param("account")) instanceof OnlineProvider) {
+            providerService.logout(session);
+        }
         logger.info(session.getRemoteAddress()+"断开了连接");
     }
 
