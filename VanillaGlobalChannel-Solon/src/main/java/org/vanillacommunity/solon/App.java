@@ -5,7 +5,7 @@ import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.SolonMain;
 import org.vanillacommunity.solon.config.ChannelsConfig;
-import org.vanillacommunity.solon.config.ProvidersConfig;
+import org.vanillacommunity.solon.config.ClientsConfig;
 @SolonMain
 public class App {
 
@@ -19,8 +19,8 @@ public class App {
         initCfg();
     }
     private static void initCfg() {
-        ProvidersConfig providersConfig = IOC.get(ProvidersConfig.class);
-        providersConfig.load(solonApp);
+        ClientsConfig clientsConfig = IOC.get(ClientsConfig.class);
+        clientsConfig.load(solonApp);
         ChannelsConfig channelsConfig = IOC.get(ChannelsConfig.class);
         channelsConfig.load(solonApp);
     }

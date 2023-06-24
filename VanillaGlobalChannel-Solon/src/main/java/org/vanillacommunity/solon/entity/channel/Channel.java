@@ -2,6 +2,8 @@ package org.vanillacommunity.solon.entity.channel;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.vanillacommunity.solon.entity.ChannelMessage;
+import org.vanillacommunity.solon.entity.MessageContainer;
 
 import java.util.List;
 
@@ -16,4 +18,6 @@ public abstract class Channel {
     private final String password;
     // 频道置顶公告
     private final List<String> announcement;
+    // 消息容器
+    private final MessageContainer messageContainer;
 }

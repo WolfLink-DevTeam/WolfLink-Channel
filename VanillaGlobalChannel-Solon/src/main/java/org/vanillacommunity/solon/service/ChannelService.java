@@ -7,13 +7,13 @@ import org.vanillacommunity.solon.MsgType;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 
 /**
- * 消息服务
+ * 频道服务
  * 向指定频道发送广播消息
  * 向所有 Provider 发送全体消息
  */
 @Singleton(true)
 @Component
-public class MessageService {
+public class ChannelService {
     @Inject
     OnlineClientRepository onlineClientRepository;
     @Inject
