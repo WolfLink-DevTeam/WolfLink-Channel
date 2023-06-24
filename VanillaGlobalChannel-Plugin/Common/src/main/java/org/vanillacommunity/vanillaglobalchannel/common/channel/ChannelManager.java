@@ -9,20 +9,28 @@ import org.vanillacommunity.vanillaglobalchannel.common.player.PlayerManager;
 
 import java.util.*;
 
+/**
+ * 频道管理者(职责太重，应该分散)
+ * 负责管理频道中的玩家和不处于频道中的玩家
+ * 还负责管理提示消息
+ */
 public class ChannelManager {
+    // 单例实例(Common模块没有引入IOC)
     private static ChannelManager instance;
-
+    // 频道用户信息，Key-频道ID Value-当前服务器处于该频道内的玩家
     private final Map<Integer,List<UUID>> channelUserMap = new HashMap<>();
-
+    // 未处于频道中的玩家
     @Getter
     private final List<UUID> leftUserList = new ArrayList<>();
-
+    // 频道发送消息的计时器(以一定周期发送dataPackQueue中的数据包)
     public Timer timer;
+    // 向玩家们展示提示信息的计时器
     public Timer showTipsTimer;
-
+    // Key-频道ID Value-频道对象
     private final Map<Integer,Channel> channelMap = new HashMap<>();
+    // 消息队列
     private final Queue<DataPack> dataPackQueue = new LinkedList<>();
-
+    // 无关紧要的提示信息
     boolean showTips = false;
 
     public Map<Integer, Channel> getChannelMap() {
@@ -34,17 +42,18 @@ public class ChannelManager {
         if(instance == null)instance = new ChannelManager();
         return instance;
     }
-
+    // 把数据包压入 dataPackQueue 消息队列中，之后会自动被发送到服务端
     public void offerPack(DataPack dataPack)
     {
         dataPackQueue.offer(dataPack);
         if(dataPackQueue.size() > 10) dataPackQueue.poll();
     }
-
+    // 初始化频道
     public void initChannel(){
         System.out.println(ConfigManager.pluginStart);
         if(NetTransManager.getInstance().getWebSocket() != null)
         {
+            // 从服务端获取多个频道的消息
             lookupChannelsInfo();
         }
         else
@@ -52,7 +61,7 @@ public class ChannelManager {
             System.out.println(ConfigManager.cmdPrefix+"中央服务器连接失败！插件将不能正常运行。");
         }
     }
-
+    // 改变玩家的频道
     public void changeChannel(UUID uuid,int oldChannelID,int newChannelID)
     {
         if(oldChannelID != -1)
@@ -67,6 +76,7 @@ public class ChannelManager {
     {
         NetTransManager.getInstance().getWebSocket().send("GetChannelInfo");
     }
+    // 从字符串中解析频道数据创建频道对象
     public void bindChannelsInfo(String str)
     {
         List<String> channelsInfo = Tools.stringToList(str);
@@ -76,7 +86,7 @@ public class ChannelManager {
             String[] args = channelStr.split("/");
 
             Channel channel = new Channel(Integer.parseInt(args[0]),args[1],args[2]);
-
+            // 把创建好的频道保存到 ChannelManager 中
             ChannelManager.getInstance().getChannelMap().put(channel.getId(),channel);
         }
         System.out.println(ConfigManager.pluginStart1);
@@ -86,7 +96,7 @@ public class ChannelManager {
         System.out.println(ConfigManager.pluginStart3);
         System.out.println(ConfigManager.pluginStartFinish);
     }
-
+    // 初始化频道的用户列表
     private void initChannelUserList()
     {
         for(int channelID : channelMap.keySet())
@@ -94,14 +104,17 @@ public class ChannelManager {
             channelUserMap.put(channelID,new ArrayList<>());
         }
     }
+    // 初始化频道的消息队列，启用定时器以固定的周期发送队列中的数据包
     private void initChannelQueue()
     {
         if(timer == null)
         {
             timer = new Timer();
+            // 启用定时器
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
+                    // 尝试发送缓存消息队列的数据包
                     if(!dataPackQueue.isEmpty())
                     {
                         DataPack dataPack = dataPackQueue.peek();
@@ -135,6 +148,7 @@ public class ChannelManager {
         }
     }
 
+    // 向频道中的玩家们广播频道信息
     public void broadcast(int channelID,String message)
     {
         if(!channelUserMap.containsKey(channelID))return;

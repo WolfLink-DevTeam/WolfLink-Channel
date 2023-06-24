@@ -2,6 +2,10 @@ package org.vanillacommunity.vanillaglobalchannel.common.network;
 
 import lombok.Getter;
 
+/**
+ * 一个并不通用的数据包封装
+ * 这样的封装没有意义...
+ */
 @Getter
 public class DataPack {
 

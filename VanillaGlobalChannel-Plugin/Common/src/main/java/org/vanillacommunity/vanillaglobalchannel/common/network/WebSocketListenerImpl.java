@@ -17,6 +17,7 @@ public class WebSocketListenerImpl extends WebSocketListener {
     private static int lastWaitingReconnect = 1;
     private static int nowWaitingReconnect = 1;//秒
 
+    // 在 WebSocket 连接建立时调用该方法进行处理
     @Override
     public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
         super.onOpen(webSocket, response);
@@ -27,6 +28,7 @@ public class WebSocketListenerImpl extends WebSocketListener {
         MCServerManager.getInstance().init();
 
     }
+    // 在收到 WebSocket 连接中对方发来的消息时调用该方法进行处理
     @Override
     public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
         super.onMessage(webSocket, text);
@@ -42,11 +44,13 @@ public class WebSocketListenerImpl extends WebSocketListener {
         }
         NetTransManager.getInstance().parseDataPack(text);
     }
+    // 在 WebSocket 连接关闭时调用该方法进行处理
     @Override
     public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
         super.onClosed(webSocket, code, reason);
         System.out.println(ConfigManager.cmdPrefix+"与中央聊天服务器的连接已断开，插件停止工作。");
     }
+    // 在 WebSocket 连接失败时调用该方法进行处理
     @Override
     public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable throwable, Response response) {
         super.onFailure(webSocket, throwable, response);

@@ -14,6 +14,7 @@ public class PlatformAdapter{
         {
             try
             {
+                // 根据平台适配符匹配对应的PlatformAdapter的实现
                 switch (platformSign) {
                     case VELOCITY:
                         instance = (PlatformAdapter) Class.forName("org.vanillacommunity.vanillaglobalchannel.velocity.VelocityAdapter").getConstructor().newInstance();

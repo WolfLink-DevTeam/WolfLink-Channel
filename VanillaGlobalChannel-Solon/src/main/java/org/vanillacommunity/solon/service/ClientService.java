@@ -29,6 +29,7 @@ public class ClientService {
     @Inject Logger logger;
     public void login(Client client,Session session,int channelId) {
         String channelPassword = session.param("channel_password");
+        if(channelPassword == null)channelPassword = "";
         if(!channelPassword.equals(channelRepository.find(channelId).getPassword())) {
             logger.warn("客户端 "+client.getAccount()+" 尝试登录频道 "+channelId+" 但密码错误，阻止本次连接。");
             try {

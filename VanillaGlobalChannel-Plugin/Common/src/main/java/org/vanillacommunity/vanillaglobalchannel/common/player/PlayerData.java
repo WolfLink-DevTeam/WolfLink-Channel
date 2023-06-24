@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 玩家数据，保存了关于玩家的一些详细信息
+ * 还负责玩家加入频道和离开频道的一些方法
+ */
 public class PlayerData {
 
     IPlayer iPlayer;

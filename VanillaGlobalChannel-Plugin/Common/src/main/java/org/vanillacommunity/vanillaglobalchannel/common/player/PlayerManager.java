@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 玩家管理者，本质上就是个 PlayerRepository
+ */
 public class PlayerManager {
     private static PlayerManager instance;
 

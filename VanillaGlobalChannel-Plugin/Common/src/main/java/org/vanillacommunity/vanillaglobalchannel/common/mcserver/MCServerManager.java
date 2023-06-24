@@ -29,6 +29,7 @@ public class MCServerManager{
         System.out.println(ConfigManager.serverInfo1);
         NetTransManager.getInstance().getWebSocket().send("GetServerInfo");
     }
+    // 其实应该是解析服务器数据，把字符串解析为 MCServer 对象之后存储到对应的映射表中
     public void bindServerInfo(String str)
     {
         List<String> serverInfo = Tools.stringToList(str);
