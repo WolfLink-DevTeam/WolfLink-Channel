@@ -1,7 +1,9 @@
 package org.vanillacommunity.solon.config;
 
 import org.noear.solon.SolonApp;
+import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
+import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.entity.channel.CommonChannel;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 
@@ -9,6 +11,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Singleton(true)
+@Component
 public class ChannelsConfig implements ILoadable{
     @Inject
     ChannelRepository channelRepository;

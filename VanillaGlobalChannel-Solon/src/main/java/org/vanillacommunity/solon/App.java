@@ -4,6 +4,7 @@ import lombok.Getter;
 import org.noear.solon.Solon;
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.SolonMain;
+import org.vanillacommunity.solon.config.ChannelsConfig;
 import org.vanillacommunity.solon.config.ProvidersConfig;
 @SolonMain
 public class App {
@@ -20,5 +21,7 @@ public class App {
     private static void initCfg() {
         ProvidersConfig providersConfig = IOC.get(ProvidersConfig.class);
         providersConfig.load(solonApp);
+        ChannelsConfig channelsConfig = IOC.get(ChannelsConfig.class);
+        channelsConfig.load(solonApp);
     }
 }
