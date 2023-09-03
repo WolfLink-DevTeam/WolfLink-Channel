@@ -7,6 +7,7 @@ import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Message;
+import org.noear.solon.lang.Nullable;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.MsgType;
 import org.vanillacommunity.solon.entity.channel.Channel;
@@ -53,6 +54,7 @@ public class WebSocketService {
      * @param input JSON格式字符串
      * @return DataPack对象
      */
+    @Nullable
     public DataPack unpackData(String input) {
         return DataPack.fromJson(input);
     }
@@ -62,6 +64,7 @@ public class WebSocketService {
      */
     public void analyseMessage(OnlineClient onlineClient, Message message) {
         DataPack dataPack = unpackData(message.bodyAsString());
+        if(dataPack == null) return;
         int channelId = onlineClient.getChannelId();
         Channel channel = channelRepository.find(channelId);
         if (channel == null) {

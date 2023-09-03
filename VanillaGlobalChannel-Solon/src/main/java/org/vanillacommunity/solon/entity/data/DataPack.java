@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import org.noear.solon.lang.Nullable;
 import org.vanillacommunity.solon.MsgType;
 
 /**
@@ -20,12 +21,15 @@ public class DataPack {
     @Getter
     String content;
 
+    @Nullable
     public static DataPack fromJson(String jsonStr) {
-        JsonObject jo = JsonParser.parseString(jsonStr).getAsJsonObject();
-        return DataPack.builder()
-                .type(MsgType.valueOf(jo.get("type").getAsString()))
-                .content(jo.get("content").getAsString())
-                .build();
+        try {
+            JsonObject jo = JsonParser.parseString(jsonStr).getAsJsonObject();
+            return DataPack.builder()
+                    .type(MsgType.valueOf(jo.get("type").getAsString()))
+                    .content(jo.get("content").getAsString())
+                    .build();
+        } catch (Exception ignore) { return null; }
     }
 
     public JsonObject toJson() {
