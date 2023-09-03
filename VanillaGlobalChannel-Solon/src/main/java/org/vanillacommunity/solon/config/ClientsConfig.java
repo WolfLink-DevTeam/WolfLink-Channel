@@ -8,6 +8,7 @@ import org.vanillacommunity.solon.entity.client.Client;
 import org.vanillacommunity.solon.repository.ClientRepository;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Singleton(true)
@@ -28,7 +29,8 @@ public class ClientsConfig implements ILoadable {
             String password = solonApp.cfg().getProperty("clients." + account + ".password");
             String name = solonApp.cfg().getProperty("clients." + account + ".name");
             String displayName = solonApp.cfg().getProperty("clients." + account + ".display_name");
-            Client client = new Client(account, password);
+            List<String> ipSegments = solonApp.cfg().getList("clients." + account + ".ip_segments");
+            Client client = new Client(account, password, ipSegments);
             client.setName(name);
             client.setDisplayName(displayName);
             clientRepository.update(client);

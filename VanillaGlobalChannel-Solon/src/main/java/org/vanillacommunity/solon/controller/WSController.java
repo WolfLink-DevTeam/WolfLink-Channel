@@ -5,6 +5,7 @@ import org.noear.solon.annotation.ServerEndpoint;
 import org.noear.solon.core.message.Listener;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.core.message.Session;
+import org.vanillacommunity.solon.IPMatcher;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.client.OnlineClient;
 import org.vanillacommunity.solon.entity.client.Client;
@@ -33,6 +34,7 @@ public class WSController implements Listener {
 
     @Override
     public void onOpen(Session session) {
+        String address = session.getRemoteAddress().getAddress().getHostAddress();
         String account = session.param("account");
         String password = session.param("password");
         int channelId;
@@ -54,6 +56,17 @@ public class WSController implements Listener {
         }
         if (password == null || (!password.equals(client.getPassword()))) {
             closeSession(session, "Password 不匹配");
+            return;
+        }
+        boolean isMatch = false;
+        for (String ipSegment : client.getIpSegments()) {
+            if(IPMatcher.isIpMatch(address,ipSegment)) {
+                isMatch = true;
+                break;
+            }
+        }
+        if(!isMatch) {
+            closeSession(session,"IP段不在用户白名单内");
             return;
         }
         logger.info(session.getRemoteAddress() + "成功建立连接");

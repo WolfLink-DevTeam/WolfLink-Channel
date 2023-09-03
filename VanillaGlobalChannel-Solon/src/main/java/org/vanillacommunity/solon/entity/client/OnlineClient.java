@@ -18,8 +18,8 @@ public class OnlineClient extends Client {
     @Getter
     int channelId;
 
-    public OnlineClient(String account, String password, int channelId, Session session, Date onlineTime) {
-        super(account, password);
+    public OnlineClient(Client client, int channelId, Session session, Date onlineTime) {
+        super(client.account, client.password, client.ipSegments);
         this.channelId = channelId;
         this.session = session;
         this.onlineTime = onlineTime;

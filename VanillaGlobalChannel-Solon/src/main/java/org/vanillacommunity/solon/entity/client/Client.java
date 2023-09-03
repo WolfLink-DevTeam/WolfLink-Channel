@@ -2,6 +2,8 @@ package org.vanillacommunity.solon.entity.client;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Client {
     // 唯一主键
@@ -13,8 +15,10 @@ public class Client {
     // 显示名称(带有颜色符号)
     String displayName = "";
 
-    public Client(String account, String password) {
+    List<String> ipSegments;
+    public Client(String account, String password, List<String> ipSegments) {
         this.account = account;
         this.password = password;
+        this.ipSegments = ipSegments;
     }
 }

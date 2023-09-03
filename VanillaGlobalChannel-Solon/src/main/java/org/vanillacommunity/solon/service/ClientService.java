@@ -55,7 +55,7 @@ public class ClientService {
             }
             return;
         }
-        OnlineClient onlineClient = new OnlineClient(client.getAccount(), client.getPassword(), channelId, session, new Date());
+        OnlineClient onlineClient = new OnlineClient(client, channelId, session, new Date());
         onlineClientRepository.update(onlineClient);
         logger.info(client.getAccount() + " 成功登录，所在频道 " + channelId);
     }
