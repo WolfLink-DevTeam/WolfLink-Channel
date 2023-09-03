@@ -1,9 +1,0 @@
-org\vanillacommunity\springboot\VanillaGlobalChannel\BeanConfiguration.class
-org\vanillacommunity\springboot\VanillaGlobalChannel\Channel.class
-org\vanillacommunity\springboot\VanillaGlobalChannel\MCServerManager.class
-org\vanillacommunity\springboot\VanillaGlobalChannel\controller\WSController.class
-org\vanillacommunity\springboot\VanillaGlobalChannel\Application.class
-org\vanillacommunity\springboot\VanillaGlobalChannel\MCServer.class
-org\vanillacommunity\springboot\VanillaGlobalChannel\ChannelManager.class
-META-INF\spring-configuration-metadata.json
-org\vanillacommunity\springboot\VanillaGlobalChannel\WSManager.class

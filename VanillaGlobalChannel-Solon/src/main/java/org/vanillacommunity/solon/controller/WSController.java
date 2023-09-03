@@ -16,7 +16,7 @@ import org.vanillacommunity.solon.service.WebSocketService;
 
 import java.io.IOException;
 
-@ServerEndpoint(path = "/ws/{account}")
+@ServerEndpoint(path = "/connection")
 public class WSController implements Listener {
     @Inject
     Logger logger;
