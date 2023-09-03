@@ -34,7 +34,7 @@ public class WSController implements Listener {
     @Override
     public void onOpen(Session session) {
         String account = session.param("account");
-        String token = session.param("token");
+        String password = session.param("password");
         int channelId;
         try {
             channelId = Integer.parseInt(session.param("channel_id"));
@@ -52,8 +52,8 @@ public class WSController implements Listener {
             closeSession(session, "未能找到：" + account + " 用户");
             return;
         }
-        if (token == null || (!token.equals(client.getToken()))) {
-            closeSession(session, "Token 不匹配");
+        if (password == null || (!password.equals(client.getPassword()))) {
+            closeSession(session, "Password 不匹配");
             return;
         }
         logger.info(session.getRemoteAddress() + "成功建立连接");

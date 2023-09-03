@@ -25,10 +25,10 @@ public class ClientsConfig implements ILoadable {
         });
         // foreach providers data
         clientAccounts.forEach(account -> {
-            String token = solonApp.cfg().getProperty("clients." + account + ".token");
+            String password = solonApp.cfg().getProperty("clients." + account + ".password");
             String name = solonApp.cfg().getProperty("clients." + account + ".name");
             String displayName = solonApp.cfg().getProperty("clients." + account + ".display_name");
-            Client client = new Client(account, token);
+            Client client = new Client(account, password);
             client.setName(name);
             client.setDisplayName(displayName);
             clientRepository.update(client);

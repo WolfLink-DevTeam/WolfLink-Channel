@@ -2,8 +2,8 @@ clients:
     "3401286177":
       name: "狼与香辛料亭"
       display_name: "§6狼与香辛料亭"
-      token: "wcnmm"
+      password: "wcnmm"
     "2333455567":
       name: "测试服务器名"
       display_name: "§e测试§a服务§b器名"
-      token: "wrnm"
+      password: "wrnm"
