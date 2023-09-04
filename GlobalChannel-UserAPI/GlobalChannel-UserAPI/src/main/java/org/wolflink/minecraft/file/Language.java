@@ -12,6 +12,8 @@ public class Language {
     private String channelJoin;
     private String serverOnline;
     private String serverOffline;
+    private String chatTemplate = "%sender% » %content%";
+    private String announcementTemplate = "[ 全球公告 ] %content%";
     public void load() {
 
     }

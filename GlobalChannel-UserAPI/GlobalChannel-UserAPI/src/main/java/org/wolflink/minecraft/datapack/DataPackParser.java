@@ -8,6 +8,6 @@ import org.wolflink.minecraft.DataPack;
 public class DataPackParser {
     @Nullable
     public DataPack parse(String string) {
-        return null;
+        return DataPack.fromJson(string);
     }
 }
