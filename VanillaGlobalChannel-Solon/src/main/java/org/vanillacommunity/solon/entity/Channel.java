@@ -1,8 +1,7 @@
-package org.vanillacommunity.solon.entity.channel;
+package org.vanillacommunity.solon.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import org.vanillacommunity.solon.entity.message.MessageContainer;
 
 import java.util.List;
 

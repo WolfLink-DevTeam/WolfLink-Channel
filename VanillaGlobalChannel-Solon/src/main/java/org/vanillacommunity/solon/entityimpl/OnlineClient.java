@@ -1,7 +1,8 @@
-package org.vanillacommunity.solon.entity.client;
+package org.vanillacommunity.solon.entityimpl;
 
 import lombok.Getter;
 import org.noear.solon.core.message.Session;
+import org.vanillacommunity.solon.entity.Client;
 
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class OnlineClient extends Client {
     int channelId;
 
     public OnlineClient(Client client, int channelId, Session session, Date onlineTime) {
-        super(client.account, client.password, client.ipSegments);
+        super(client.getAccount(), client.getPassword(), client.getIpSegments());
         this.channelId = channelId;
         this.session = session;
         this.onlineTime = onlineTime;

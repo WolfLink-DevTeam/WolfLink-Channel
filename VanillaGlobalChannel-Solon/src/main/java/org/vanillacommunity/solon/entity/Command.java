@@ -1,4 +1,4 @@
-package org.vanillacommunity.solon.entity.command;
+package org.vanillacommunity.solon.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

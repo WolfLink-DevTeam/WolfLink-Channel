@@ -1,18 +1,17 @@
 package org.vanillacommunity.solon.service;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.MsgType;
-import org.vanillacommunity.solon.entity.message.GlobalMessage;
-import org.vanillacommunity.solon.entity.client.Client;
-import org.vanillacommunity.solon.entity.client.OnlineClient;
+import org.vanillacommunity.solon.entity.Client;
+import org.vanillacommunity.solon.entityimpl.OnlineClient;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.wolflink.minecraft.GlobalMessage;
+import org.wolflink.minecraft.MsgType;
 
 import java.io.IOException;
 import java.util.Date;

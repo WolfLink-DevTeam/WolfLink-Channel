@@ -1,4 +1,4 @@
-package org.vanillacommunity.solon;
+package org.wolflink.minecraft;
 
 /**
  * 消息类型

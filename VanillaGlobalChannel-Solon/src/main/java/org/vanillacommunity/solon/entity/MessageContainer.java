@@ -1,4 +1,6 @@
-package org.vanillacommunity.solon.entity.message;
+package org.vanillacommunity.solon.entity;
+
+import org.wolflink.minecraft.GlobalMessage;
 
 import java.util.ArrayList;
 import java.util.List;

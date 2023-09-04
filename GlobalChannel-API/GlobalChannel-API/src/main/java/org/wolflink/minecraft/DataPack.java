@@ -1,12 +1,11 @@
-package org.vanillacommunity.solon.entity.data;
+package org.wolflink.minecraft;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
-import org.noear.solon.lang.Nullable;
-import org.vanillacommunity.solon.MsgType;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * WebSocket 通信的最外层数据包结构

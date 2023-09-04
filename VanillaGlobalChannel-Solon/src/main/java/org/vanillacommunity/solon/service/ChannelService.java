@@ -4,11 +4,11 @@ import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.MsgType;
-import org.vanillacommunity.solon.entity.channel.Channel;
-import org.vanillacommunity.solon.entity.message.GlobalMessage;
+import org.vanillacommunity.solon.entity.Channel;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.wolflink.minecraft.GlobalMessage;
+import org.wolflink.minecraft.MsgType;
 
 /**
  * 频道层面的业务类

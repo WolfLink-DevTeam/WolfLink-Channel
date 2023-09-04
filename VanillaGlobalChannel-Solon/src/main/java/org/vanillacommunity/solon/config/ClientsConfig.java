@@ -4,7 +4,7 @@ import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
-import org.vanillacommunity.solon.entity.client.Client;
+import org.vanillacommunity.solon.entity.Client;
 import org.vanillacommunity.solon.repository.ClientRepository;
 
 import java.util.HashSet;

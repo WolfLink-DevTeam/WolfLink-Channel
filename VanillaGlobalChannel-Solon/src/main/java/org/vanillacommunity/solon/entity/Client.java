@@ -1,4 +1,4 @@
-package org.vanillacommunity.solon.entity.client;
+package org.vanillacommunity.solon.entity;
 
 import lombok.Data;
 

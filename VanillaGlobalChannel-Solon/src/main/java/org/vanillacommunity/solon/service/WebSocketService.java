@@ -9,13 +9,13 @@ import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.lang.Nullable;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.MsgType;
-import org.vanillacommunity.solon.entity.channel.Channel;
-import org.vanillacommunity.solon.entity.client.OnlineClient;
-import org.vanillacommunity.solon.entity.data.DataPack;
-import org.vanillacommunity.solon.entity.message.GlobalMessage;
+import org.vanillacommunity.solon.entity.Channel;
+import org.vanillacommunity.solon.entityimpl.OnlineClient;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.wolflink.minecraft.DataPack;
+import org.wolflink.minecraft.GlobalMessage;
+import org.wolflink.minecraft.MsgType;
 
 import java.util.List;
 import java.util.Set;
