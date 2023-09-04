@@ -3,8 +3,9 @@ package org.wolflink.minecraft.file;
 import lombok.Getter;
 import org.spongepowered.configurate.CommentedConfigurationNode;
 import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
+import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Singleton;
-import org.wolflink.minecraft.Application;
+import org.wolflink.minecraft.interfaces.ILogger;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,7 +29,7 @@ public class Configuration {
         try {
             root = loader.load();
         } catch (IOException e) {
-            Application.getLogger().err("An error occurred while loading this configuration: " + e.getMessage());
+            IOC.getBean(ILogger.class).err("An error occurred while loading this configuration: " + e.getMessage());
             if (e.getCause() != null) {
                 e.getCause().printStackTrace();
             }

@@ -6,7 +6,6 @@ import okhttp3.WebSocketListener;
 import org.jetbrains.annotations.NotNull;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
-import org.wolflink.minecraft.Application;
 import org.wolflink.minecraft.datapack.DataPackExecutor;
 import org.wolflink.minecraft.datapack.DataPackParser;
 import org.wolflink.minecraft.file.Configuration;
@@ -19,7 +18,8 @@ import java.util.TimerTask;
 @Singleton
 public class WSListener extends WebSocketListener {
 
-    private final ILogger logger = Application.getLogger();
+    @Inject
+    private ILogger logger;
     @Inject
     private Network network;
     @Inject

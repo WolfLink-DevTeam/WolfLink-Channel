@@ -7,6 +7,7 @@ import org.wolflink.minecraft.DataPack;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
 import org.wolflink.minecraft.file.Language;
+import org.wolflink.minecraft.interfaces.PlatformAdapter;
 
 @Singleton
 public class DataPackExecutor {
@@ -18,7 +19,7 @@ public class DataPackExecutor {
                     .replace("%sender%",globalMessage.getSenderDisplayName())
                     .replace("%content%", globalMessage.getContent());
             // TODO 判断玩家是否处于全球频道
-            Application.getPlatformAdapter().getOnlinePlayers().forEach(iPlayer -> iPlayer.sendMessage(chatMsg));
+            IOC.getBean(PlatformAdapter.class).getOnlinePlayers().forEach(iPlayer -> iPlayer.sendMessage(chatMsg));
         }
     }
 }
