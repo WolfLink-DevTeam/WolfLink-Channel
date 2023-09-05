@@ -6,12 +6,13 @@ import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entity.Client;
+import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.entityimpl.OnlineClient;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
+import org.wolflink.minecraft.PlatformType;
 
 import java.io.IOException;
 import java.util.Date;
@@ -37,15 +38,23 @@ public class ClientService {
      * 只有登录成功后客户端才会被添加到 OnlineClientRepository 当中
      * 可能会出现登录失败的情况，即频道密码不符
      *
-     * @param client    用户客户端
+     * @param secureClient    用户客户端
      * @param session   WebSocket连接对象
      * @param channelId 频道ID
      */
-    public void login(Client client, Session session, int channelId) {
+    public void login(SecureClient secureClient, Session session, int channelId) {
         String channelPassword = session.param("channel_password");
+        String platformTypeStr = session.param("platform_type");
+        PlatformType platformType;
+        try {
+            platformType = PlatformType.valueOf(platformTypeStr);
+        } catch (Exception ignore) {
+            logger.warn("未能获取到"+secureClient.getAccount()+"的平台标识："+platformTypeStr);
+            platformType = PlatformType.UNKNOWN;
+        }
         if (channelPassword == null) channelPassword = "";
         if (!channelPassword.equals(channelRepository.find(channelId).getPassword())) {
-            logger.warn("客户端 " + client.getAccount() + " 尝试登录频道 " + channelId + " 但密码错误，阻止本次连接。");
+            logger.warn("客户端 " + secureClient.getAccount() + " 尝试登录频道 " + channelId + " 但密码错误，阻止本次连接。");
             try {
                 // 关闭用户连接
                 session.close();
@@ -54,9 +63,9 @@ public class ClientService {
             }
             return;
         }
-        OnlineClient onlineClient = new OnlineClient(client, channelId, session, new Date());
+        OnlineClient onlineClient = new OnlineClient(secureClient, channelId, session, new Date(),platformType);
         onlineClientRepository.update(onlineClient);
-        logger.info(client.getAccount() + " 成功登录，所在频道 " + channelId);
+        logger.info(secureClient.getAccount() + " 成功登录，所在频道 " + channelId);
     }
 
     /**

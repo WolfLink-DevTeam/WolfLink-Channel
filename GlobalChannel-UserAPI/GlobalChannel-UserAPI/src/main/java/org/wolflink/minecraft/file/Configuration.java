@@ -12,7 +12,7 @@ import java.nio.file.Path;
 
 @Getter
 @Singleton
-public class Configuration {
+public class Configuration extends YamlConfiguration {
 
     private String centralServerIp = "";
     private String centralServerPort = "";
@@ -20,22 +20,14 @@ public class Configuration {
     private String password = "";
     private int channelId = 1;
 
-    public void load() {
+    public Configuration() {
         // TODO 改为 PlatformAdapter 提供的数据文件夹路径
-        YamlConfigurationLoader loader = YamlConfigurationLoader.builder()
-                .path(Path.of("GlobalChannel/config.yml"))
-                .build();
-        CommentedConfigurationNode root;
-        try {
-            root = loader.load();
-        } catch (IOException e) {
-            IOC.getBean(ILogger.class).err("An error occurred while loading this configuration: " + e.getMessage());
-            if (e.getCause() != null) {
-                e.getCause().printStackTrace();
-            }
-            System.exit(1);
-            return;
-        }
+        super("GlobalChannel/config.yml");
+    }
+
+    public void load() {
+        loadRoot();
+        if(root == null) return;
         centralServerIp = root.node("CentralServer").node("Ip").getString("");
         centralServerPort = root.node("CentralServer").node("Port").getString("");
         account = root.node("User").node("Account").getString("");

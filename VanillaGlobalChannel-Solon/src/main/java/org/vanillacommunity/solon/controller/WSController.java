@@ -8,7 +8,7 @@ import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.IPMatcher;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entityimpl.OnlineClient;
-import org.vanillacommunity.solon.entity.Client;
+import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.repository.ChannelRepository;
 import org.vanillacommunity.solon.repository.ClientRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
@@ -49,17 +49,17 @@ public class WSController implements Listener {
             return;
         }
 
-        Client client = clientRepository.find(account);
-        if (client == null) {
+        SecureClient secureClient = clientRepository.find(account);
+        if (secureClient == null) {
             closeSession(session, "未能找到：" + account + " 用户");
             return;
         }
-        if (password == null || (!password.equals(client.getPassword()))) {
+        if (password == null || (!password.equals(secureClient.getPassword()))) {
             closeSession(session, "Password 不匹配");
             return;
         }
         boolean isMatch = false;
-        for (String ipSegment : client.getIpSegments()) {
+        for (String ipSegment : secureClient.getIpSegments()) {
             if(IPMatcher.isIpMatch(address,ipSegment)) {
                 isMatch = true;
                 break;
@@ -70,7 +70,7 @@ public class WSController implements Listener {
             return;
         }
         logger.info(session.getRemoteAddress() + "成功建立连接");
-        clientService.login(client, session, channelId);
+        clientService.login(secureClient, session, channelId);
     }
 
     @Override

@@ -55,15 +55,9 @@
             <version>2.4.0</version>
         </dependency>
         <dependency>
-            <groupId>org.wolflink.minecraft</groupId>
+            <groupId>org.wolflink.minecraft.globalchannel</groupId>
             <artifactId>GlobalChannel-API</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.wolflink.minecraft</groupId>
-            <artifactId>GlobalChannel-API</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>

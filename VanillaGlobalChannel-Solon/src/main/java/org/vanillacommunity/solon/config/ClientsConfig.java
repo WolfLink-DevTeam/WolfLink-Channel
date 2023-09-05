@@ -4,8 +4,9 @@ import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
-import org.vanillacommunity.solon.entity.Client;
+import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.repository.ClientRepository;
+import org.wolflink.minecraft.Client;
 
 import java.util.HashSet;
 import java.util.List;
@@ -30,10 +31,10 @@ public class ClientsConfig implements ILoadable {
             String name = solonApp.cfg().getProperty("clients." + account + ".name");
             String displayName = solonApp.cfg().getProperty("clients." + account + ".display_name");
             List<String> ipSegments = solonApp.cfg().getList("clients." + account + ".ip_segments");
-            Client client = new Client(account, password, ipSegments);
-            client.setName(name);
-            client.setDisplayName(displayName);
-            clientRepository.update(client);
+            SecureClient secureClient = new SecureClient(new Client(account,name,displayName), password, ipSegments);
+            secureClient.setName(name);
+            secureClient.setDisplayName(displayName);
+            clientRepository.update(secureClient);
         });
     }
 }

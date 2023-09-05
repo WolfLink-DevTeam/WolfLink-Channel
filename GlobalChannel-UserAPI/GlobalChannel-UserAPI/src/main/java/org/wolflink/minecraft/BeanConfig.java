@@ -13,6 +13,7 @@ public class BeanConfig {
     public ILogger iLogger() {
         return iLogger;
     }
+    @BeanProvider
     public PlatformAdapter platformAdapter() {
         return platformAdapter;
     }

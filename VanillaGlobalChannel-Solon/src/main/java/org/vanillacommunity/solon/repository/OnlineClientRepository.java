@@ -3,7 +3,7 @@ package org.vanillacommunity.solon.repository;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.entityimpl.OnlineClient;
-import org.vanillacommunity.solon.entity.Client;
+import org.vanillacommunity.solon.entity.SecureClient;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class OnlineClientRepository extends Repository<String, OnlineClient> {
     public OnlineClientRepository() {
-        super(Client::getAccount);
+        super(SecureClient::getAccount);
     }
 
     public Set<OnlineClient> filterByChannelId(int channelId) {

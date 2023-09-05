@@ -3,7 +3,7 @@ package org.vanillacommunity.solon.repository;
 
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Singleton;
-import org.vanillacommunity.solon.entity.Client;
+import org.vanillacommunity.solon.entity.SecureClient;
 
 /**
  * 客户端仓库
@@ -11,8 +11,8 @@ import org.vanillacommunity.solon.entity.Client;
  */
 @Singleton(true)
 @Component
-public class ClientRepository extends Repository<String, Client> {
+public class ClientRepository extends Repository<String, SecureClient> {
     public ClientRepository() {
-        super(Client::getAccount);
+        super(SecureClient::getAccount);
     }
 }
