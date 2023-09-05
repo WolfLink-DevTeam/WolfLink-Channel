@@ -4,12 +4,15 @@ import lombok.Getter;
 import org.wolflink.common.ioc.Singleton;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Singleton
 @Getter
 public class PermanentData extends YamlConfiguration {
-    private List<String> channelPlayers;
+    private Set<String> channelPlayers;
 
     public PermanentData() {
         super("GlobalChannel/permanent.yml");
@@ -19,7 +22,7 @@ public class PermanentData extends YamlConfiguration {
         loadRoot();
         if(root == null) return;
         try {
-            channelPlayers = root.node("ChannelPlayers").getList(String.class,new ArrayList<>());
+            channelPlayers = new HashSet<>(root.node("ChannelPlayers").getList(String.class, new ArrayList<>()));
         } catch (Exception e) {
             e.printStackTrace();
             getLogger().err("Permanent.yml 文件加载出现异常。");
@@ -27,7 +30,7 @@ public class PermanentData extends YamlConfiguration {
     }
     public void save() {
         try {
-            root.node("ChannelPlayers").setList(String.class,channelPlayers);
+            root.node("ChannelPlayers").setList(String.class,new ArrayList<>(channelPlayers));
             loader.save(root);
         } catch (Exception e) {
             e.printStackTrace();

@@ -10,6 +10,7 @@ public interface IPlayer {
     UUID getUUID();
 
     String getDisplayName();
+    String getName();
 
     void sendMessage(String message);
 
