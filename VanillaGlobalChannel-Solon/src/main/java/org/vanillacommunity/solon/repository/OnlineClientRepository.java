@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Component
 public class OnlineClientRepository extends Repository<String, OnlineClient> {
     public OnlineClientRepository() {
-        super(SecureClient::getAccount);
+        super(OnlineClient::getAccount);
     }
 
     public Set<OnlineClient> filterByChannelId(int channelId) {
