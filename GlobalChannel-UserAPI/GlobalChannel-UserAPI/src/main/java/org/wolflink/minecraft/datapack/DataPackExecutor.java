@@ -27,7 +27,9 @@ public class DataPackExecutor {
                     .replace("%content%", globalMessage.getContent());
 
             platformAdapter.getOnlinePlayers()
-                    .stream().filter(iPlayer -> permanentData.getChannelPlayers().contains(iPlayer.getName()))
+                    .stream().filter(iPlayer ->
+                            permanentData.getChannelPlayers().contains(iPlayer.getName())
+                                    && iPlayer.isOnline())
                     .forEach(iPlayer -> iPlayer.sendMessage(chatMsg));
         }
     }
