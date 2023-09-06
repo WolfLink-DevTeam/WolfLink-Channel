@@ -7,10 +7,10 @@ import org.noear.solon.core.message.Message;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.IPMatcher;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entityimpl.OnlineClient;
+import org.vanillacommunity.solon.entity.OnlineClient;
 import org.vanillacommunity.solon.entity.SecureClient;
-import org.vanillacommunity.solon.repository.ChannelRepository;
-import org.vanillacommunity.solon.repository.ClientRepository;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.vanillacommunity.solon.repository.SecureClientRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.service.ClientService;
 import org.vanillacommunity.solon.service.WebSocketService;
@@ -22,11 +22,11 @@ public class WSController implements Listener {
     @Inject
     Logger logger;
     @Inject
-    ClientRepository clientRepository;
+    SecureClientRepository secureClientRepository;
     @Inject
     OnlineClientRepository onlineClientRepository;
     @Inject
-    ChannelRepository channelRepository;
+    SecureChannelRepository secureChannelRepository;
     @Inject
     ClientService clientService;
     @Inject
@@ -44,12 +44,12 @@ public class WSController implements Listener {
             closeSession(session, "频道ID " + session.param("channel_id") + " 不合法");
             return;
         }
-        if (channelRepository.find(channelId) == null) {
+        if (secureChannelRepository.find(channelId) == null) {
             closeSession(session, "频道ID " + channelId + " 未找到");
             return;
         }
 
-        SecureClient secureClient = clientRepository.find(account);
+        SecureClient secureClient = secureClientRepository.find(account);
         if (secureClient == null) {
             closeSession(session, "未能找到：" + account + " 用户");
             return;

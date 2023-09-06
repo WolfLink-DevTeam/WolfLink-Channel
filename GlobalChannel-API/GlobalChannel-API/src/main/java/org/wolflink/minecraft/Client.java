@@ -13,4 +13,10 @@ public class Client {
     // 显示名称(带有颜色符号)
     String displayName;
 
+    public Client(Client client) {
+        this.account = client.account;
+        this.name = client.name;
+        this.displayName = client.displayName;
+    }
+
 }

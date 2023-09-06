@@ -9,9 +9,9 @@ import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.lang.Nullable;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entity.Channel;
-import org.vanillacommunity.solon.entityimpl.OnlineClient;
-import org.vanillacommunity.solon.repository.ChannelRepository;
+import org.vanillacommunity.solon.entity.SecureChannel;
+import org.vanillacommunity.solon.entity.OnlineClient;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.wolflink.minecraft.DataPack;
 import org.wolflink.minecraft.GlobalMessage;
@@ -28,7 +28,7 @@ public class WebSocketService {
     @Inject
     ClientService clientService;
     @Inject
-    ChannelRepository channelRepository;
+    SecureChannelRepository secureChannelRepository;
     @Inject
     OnlineClientRepository onlineClientRepository;
     @Inject
@@ -66,8 +66,8 @@ public class WebSocketService {
         DataPack dataPack = unpackData(message.bodyAsString());
         if(dataPack == null) return;
         int channelId = onlineClient.getChannelId();
-        Channel channel = channelRepository.find(channelId);
-        if (channel == null) {
+        SecureChannel secureChannel = secureChannelRepository.find(channelId);
+        if (secureChannel == null) {
             logger.err("不存在ID为 " + channelId + " 的频道，来自在线用户 " + onlineClient.getAccount());
             return;
         }
@@ -84,7 +84,7 @@ public class WebSocketService {
             switch (command) {
                 case "lookup_history": {
                     JsonArray jsonArray = new JsonArray();
-                    List<GlobalMessage> msgHistory = channel.getMessageContainer().lookup(100);
+                    List<GlobalMessage> msgHistory = secureChannel.getMessageContainer().lookup(100);
                     msgHistory.forEach(globalMessage -> jsonArray.add(globalMessage.toJson().toString()));
                     clientService.sendSystemMsg(onlineClient, jsonArray);
                     break;

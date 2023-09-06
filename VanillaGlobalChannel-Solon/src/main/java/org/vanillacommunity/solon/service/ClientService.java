@@ -7,8 +7,8 @@ import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.SecureClient;
-import org.vanillacommunity.solon.entityimpl.OnlineClient;
-import org.vanillacommunity.solon.repository.ChannelRepository;
+import org.vanillacommunity.solon.entity.OnlineClient;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
@@ -28,7 +28,7 @@ public class ClientService {
     @Inject
     WebSocketService webSocketService;
     @Inject
-    ChannelRepository channelRepository;
+    SecureChannelRepository secureChannelRepository;
     @Inject
     Logger logger;
 
@@ -53,7 +53,7 @@ public class ClientService {
             platformType = PlatformType.UNKNOWN;
         }
         if (channelPassword == null) channelPassword = "";
-        if (!channelPassword.equals(channelRepository.find(channelId).getPassword())) {
+        if (!channelPassword.equals(secureChannelRepository.find(channelId).getPassword())) {
             logger.warn("客户端 " + secureClient.getAccount() + " 尝试登录频道 " + channelId + " 但密码错误，阻止本次连接。");
             try {
                 // 关闭用户连接

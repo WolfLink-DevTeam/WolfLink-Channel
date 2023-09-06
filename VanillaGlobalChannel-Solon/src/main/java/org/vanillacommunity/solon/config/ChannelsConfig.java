@@ -4,8 +4,7 @@ import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
-import org.vanillacommunity.solon.entityimpl.CommonChannel;
-import org.vanillacommunity.solon.repository.ChannelRepository;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
 
 import java.util.HashSet;
 import java.util.List;
@@ -15,7 +14,7 @@ import java.util.Set;
 @Component
 public class ChannelsConfig implements ILoadable {
     @Inject
-    ChannelRepository channelRepository;
+    SecureChannelRepository secureChannelRepository;
 
     @Override
     public void load(SolonApp solonApp) {
@@ -29,7 +28,7 @@ public class ChannelsConfig implements ILoadable {
             String name = solonApp.cfg().getProperty("channels." + id + ".name");
             String password = solonApp.cfg().getProperty("channels." + id + ".password");
             List<String> announcement = solonApp.cfg().getList("channels." + id + ".announcement");
-            channelRepository.update(new CommonChannel(Integer.parseInt(id), name, password, announcement));
+            secureChannelRepository.update(new CommonSecureChannel(Integer.parseInt(id), name, password, announcement));
         });
     }
 }

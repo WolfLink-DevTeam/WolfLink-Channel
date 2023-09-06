@@ -11,8 +11,8 @@ import org.vanillacommunity.solon.entity.SecureClient;
  */
 @Singleton(true)
 @Component
-public class ClientRepository extends Repository<String, SecureClient> {
-    public ClientRepository() {
+public class SecureClientRepository extends Repository<String, SecureClient> {
+    public SecureClientRepository() {
         super(SecureClient::getAccount);
     }
 }

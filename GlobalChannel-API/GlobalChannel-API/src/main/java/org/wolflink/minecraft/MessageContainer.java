@@ -1,4 +1,4 @@
-package org.vanillacommunity.solon.entity;
+package org.wolflink.minecraft;
 
 import org.wolflink.minecraft.GlobalMessage;
 

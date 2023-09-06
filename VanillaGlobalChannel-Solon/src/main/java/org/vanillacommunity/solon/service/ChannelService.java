@@ -4,8 +4,8 @@ import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entity.Channel;
-import org.vanillacommunity.solon.repository.ChannelRepository;
+import org.vanillacommunity.solon.entity.SecureChannel;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
@@ -19,7 +19,7 @@ import org.wolflink.minecraft.MsgType;
 @Component
 public class ChannelService {
     @Inject
-    ChannelRepository channelRepository;
+    SecureChannelRepository secureChannelRepository;
     @Inject
     OnlineClientRepository onlineClientRepository;
     @Inject
@@ -36,8 +36,8 @@ public class ChannelService {
      * @param globalMessage 消息对象
      */
     public void broadcast(int channelId, MsgType msgType, GlobalMessage globalMessage) {
-        Channel channel = channelRepository.find(channelId);
-        if (channel == null) {
+        SecureChannel secureChannel = secureChannelRepository.find(channelId);
+        if (secureChannel == null) {
             logger.err("在尝试向ID为 " + channelId + " 的频道播报消息时出现错误，并不存在该ID的频道！");
             return;
         }
@@ -47,7 +47,7 @@ public class ChannelService {
                 break;
             case ANNOUNCEMENT:
                 // 将消息添加到聊天记录中
-                channel.getMessageContainer().add(globalMessage);
+                secureChannel.getMessageContainer().add(globalMessage);
                 // 发送消息
                 onlineClientRepository.filterByChannelId(channelId).forEach(onlineClient -> {
                     clientService.sendAnnouncementMsg(onlineClient, globalMessage);
@@ -55,7 +55,7 @@ public class ChannelService {
                 break;
             case CHANNEL:
                 // 将消息添加到聊天记录中
-                channel.getMessageContainer().add(globalMessage);
+                secureChannel.getMessageContainer().add(globalMessage);
                 // 发送消息
                 onlineClientRepository.filterByChannelId(channelId).forEach(onlineClient -> {
                     clientService.sendChannelMsg(onlineClient, globalMessage);
@@ -71,8 +71,8 @@ public class ChannelService {
      * @param globalMessage 消息对象
      */
     public void broadcast(MsgType msgType, GlobalMessage globalMessage) {
-        channelRepository.findAll().forEach(channel -> {
-            broadcast(channel.getId(), msgType, globalMessage);
+        secureChannelRepository.findAll().forEach(secureChannel -> {
+            broadcast(secureChannel.getId(), msgType, globalMessage);
         });
     }
 }

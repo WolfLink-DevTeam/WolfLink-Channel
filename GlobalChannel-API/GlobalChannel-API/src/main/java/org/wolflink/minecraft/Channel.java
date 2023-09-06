@@ -1,25 +1,21 @@
-package org.vanillacommunity.solon.entity;
+package org.wolflink.minecraft;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
-/**
- * 抽象频道对象
- * 目前只有 CommonChannel 一个实现
- */
 @Data
 @AllArgsConstructor
-public abstract class Channel {
+public class Channel {
     // 频道ID 必须保证独一无二
     private final int id;
     // 频道名称
     private final String name;
-    // 进入频道需要的口令
-    private final String password;
     // 频道置顶公告
     private final List<String> announcement;
     // 消息容器，存储消息历史记录
-    private final MessageContainer messageContainer;
+    private final MessageContainer messageContainer = new MessageContainer();
+
 }

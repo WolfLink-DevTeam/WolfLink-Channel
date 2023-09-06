@@ -2,8 +2,7 @@ package org.vanillacommunity.solon.repository;
 
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Singleton;
-import org.vanillacommunity.solon.entityimpl.OnlineClient;
-import org.vanillacommunity.solon.entity.SecureClient;
+import org.vanillacommunity.solon.entity.OnlineClient;
 
 import java.util.Set;
 import java.util.stream.Collectors;
