@@ -2,11 +2,11 @@ package org.vanillacommunity.solon.service;
 
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.SecureChannel;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
 
@@ -15,7 +15,7 @@ import org.wolflink.minecraft.MsgType;
  * 向指定频道发送广播消息
  * 向所有 Provider 发送全体消息
  */
-@Singleton(true)
+@Singleton
 @Component
 public class ChannelService {
     @Inject

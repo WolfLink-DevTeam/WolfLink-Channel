@@ -1,13 +1,13 @@
 package org.vanillacommunity.solon;
 
 import org.noear.solon.annotation.Component;
-import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.util.LogUtil;
+import org.wolflink.common.ioc.Singleton;
 
 /**
  * 日志类的规范封装
  */
-@Singleton(true)
+@Singleton
 @Component
 public class Logger {
     private static final String PREFIX = "VGC-Server";

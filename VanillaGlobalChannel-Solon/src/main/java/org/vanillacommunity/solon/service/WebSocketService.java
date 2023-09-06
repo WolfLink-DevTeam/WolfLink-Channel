@@ -5,7 +5,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.lang.Nullable;
 import org.vanillacommunity.solon.Logger;
@@ -13,6 +12,7 @@ import org.vanillacommunity.solon.entity.SecureChannel;
 import org.vanillacommunity.solon.entity.OnlineClient;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.DataPack;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
@@ -20,7 +20,7 @@ import org.wolflink.minecraft.MsgType;
 import java.util.List;
 import java.util.Set;
 
-@Singleton(true)
+@Singleton
 @Component
 public class WebSocketService {
     @Inject

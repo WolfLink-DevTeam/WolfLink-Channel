@@ -3,13 +3,13 @@ package org.vanillacommunity.solon.service;
 import com.google.gson.JsonElement;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Singleton;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.entity.OnlineClient;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
 import org.wolflink.minecraft.PlatformType;
@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * 对于一个具体客户端的业务类
  */
-@Singleton(true)
+@Singleton
 @Component
 public class ClientService {
     @Inject

@@ -2,17 +2,17 @@ package org.vanillacommunity.solon.config;
 
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Singleton;
 import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.repository.SecureClientRepository;
+import org.wolflink.common.ioc.Inject;
+import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.Client;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Singleton(true)
+@Singleton
 @Component
 public class ClientsConfig implements ILoadable {
     @Inject

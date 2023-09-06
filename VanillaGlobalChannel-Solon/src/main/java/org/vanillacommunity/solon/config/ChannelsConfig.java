@@ -2,15 +2,16 @@ package org.vanillacommunity.solon.config;
 
 import org.noear.solon.SolonApp;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Singleton;
+import org.vanillacommunity.solon.entity.SecureChannel;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.wolflink.common.ioc.Inject;
+import org.wolflink.common.ioc.Singleton;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Singleton(true)
+@Singleton
 @Component
 public class ChannelsConfig implements ILoadable {
     @Inject
@@ -28,7 +29,7 @@ public class ChannelsConfig implements ILoadable {
             String name = solonApp.cfg().getProperty("channels." + id + ".name");
             String password = solonApp.cfg().getProperty("channels." + id + ".password");
             List<String> announcement = solonApp.cfg().getList("channels." + id + ".announcement");
-            secureChannelRepository.update(new CommonSecureChannel(Integer.parseInt(id), name, password, announcement));
+            secureChannelRepository.update(new SecureChannel(Integer.parseInt(id), name, password, announcement));
         });
     }
 }
