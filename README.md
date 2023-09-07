@@ -1,4 +1,4 @@
-# VanillaGlobalChannel - 香草跨服频道
+# WolfLink Channel - 绫狼跨服频道
 
 ![开源协议](https://img.shields.io/github/license/Vanilla-Non-Benefit-Community/VanillaGlobalChannel?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/Vanilla-Non-Benefit-Community/VanillaGlobalChannel?style=for-the-badge)
