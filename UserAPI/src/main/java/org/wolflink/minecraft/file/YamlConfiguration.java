@@ -8,13 +8,14 @@ import org.wolflink.minecraft.interfaces.ILogger;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public abstract class YamlConfiguration {
     protected final YamlConfigurationLoader loader;
     protected CommentedConfigurationNode root = null;
     public YamlConfiguration(String path) {
         loader = YamlConfigurationLoader.builder()
-                .path(Path.of(path))
+                .path(Paths.get(path))
                 .build();
     }
     protected ILogger getLogger() { return IOC.getBean(ILogger.class); }
