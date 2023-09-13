@@ -6,6 +6,9 @@ import java.util.UUID;
 
 public interface PlatformAdapter {
 
+    /**
+     * 一个 UUID 对应一个 IPlayer
+     */
     IPlayer adaptPlayer(UUID playerUuid);
     Collection<IPlayer> getOnlinePlayers();
     File getDataFolder();
