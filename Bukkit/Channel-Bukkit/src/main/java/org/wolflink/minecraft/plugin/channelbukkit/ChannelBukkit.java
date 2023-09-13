@@ -19,6 +19,7 @@ public final class ChannelBukkit extends JavaPlugin {
         channelApp.setEnabled(true);
         Objects.requireNonNull(Bukkit.getPluginCommand("channel"))
                 .setExecutor(new CommandManager());
+        Bukkit.getPluginManager().registerEvents(new ChatListener(),this);
     }
 
     @Override

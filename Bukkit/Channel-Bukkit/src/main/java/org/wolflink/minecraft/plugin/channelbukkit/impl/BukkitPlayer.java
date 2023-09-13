@@ -2,6 +2,8 @@ package org.wolflink.minecraft.plugin.channelbukkit.impl;
 
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
+import org.wolflink.common.ioc.IOC;
+import org.wolflink.minecraft.file.PermanentData;
 import org.wolflink.minecraft.interfaces.IPlayer;
 
 import java.util.UUID;
@@ -38,5 +40,10 @@ public class BukkitPlayer implements IPlayer {
     @Override
     public boolean isOnline() {
         return offlinePlayer.isOnline();
+    }
+
+    @Override
+    public boolean isInChannel() {
+        return IOC.getBean(PermanentData.class).getChannelPlayers().contains(getName());
     }
 }

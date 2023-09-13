@@ -15,4 +15,6 @@ public interface IPlayer {
 
     boolean isOnline();
 
+    boolean isInChannel();
+
 }

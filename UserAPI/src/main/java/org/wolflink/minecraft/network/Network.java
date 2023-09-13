@@ -8,12 +8,13 @@ import okhttp3.*;
 import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
-import org.wolflink.minecraft.Channel;
-import org.wolflink.minecraft.Client;
-import org.wolflink.minecraft.HttpAPI;
+import org.wolflink.minecraft.*;
 import org.wolflink.minecraft.file.Configuration;
+import org.wolflink.minecraft.interfaces.IPlayer;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -119,5 +120,18 @@ public class Network implements HttpAPI {
             e.printStackTrace();
         }
         return null;
+    }
+    public void sendChat(IPlayer iPlayer,String msg) {
+        GlobalMessage globalMessage = GlobalMessage.builder()
+                .clientAccount(IOC.getBean(Configuration.class).getAccount())
+                .sendDate(new Date())
+                .senderDisplayName(iPlayer.getName())
+                .content(msg)
+                .build();
+        DataPack dataPack = DataPack.builder()
+                .type(MsgType.CHANNEL)
+                .content(globalMessage.toString())
+                .build();
+        webSocket.send(dataPack.toString());
     }
 }
