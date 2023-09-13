@@ -1,7 +1,6 @@
 package org.vanillacommunity.solon.config;
 
 import org.noear.solon.SolonApp;
-import org.noear.solon.annotation.Component;
 import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.repository.SecureClientRepository;
 import org.wolflink.common.ioc.Inject;
@@ -13,7 +12,6 @@ import java.util.List;
 import java.util.Set;
 
 @Singleton
-@Component
 public class ClientsConfig implements ILoadable {
     @Inject
     SecureClientRepository secureClientRepository;

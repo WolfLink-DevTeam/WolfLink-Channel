@@ -10,3 +10,6 @@ solon.config.load:
 solon.logging.logger:
   "root": #默认记录器配置
     level: INFO
+api:
+  # 每分钟允许的 Http 接口调用数
+  query_per_minute_limit: 600
