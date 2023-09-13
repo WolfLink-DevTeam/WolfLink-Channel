@@ -33,7 +33,6 @@ public class GlobalMessage {
                 .senderDisplayName(jo.get("sender_display_name").getAsString())
                 .content(jo.get("content").getAsString())
                 .build();
-
     }
 
     public JsonObject toJson() {

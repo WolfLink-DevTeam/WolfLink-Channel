@@ -2,3 +2,8 @@ name: Channel-Bukkit
 version: '${project.version}'
 main: org.wolflink.minecraft.plugin.channelbukkit.ChannelBukkit
 api-version: '1.16'
+commands:
+  channel:
+    aliases:
+      - globalchannel
+      - gc

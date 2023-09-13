@@ -4,6 +4,7 @@ import lombok.NonNull;
 import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.file.Configuration;
+import org.wolflink.minecraft.file.Language;
 
 @Singleton
 public class Application {
@@ -26,6 +27,7 @@ public class Application {
 
     private void enable() {
         IOC.getBean(Configuration.class).load();
+        IOC.getBean(Language.class).load();
     }
     private void disable() {
     }

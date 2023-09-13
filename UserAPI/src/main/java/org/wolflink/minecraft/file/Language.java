@@ -23,5 +23,13 @@ public class Language extends YamlConfiguration {
     public void load() {
         loadRoot();
         if(root == null) return;
+        prefix = root.node("plugin").node("prefix").getString();
+        cmdHelp = root.node("plugin").node("cmdHelp").getString();
+        channelLeave = root.node("channel").node("leave").getString();
+        channelJoin = root.node("channel").node("join").getString();
+        serverOnline = root.node("channel").node("server-online").getString();
+        serverOffline = root.node("channel").node("server-offline").getString();
+        chatTemplate = root.node("channel").node("chat-template").getString();
+        announcementTemplate = root.node("channel").node("announcement-template").getString();
     }
 }
