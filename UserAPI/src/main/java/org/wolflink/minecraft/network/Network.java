@@ -1,15 +1,25 @@
 package org.wolflink.minecraft.network;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import okhttp3.*;
 import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
+import org.wolflink.minecraft.Channel;
+import org.wolflink.minecraft.Client;
+import org.wolflink.minecraft.HttpAPI;
 import org.wolflink.minecraft.file.Configuration;
 
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
-public class Network {
+public class Network implements HttpAPI {
     @Inject
     private Configuration configuration;
     private WebSocket webSocket = null;
@@ -44,5 +54,70 @@ public class Network {
         webSocket = httpClient.newWebSocket(request, IOC.getBean(WSListener.class));
     }
     private void disable() {
+    }
+
+    @Override
+    public Client queryClient(String client_account) {
+        RequestBody requestBody = new FormBody.Builder()
+                .add("client_account",client_account)
+                .build();
+        Request request = new Request.Builder()
+                .url(getConnectionUrl())
+                .post(requestBody)
+                .build();
+        try {
+            Response response = httpClient.newCall(request).execute();
+            if(response.body() == null) return null;
+            return new Gson().fromJson(response.body().string(),Client.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Channel queryChannel(int channel_id) {
+        RequestBody requestBody = new FormBody.Builder()
+                .add("channel_id", String.valueOf(channel_id))
+                .build();
+        Request request = new Request.Builder()
+                .url(getConnectionUrl())
+                .post(requestBody)
+                .build();
+        try {
+            Response response = httpClient.newCall(request).execute();
+            if(response.body() == null) return null;
+            return new Gson().fromJson(response.body().string(), Channel.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public Set<Client> queryChannelOnlineClients(int channel_id) {
+        RequestBody requestBody = new FormBody.Builder()
+                .add("channel_id",String.valueOf(channel_id))
+                .build();
+        Request request = new Request.Builder()
+                .url(getConnectionUrl())
+                .post(requestBody)
+                .build();
+        try {
+            Response response = httpClient.newCall(request).execute();
+            if(response.body() == null) return null;
+            JsonElement jsonElement = JsonParser.parseString(response.body().string());
+            Set<Client> clients = new HashSet<>();
+            if(jsonElement instanceof JsonArray) {
+                JsonArray jsonArray = (JsonArray) jsonElement;
+                jsonArray.forEach(element -> {
+                    clients.add(new Gson().fromJson(element.getAsString(),Client.class));
+                });
+            }
+            return clients;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
