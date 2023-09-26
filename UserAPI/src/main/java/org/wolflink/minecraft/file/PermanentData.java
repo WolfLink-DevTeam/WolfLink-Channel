@@ -12,10 +12,10 @@ import java.util.stream.Collectors;
 @Singleton
 @Getter
 public class PermanentData extends YamlConfiguration {
-    private Set<String> channelPlayers;
+    private Set<String> channelPlayers = new HashSet<>();
 
     public PermanentData() {
-        super("GlobalChannel/permanent.yml");
+        super("permanent.yml");
     }
 
     public void load() {

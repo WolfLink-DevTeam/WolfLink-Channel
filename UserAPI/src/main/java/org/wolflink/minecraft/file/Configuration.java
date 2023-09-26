@@ -22,7 +22,7 @@ public class Configuration extends YamlConfiguration {
 
     public Configuration() {
         // TODO 改为 PlatformAdapter 提供的数据文件夹路径
-        super("GlobalChannel/config.yml");
+        super("config.yml");
     }
 
     public void load() {

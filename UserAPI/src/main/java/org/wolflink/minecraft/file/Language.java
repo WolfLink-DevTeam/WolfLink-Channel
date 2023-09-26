@@ -17,7 +17,7 @@ public class Language extends YamlConfiguration {
 
     public Language() {
         // TODO 改为 PlatformAdapter 提供的数据文件夹路径
-        super("GlobalChannel/lang.yml");
+        super("lang.yml");
     }
 
     public void load() {
