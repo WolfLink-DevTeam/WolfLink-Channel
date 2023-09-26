@@ -36,6 +36,9 @@ public abstract class YamlConfiguration {
                 e.getCause().printStackTrace();
             }
         }
+        if(root == null || root.isNull()) {
+            getLogger().warn("配置文件未初始化");
+        }
     }
     public void load(){}
     public void save(){}

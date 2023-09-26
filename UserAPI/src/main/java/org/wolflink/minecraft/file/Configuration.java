@@ -27,7 +27,6 @@ public class Configuration extends YamlConfiguration {
 
     public void load() {
         loadRoot();
-        if(root == null) return;
         centralServerIp = root.node("CentralServer").node("Ip").getString("");
         centralServerPort = root.node("CentralServer").node("Port").getString("");
         account = root.node("User").node("Account").getString("");
