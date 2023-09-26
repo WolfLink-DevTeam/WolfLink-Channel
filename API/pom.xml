@@ -51,9 +51,9 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.WolfLink-DevTeam</groupId>
+            <groupId>org.wolflink.common</groupId>
             <artifactId>WolfLink-IOC</artifactId>
-            <version>1.1.0</version>
+            <version>1.1.4</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
