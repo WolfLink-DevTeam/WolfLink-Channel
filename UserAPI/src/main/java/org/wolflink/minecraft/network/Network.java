@@ -43,14 +43,12 @@ public class Network implements HttpAPI {
 
     private void enable() {
         if(webSocket != null) webSocket.close(1012,"客户端网络服务重启");
-        RequestBody requestBody = new FormBody.Builder()
-                .add("account",configuration.getAccount())
-                .add("password",configuration.getPassword())
-                .add("channel_id", String.valueOf(configuration.getChannelId()))
-                .build();
         Request request = new Request.Builder()
-                .url(getConnectionUrl())
-                .post(requestBody)
+                .url(getConnectionUrl()
+                        +"?account="+configuration.getAccount()
+                        +"&password="+configuration.getPassword()
+                        +"&channel_id="+configuration.getChannelId())
+                .get()
                 .build();
         webSocket = httpClient.newWebSocket(request, IOC.getBean(WSListener.class));
     }

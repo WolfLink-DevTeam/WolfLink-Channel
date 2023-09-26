@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.channelbukkit;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.wolflink.common.ioc.IOC;
 import org.wolflink.minecraft.Application;
 import org.wolflink.minecraft.plugin.channelbukkit.impl.BeanConfig;
 
@@ -18,7 +19,7 @@ public final class ChannelBukkit extends JavaPlugin {
         channelApp = new Application(new BeanConfig());
         channelApp.setEnabled(true);
         Objects.requireNonNull(Bukkit.getPluginCommand("channel"))
-                .setExecutor(new CommandManager());
+                .setExecutor(IOC.getBean(CommandManager.class));
         Bukkit.getPluginManager().registerEvents(new ChatListener(),this);
     }
 
