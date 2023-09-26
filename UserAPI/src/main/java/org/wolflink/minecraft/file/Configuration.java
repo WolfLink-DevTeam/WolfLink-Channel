@@ -28,7 +28,7 @@ public class Configuration extends YamlConfiguration {
     public void load() {
         loadRoot();
         centralServerIp = root.node("CentralServer").node("Ip").getString("127.0.0.1");
-        centralServerPort = root.node("CentralServer").node("Port").getString("25565");
+        centralServerPort = root.node("CentralServer").node("Port").getString("18080");
         account = root.node("User").node("Account").getString("temp_account");
         password = root.node("User").node("Password").getString("temp_password");
         channelId = root.node("User").node("ChannelId").getInt(1);
