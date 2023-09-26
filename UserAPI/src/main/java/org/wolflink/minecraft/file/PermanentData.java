@@ -20,7 +20,6 @@ public class PermanentData extends YamlConfiguration {
 
     public void load() {
         loadRoot();
-        if(root == null) return;
         try {
             channelPlayers = new HashSet<>(root.node("ChannelPlayers").getList(String.class, new ArrayList<>()));
         } catch (Exception e) {

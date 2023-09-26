@@ -37,7 +37,7 @@ public abstract class YamlConfiguration {
             }
         }
         if(root == null || root.isNull()) {
-            getLogger().warn("配置文件未初始化");
+            getLogger().warn("配置文件未初始化，系统将采用默认配置");
         }
     }
     public void load(){}
