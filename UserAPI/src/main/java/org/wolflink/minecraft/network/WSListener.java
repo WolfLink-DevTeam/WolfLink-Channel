@@ -12,6 +12,7 @@ import org.wolflink.minecraft.file.Configuration;
 import org.wolflink.minecraft.file.Language;
 import org.wolflink.minecraft.interfaces.ILogger;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -41,6 +42,16 @@ public class WSListener extends WebSocketListener {
             logger.info(language.getPrefix()+"中央聊天服务器连接成功。");
             lastWaitingReconnect = 1;
             nowWaitingReconnect = 1;
+        } else {
+            logger.warn(language.getPrefix()+"与中央聊天服务器建立连接时出现问题：");
+            logger.warn(response.message());
+            try {
+                if(response.body() != null) {
+                    logger.warn(response.body().string());
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
     // 在收到 WebSocket 连接中对方发来的消息时调用该方法进行处理
