@@ -16,7 +16,7 @@ public final class ChannelBukkit extends JavaPlugin {
     @Override
     public void onEnable() {
         // Plugin startup logic
-        channelApp = new Application(new BeanConfig());
+        channelApp = new Application(new BeanConfig(this));
         channelApp.setEnabled(true);
         Objects.requireNonNull(Bukkit.getPluginCommand("channel"))
                 .setExecutor(IOC.getBean(CommandManager.class));

@@ -15,7 +15,7 @@ public class PermanentData extends YamlConfiguration {
     private Set<String> channelPlayers = new HashSet<>();
 
     public PermanentData() {
-        super("permanent.yml");
+        super("permanent");
     }
 
     public void load() {

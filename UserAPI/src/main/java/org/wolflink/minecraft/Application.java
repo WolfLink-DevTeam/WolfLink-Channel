@@ -33,6 +33,8 @@ public class Application {
     }
     private void disable() {
         IOC.getBean(Network.class).setEnabled(false);
+        IOC.getBean(Configuration.class).save();
+        IOC.getBean(Language.class).save();
     }
 
 }

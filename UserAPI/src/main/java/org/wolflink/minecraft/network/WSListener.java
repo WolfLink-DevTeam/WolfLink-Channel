@@ -35,6 +35,8 @@ public class WSListener extends WebSocketListener {
     private static int lastWaitingReconnect = 1;
     private static int nowWaitingReconnect = 1;//秒
 
+    private boolean isRetring = false;
+
     // 在 WebSocket 连接建立时调用该方法进行处理
     @Override
     public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
@@ -42,6 +44,7 @@ public class WSListener extends WebSocketListener {
             logger.info(language.getPrefix()+"中央聊天服务器连接成功。");
             lastWaitingReconnect = 1;
             nowWaitingReconnect = 1;
+            isRetring = false;
         } else {
             logger.warn(language.getPrefix()+"与中央聊天服务器建立连接时出现问题：");
             logger.warn(response.message());
@@ -51,6 +54,10 @@ public class WSListener extends WebSocketListener {
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
+            }
+            if(!isRetring) {
+                isRetring = true;
+                retry();
             }
         }
     }
@@ -67,6 +74,9 @@ public class WSListener extends WebSocketListener {
     // 在 WebSocket 连接失败时调用该方法进行处理
     @Override
     public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable throwable, Response response) {
+        retry();
+    }
+    private void retry() {
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -80,7 +90,6 @@ public class WSListener extends WebSocketListener {
                 if(nowWaitingReconnect > 3600)nowWaitingReconnect = 3600;
             }
         },nowWaitingReconnect * 1000L);
-
     }
 
 }

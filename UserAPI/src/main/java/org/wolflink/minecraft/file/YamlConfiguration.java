@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 public abstract class YamlConfiguration {
     protected YamlConfigurationLoader loader = null;
@@ -21,11 +22,24 @@ public abstract class YamlConfiguration {
         this.fileName = fileName;
     }
     protected ILogger getLogger() { return IOC.getBean(ILogger.class); }
+
+    public File getFile() {
+        File folder = IOC.getBean(PlatformAdapter.class).getDataFolder();
+        if(!folder.exists())folder.mkdirs();
+        File file = new File(folder,fileName+".yml");
+        try {
+            if(!file.exists()) file.createNewFile();
+        } catch (IOException e) {
+            getLogger().err("An error occurred while loading this configuration: " + e.getMessage());
+            if (e.getCause() != null) {
+                e.getCause().printStackTrace();
+            }
+        }
+        return file;
+    }
     protected void loadRoot() {
         try {
-            File folder = IOC.getBean(PlatformAdapter.class).getDataFolder();
-            File file = new File(folder,fileName+".yml");
-            if(!file.exists()) file.createNewFile();
+            File file = getFile();
             loader = YamlConfigurationLoader.builder()
                     .file(file)
                     .build();
@@ -41,5 +55,12 @@ public abstract class YamlConfiguration {
         }
     }
     public void load(){}
-    public void save(){}
+    public void save(){
+        try {
+            loader.save(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+            getLogger().err(fileName+".yml 文件保存出现异常。");
+        }
+    }
 }

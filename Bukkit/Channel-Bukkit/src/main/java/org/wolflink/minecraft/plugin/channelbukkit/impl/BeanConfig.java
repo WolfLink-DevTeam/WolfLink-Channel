@@ -1,9 +1,9 @@
 package org.wolflink.minecraft.plugin.channelbukkit.impl;
 
-import org.wolflink.minecraft.interfaces.ILogger;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class BeanConfig extends org.wolflink.minecraft.BeanConfig {
-    public BeanConfig() {
-        super(new Logger(), new PlatformAdapter());
+    public BeanConfig(JavaPlugin plugin) {
+        super(new Logger(), new PlatformAdapter(plugin));
     }
 }
