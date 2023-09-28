@@ -3,6 +3,7 @@ package org.wolflink.minecraft.plugin.channelbukkit.impl;
 import lombok.AllArgsConstructor;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.wolflink.minecraft.PlatformType;
 import org.wolflink.minecraft.interfaces.IPlayer;
 
 import java.io.File;
@@ -28,5 +29,10 @@ public class PlatformAdapter implements org.wolflink.minecraft.interfaces.Platfo
     @Override
     public File getDataFolder() {
         return plugin.getDataFolder();
+    }
+
+    @Override
+    public PlatformType getPlatformType() {
+        return PlatformType.BUKKIT;
     }
 }

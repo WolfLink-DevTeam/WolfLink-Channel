@@ -11,6 +11,7 @@ import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.*;
 import org.wolflink.minecraft.file.Configuration;
 import org.wolflink.minecraft.interfaces.IPlayer;
+import org.wolflink.minecraft.interfaces.PlatformAdapter;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
@@ -47,7 +48,9 @@ public class Network implements HttpAPI {
                 .url(getConnectionUrl()
                         +"?account="+configuration.getAccount()
                         +"&password="+configuration.getPassword()
-                        +"&channel_id="+configuration.getChannelId())
+                        +"&channel_id="+configuration.getChannelId()
+                        +"&platform_type="+IOC.getBean(PlatformAdapter.class).getPlatformType()
+                )
                 .get()
                 .build();
         webSocket = httpClient.newWebSocket(request, IOC.getBean(WSListener.class));
