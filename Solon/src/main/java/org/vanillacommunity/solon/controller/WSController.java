@@ -1,6 +1,5 @@
 package org.vanillacommunity.solon.controller;
 
-import org.noear.solon.annotation.Inject;
 import org.noear.solon.annotation.ServerEndpoint;
 import org.noear.solon.core.message.Listener;
 import org.noear.solon.core.message.Message;
@@ -9,28 +8,23 @@ import org.vanillacommunity.solon.IPMatcher;
 import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.entity.OnlineClient;
 import org.vanillacommunity.solon.entity.SecureClient;
+import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.SecureClientRepository;
-import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.service.ClientService;
 import org.vanillacommunity.solon.service.WebSocketService;
+import org.wolflink.common.ioc.IOC;
 
 import java.io.IOException;
 
 @ServerEndpoint(path = "/connection")
 public class WSController implements Listener {
-    @Inject
-    Logger logger;
-    @Inject
-    SecureClientRepository secureClientRepository;
-    @Inject
-    OnlineClientRepository onlineClientRepository;
-    @Inject
-    SecureChannelRepository secureChannelRepository;
-    @Inject
-    ClientService clientService;
-    @Inject
-    WebSocketService webSocketService;
+    Logger logger = IOC.getBean(Logger.class);
+    SecureClientRepository secureClientRepository = IOC.getBean(SecureClientRepository.class);
+    OnlineClientRepository onlineClientRepository = IOC.getBean(OnlineClientRepository.class);
+    SecureChannelRepository secureChannelRepository = IOC.getBean(SecureChannelRepository.class);
+    ClientService clientService = IOC.getBean(ClientService.class);
+    WebSocketService webSocketService = IOC.getBean(WebSocketService.class);
 
     @Override
     public void onOpen(Session session) {
@@ -60,13 +54,13 @@ public class WSController implements Listener {
         }
         boolean isMatch = false;
         for (String ipSegment : secureClient.getIpSegments()) {
-            if(IPMatcher.isIpMatch(address,ipSegment)) {
+            if (IPMatcher.isIpMatch(address, ipSegment)) {
                 isMatch = true;
                 break;
             }
         }
-        if(!isMatch) {
-            closeSession(session,"IP段不在用户白名单内");
+        if (!isMatch) {
+            closeSession(session, "IP段不在用户白名单内");
             return;
         }
         logger.info(session.getRemoteAddress() + "成功建立连接");

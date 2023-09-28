@@ -2,7 +2,6 @@ package org.vanillacommunity.solon.config;
 
 import lombok.Getter;
 import org.noear.solon.SolonApp;
-import org.noear.solon.annotation.Component;
 import org.wolflink.common.ioc.Singleton;
 
 @Singleton
@@ -13,6 +12,6 @@ public class MainConfig implements ILoadable {
 
     @Override
     public void load(SolonApp solonApp) {
-        queryPerMinuteLimit = solonApp.cfg().getInt("api.query_per_minute_limit",0);
+        queryPerMinuteLimit = solonApp.cfg().getInt("api.query_per_minute_limit", 0);
     }
 }

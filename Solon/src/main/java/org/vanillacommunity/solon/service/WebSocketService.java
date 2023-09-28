@@ -4,14 +4,14 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.annotation.Inject;
 import org.noear.solon.core.message.Message;
 import org.noear.solon.lang.Nullable;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entity.SecureChannel;
 import org.vanillacommunity.solon.entity.OnlineClient;
-import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.vanillacommunity.solon.entity.SecureChannel;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.DataPack;
 import org.wolflink.minecraft.GlobalMessage;
@@ -64,7 +64,7 @@ public class WebSocketService {
      */
     public void analyseMessage(OnlineClient onlineClient, Message message) {
         DataPack dataPack = unpackData(message.bodyAsString());
-        if(dataPack == null) return;
+        if (dataPack == null) return;
         int channelId = onlineClient.getChannelId();
         SecureChannel secureChannel = secureChannelRepository.find(channelId);
         if (secureChannel == null) {

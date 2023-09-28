@@ -29,7 +29,7 @@ public class ClientsConfig implements ILoadable {
             String name = solonApp.cfg().getProperty("clients." + account + ".name");
             String displayName = solonApp.cfg().getProperty("clients." + account + ".display_name");
             List<String> ipSegments = solonApp.cfg().getList("clients." + account + ".ip_segments");
-            SecureClient secureClient = new SecureClient(new Client(account,name,displayName), password, ipSegments);
+            SecureClient secureClient = new SecureClient(new Client(account, name, displayName), password, ipSegments);
             secureClient.setName(name);
             secureClient.setDisplayName(displayName);
             secureClientRepository.update(secureClient);

@@ -2,13 +2,13 @@ package org.vanillacommunity.solon.service;
 
 import com.google.gson.JsonElement;
 import org.noear.solon.annotation.Component;
-import org.noear.solon.annotation.Inject;
 import org.noear.solon.core.message.Session;
 import org.vanillacommunity.solon.Logger;
-import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.entity.OnlineClient;
-import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.vanillacommunity.solon.entity.SecureClient;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
+import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.GlobalMessage;
 import org.wolflink.minecraft.MsgType;
@@ -38,9 +38,9 @@ public class ClientService {
      * 只有登录成功后客户端才会被添加到 OnlineClientRepository 当中
      * 可能会出现登录失败的情况，即频道密码不符
      *
-     * @param secureClient    用户客户端
-     * @param session   WebSocket连接对象
-     * @param channelId 频道ID
+     * @param secureClient 用户客户端
+     * @param session      WebSocket连接对象
+     * @param channelId    频道ID
      */
     public void login(SecureClient secureClient, Session session, int channelId) {
         String channelPassword = session.param("channel_password");
@@ -49,7 +49,7 @@ public class ClientService {
         try {
             platformType = PlatformType.valueOf(platformTypeStr);
         } catch (Exception ignore) {
-            logger.warn("未能获取到"+secureClient.getAccount()+"的平台标识："+platformTypeStr);
+            logger.warn("未能获取到" + secureClient.getAccount() + "的平台标识：" + platformTypeStr);
             platformType = PlatformType.UNKNOWN;
         }
         if (channelPassword == null) channelPassword = "";
@@ -63,7 +63,7 @@ public class ClientService {
             }
             return;
         }
-        OnlineClient onlineClient = new OnlineClient(secureClient, channelId, session, new Date(),platformType);
+        OnlineClient onlineClient = new OnlineClient(secureClient, channelId, session, new Date(), platformType);
         onlineClientRepository.update(onlineClient);
         logger.info(secureClient.getAccount() + " 成功登录，所在频道 " + channelId);
     }

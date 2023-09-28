@@ -3,7 +3,6 @@ package org.vanillacommunity.solon.controller;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
 import org.vanillacommunity.solon.config.MainConfig;
-import org.vanillacommunity.solon.entity.OnlineClient;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
 import org.vanillacommunity.solon.repository.SecureClientRepository;
@@ -32,16 +31,18 @@ public class HttpController implements HttpAPI {
             }
         }, 1000 * 60, 1000 * 60);
     }
+
     private synchronized boolean verifyQPM() {
         return (queryPerMinute++ < IOC.getBean(MainConfig.class).getQueryPerMinuteLimit());
     }
+
     /**
      * 查询指定客户端信息
      */
     @Mapping("/client")
     @Override
     public Client queryClient(String client_account) {
-        if(!verifyQPM()) return null;
+        if (!verifyQPM()) return null;
         return IOC.getBean(SecureClientRepository.class).find(client_account);
     }
 
@@ -51,7 +52,7 @@ public class HttpController implements HttpAPI {
     @Mapping("/channel/info")
     @Override
     public Channel queryChannel(int channel_id) {
-        if(!verifyQPM()) return null;
+        if (!verifyQPM()) return null;
         return IOC.getBean(SecureChannelRepository.class).find(channel_id);
     }
 
@@ -61,7 +62,7 @@ public class HttpController implements HttpAPI {
     @Mapping("/channel/online_clients")
     @Override
     public Set<Client> queryChannelOnlineClients(int channel_id) {
-        if(!verifyQPM()) return null;
+        if (!verifyQPM()) return null;
         return IOC.getBean(OnlineClientRepository.class).filterByChannelId(channel_id).stream()
                 .map(it -> (Client) it).collect(Collectors.toSet());
     }

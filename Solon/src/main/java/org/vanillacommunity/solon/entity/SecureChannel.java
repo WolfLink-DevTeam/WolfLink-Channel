@@ -19,12 +19,13 @@ public class SecureChannel extends Channel {
     private String password;
     // 当前频道的在线客户端
     private final Set<OnlineClient> onlineClients = new HashSet<>();
-    public SecureChannel(int id,String name,List<String> announcement) {
-        super(id,name,announcement);
+
+    public SecureChannel(int id, String name, List<String> announcement) {
+        super(id, name, announcement);
         this.password = "";
     }
 
-    public SecureChannel(int id, String name,String password, List<String> announcement) {
+    public SecureChannel(int id, String name, String password, List<String> announcement) {
         super(id, name, announcement);
         this.password = password;
     }

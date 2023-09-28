@@ -21,7 +21,7 @@ public class OnlineClient extends Client {
     // 客户端类型
     PlatformType platformType;
 
-    public OnlineClient(Client client, int channelId, Session session, Date onlineTime,PlatformType platformType) {
+    public OnlineClient(Client client, int channelId, Session session, Date onlineTime, PlatformType platformType) {
         super(client);
         this.channelId = channelId;
         this.session = session;
