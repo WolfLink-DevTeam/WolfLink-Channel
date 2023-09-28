@@ -25,9 +25,9 @@ public class Language extends YamlConfiguration {
 
     public void load() {
         loadRoot();
-        prefix = root.node("plugin").node("prefix").getString("[ GlobalChannel ]");
+        prefix = root.node("plugin","prefix").getString("[ GlobalChannel ]");
         try {
-            cmdHelp = root.node("plugin").node("cmdHelp").getList(String.class);
+            cmdHelp = root.node("plugin","cmdHelp").getList(String.class);
         } catch (Exception ignore) {
             List<String> temp = new ArrayList<>();
             temp.add(" ");
@@ -39,11 +39,11 @@ public class Language extends YamlConfiguration {
             temp.add(" ");
             cmdHelp = temp;
         }
-        channelLeave = root.node("channel").node("leave").getString("%prefix% 你已离开跨服频道！挥挥~");
-        channelJoin = root.node("channel").node("join").getString("%prefix% 你已加入频道。");
-        serverOnline = root.node("channel").node("server-online").getString("%prefix% 一台服务器加入了跨服聊天。");
-        serverOffline = root.node("channel").node("server-offline").getString("%prefix% 一台服务器退出了跨服聊天。");
-        chatTemplate = root.node("channel").node("chat-template").getString("§7[ §a%playerName% §7] §8» §7%message%");
+        channelLeave = root.node("channel","leave").getString("%prefix% 你已离开跨服频道！挥挥~");
+        channelJoin = root.node("channel","join").getString("%prefix% 你已加入频道。");
+        serverOnline = root.node("channel","server-online").getString("%prefix% 一台服务器加入了跨服聊天。");
+        serverOffline = root.node("channel","server-offline").getString("%prefix% 一台服务器退出了跨服聊天。");
+        chatTemplate = root.node("channel","chat-template").getString("§7[ §a%playerName% §7] §8» §7%message%");
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }
