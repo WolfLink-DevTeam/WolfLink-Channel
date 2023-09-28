@@ -6,6 +6,7 @@ import okhttp3.WebSocketListener;
 import org.jetbrains.annotations.NotNull;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
+import org.wolflink.minecraft.DataPack;
 import org.wolflink.minecraft.datapack.DataPackExecutor;
 import org.wolflink.minecraft.datapack.DataPackParser;
 import org.wolflink.minecraft.file.Configuration;
@@ -32,19 +33,11 @@ public class WSListener extends WebSocketListener {
     @Inject
     private DataPackParser parser;
 
-    private static int lastWaitingReconnect = 1;
-    private static int nowWaitingReconnect = 1;//秒
-
-    private boolean isRetring = false;
-
     // 在 WebSocket 连接建立时调用该方法进行处理
     @Override
     public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
         if(response.isSuccessful()) {
             logger.info(language.getPrefix()+"中央聊天服务器连接成功。");
-            lastWaitingReconnect = 1;
-            nowWaitingReconnect = 1;
-            isRetring = false;
         } else {
             logger.warn(language.getPrefix()+"与中央聊天服务器建立连接时出现问题：");
             logger.warn(response.message());
@@ -55,41 +48,25 @@ public class WSListener extends WebSocketListener {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            if(!isRetring) {
-                isRetring = true;
-                retry();
-            }
         }
     }
     // 在收到 WebSocket 连接中对方发来的消息时调用该方法进行处理
     @Override
     public void onMessage(@NotNull WebSocket webSocket, @NotNull String text) {
-        executor.execute(parser.parse(text));
+        DataPack dataPack = parser.parse(text);
+        if(dataPack == null) return;
+        executor.execute(dataPack);
     }
     // 在 WebSocket 连接关闭时调用该方法进行处理
     @Override
     public void onClosed(@NotNull WebSocket webSocket, int code, @NotNull String reason) {
-        logger.info(language.getPrefix()+"与中央服务器的连接已断开，插件停止工作。");
+        if(code != 1012) {
+            logger.info(language.getPrefix()+"与中央服务器的连接已断开，插件停止工作。");
+        }
     }
     // 在 WebSocket 连接失败时调用该方法进行处理
     @Override
     public void onFailure(@NotNull WebSocket webSocket, @NotNull Throwable throwable, Response response) {
-        retry();
-    }
-    private void retry() {
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                logger.warn(language.getPrefix()+"中央聊天服务器连接失败，正在重试...");
-                network.setEnabled(false);
-                network.setEnabled(true);
-                int temp = nowWaitingReconnect;
-                nowWaitingReconnect+=lastWaitingReconnect;
-                lastWaitingReconnect=temp;
-                if(nowWaitingReconnect > 3600)nowWaitingReconnect = 3600;
-            }
-        },nowWaitingReconnect * 1000L);
     }
 
 }
