@@ -11,6 +11,7 @@ import org.vanillacommunity.solon.entity.OnlineClient;
 import org.vanillacommunity.solon.entity.SecureChannel;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
+import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.DataPack;
@@ -23,10 +24,6 @@ import java.util.Set;
 @Singleton
 @Component
 public class WebSocketService {
-    @Inject
-    ChannelService channelService;
-    @Inject
-    ClientService clientService;
     @Inject
     SecureChannelRepository secureChannelRepository;
     @Inject
@@ -75,7 +72,7 @@ public class WebSocketService {
         if (dataPack.getType() == MsgType.CHANNEL) {
             GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent());
             // 把这条消息广播给对应频道
-            channelService.broadcast(channelId, MsgType.CHANNEL, globalMessage);
+            IOC.getBean(ChannelService.class).broadcast(channelId, MsgType.CHANNEL, globalMessage);
         }
         // 客户端发来系统消息
         // TODO 这里可以考虑重构
@@ -86,7 +83,7 @@ public class WebSocketService {
                     JsonArray jsonArray = new JsonArray();
                     List<GlobalMessage> msgHistory = secureChannel.getMessageContainer().lookup(100);
                     msgHistory.forEach(globalMessage -> jsonArray.add(globalMessage.toJson().toString()));
-                    clientService.sendSystemMsg(onlineClient, jsonArray);
+                    IOC.getBean(ClientService.class).sendSystemMsg(onlineClient, jsonArray);
                     break;
                 }
                 case "query_online": {
@@ -103,7 +100,7 @@ public class WebSocketService {
                     });
                     jsonObject.addProperty("online_count", onlineClients.size());
                     jsonObject.add("online_clients", jsonArray);
-                    clientService.sendSystemMsg(onlineClient, jsonArray);
+                    IOC.getBean(ClientService.class).sendSystemMsg(onlineClient, jsonArray);
                     break;
                 }
                 default:
