@@ -38,11 +38,12 @@ public class Network implements HttpAPI {
         else disable();
     }
     private String getConnectionUrl() {
-        return "ws://"+configuration.getCentralServerIp()+":"+configuration.getCentralServerPort()+"/Connection";
+        return "ws://"+configuration.getCentralServerIp()+":"+configuration.getCentralServerPort()+"/connection";
     }
 
     private void enable() {
         if(webSocket != null) webSocket.close(1012,"客户端网络服务重启");
+        // ws://127.0.0.1:18080/connection?account=3401286177&password=wcnmm&channel_id=1
         Request request = new Request.Builder()
                 .url(getConnectionUrl()
                         +"?account="+configuration.getAccount()

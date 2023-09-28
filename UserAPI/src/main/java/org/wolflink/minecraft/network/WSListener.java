@@ -37,9 +37,11 @@ public class WSListener extends WebSocketListener {
     // 在 WebSocket 连接建立时调用该方法进行处理
     @Override
     public void onOpen(@NotNull WebSocket webSocket, @NotNull Response response) {
-        logger.info(language.getPrefix()+"中央聊天服务器连接成功。");
-        lastWaitingReconnect = 1;
-        nowWaitingReconnect = 1;
+        if(response.isSuccessful()) {
+            logger.info(language.getPrefix()+"中央聊天服务器连接成功。");
+            lastWaitingReconnect = 1;
+            nowWaitingReconnect = 1;
+        }
     }
     // 在收到 WebSocket 连接中对方发来的消息时调用该方法进行处理
     @Override
