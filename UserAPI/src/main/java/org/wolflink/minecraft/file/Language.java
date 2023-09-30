@@ -43,7 +43,7 @@ public class Language extends YamlConfiguration {
         channelJoin = root.node("channel","join").getString("%prefix% 你已加入频道。");
         serverOnline = root.node("channel","server-online").getString("%prefix% 一台服务器加入了跨服聊天。");
         serverOffline = root.node("channel","server-offline").getString("%prefix% 一台服务器退出了跨服聊天。");
-        chatTemplate = root.node("channel","chat-template").getString("§7[ §a%playerName% §7] §8» §7%message%");
+        chatTemplate = root.node("channel","chat-template").getString("§7[ §a%sender% §7] §8» §7%content%");
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }

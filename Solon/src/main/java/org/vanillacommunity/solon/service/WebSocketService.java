@@ -38,11 +38,11 @@ public class WebSocketService {
      * @param globalMessage 消息内容
      */
     public String formatData(MsgType msgType, GlobalMessage globalMessage) {
-        return new DataPack(msgType, globalMessage.toJson().toString()).toJson().toString();
+        return new DataPack(msgType, globalMessage.toJson()).toJson().toString();
     }
 
     public String formatData(MsgType msgType, JsonElement jsonElement) {
-        return new DataPack(msgType, jsonElement.toString()).toJson().toString();
+        return new DataPack(msgType, jsonElement).toJson().toString();
     }
 
     /**
@@ -70,14 +70,14 @@ public class WebSocketService {
         }
         // 客户端发来频道消息，则需要广播这条频道消息到客户端所处频道中
         if (dataPack.getType() == MsgType.CHANNEL) {
-            GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent());
+            GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent().getAsJsonObject());
             // 把这条消息广播给对应频道
             IOC.getBean(ChannelService.class).broadcast(channelId, MsgType.CHANNEL, globalMessage);
         }
         // 客户端发来系统消息
         // TODO 这里可以考虑重构
         if (dataPack.getType() == MsgType.SYSTEM) {
-            String command = dataPack.getContent();
+            String command = dataPack.getContent().getAsJsonObject().get("command").getAsString();
             switch (command) {
                 case "lookup_history": {
                     JsonArray jsonArray = new JsonArray();

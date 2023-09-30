@@ -20,7 +20,7 @@ public class DataPackExecutor {
     PermanentData permanentData;
     public void execute(DataPack dataPack) {
         if(dataPack.getType().equals(MsgType.CHANNEL)) {
-            GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent());
+            GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent().getAsJsonObject());
             String chatTemplate = IOC.getBean(Language.class).getChatTemplate();
             String chatMsg = chatTemplate
                     .replace("%sender%",globalMessage.getSenderDisplayName())

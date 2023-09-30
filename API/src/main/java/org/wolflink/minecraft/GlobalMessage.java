@@ -2,6 +2,7 @@ package org.wolflink.minecraft;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.gson.stream.JsonReader;
 import lombok.Builder;
 import lombok.Data;
 
@@ -21,10 +22,6 @@ public class GlobalMessage {
     private String senderDisplayName;
     // 消息内容
     private String content;
-
-    public static GlobalMessage fromJson(String joStr) {
-        return fromJson(JsonParser.parseString(joStr).getAsJsonObject());
-    }
 
     public static GlobalMessage fromJson(JsonObject jo) {
         return GlobalMessage.builder()

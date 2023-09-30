@@ -90,6 +90,7 @@ public class WSController implements Listener {
     @Override
     public void onError(Session session, Throwable error) {
         logger.err(session.getRemoteAddress() + "触发了一个错误：" + error.toString());
+        error.printStackTrace();
     }
 
     void closeSession(Session session, String reason) {

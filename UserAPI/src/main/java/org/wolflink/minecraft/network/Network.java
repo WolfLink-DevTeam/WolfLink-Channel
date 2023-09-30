@@ -131,8 +131,8 @@ public class Network implements HttpAPI {
                 .build();
         DataPack dataPack = DataPack.builder()
                 .type(MsgType.CHANNEL)
-                .content(globalMessage.toString())
+                .content(globalMessage.toJson())
                 .build();
-        webSocket.send(dataPack.toString());
+        webSocket.send(dataPack.toJson().toString());
     }
 }

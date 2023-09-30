@@ -1,5 +1,6 @@
 package org.wolflink.minecraft;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class DataPack {
     @Getter
     MsgType type;
     @Getter
-    String content;
+    JsonElement content;
 
     @Nullable
     public static DataPack fromJson(String jsonStr) {
@@ -26,7 +27,7 @@ public class DataPack {
             JsonObject jo = JsonParser.parseString(jsonStr).getAsJsonObject();
             return DataPack.builder()
                     .type(MsgType.valueOf(jo.get("type").getAsString()))
-                    .content(jo.get("content").getAsString())
+                    .content(jo.get("content"))
                     .build();
         } catch (Exception ignore) { return null; }
     }
@@ -34,7 +35,7 @@ public class DataPack {
     public JsonObject toJson() {
         JsonObject jo = new JsonObject();
         jo.addProperty("type", type.name());
-        jo.addProperty("content", content);
+        jo.add("content", content);
         return jo;
     }
 }
