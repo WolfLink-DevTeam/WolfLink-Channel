@@ -18,6 +18,8 @@ public class Language extends YamlConfiguration {
     private String alreadyInChannel;
     private String notInChannel;
     private String serverOnline;
+    private String isRetrying;
+    private String sendFailed;
     public String getServerOnline(Client client) {
         return serverOnline
                 .replace("%server%",client.getDisplayName());
@@ -63,6 +65,8 @@ public class Language extends YamlConfiguration {
         chatTemplate = root.node("channel","chat-template").getString("§7[ §a%sender% §7] §8» §7%content%");
         alreadyInChannel = root.node("channel","already-in").getString("%prefix% 你已经处在频道中了。").replace("%prefix%",prefix);
         notInChannel = root.node("channel","not-in").getString("%prefix% 你当前没有处于频道中。").replace("%prefix%",prefix);
+        isRetrying = root.node("system","is-retrying").getString("%prefix% 消息发送失败，正在尝试重新建立连接。").replace("%prefix%",prefix);
+        sendFailed = root.node("system","send-failed").getString("%prefix% 消息发送失败，请稍后再尝试。").replace("%prefix%",prefix);
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }

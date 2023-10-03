@@ -10,20 +10,28 @@ import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.*;
 import org.wolflink.minecraft.file.Configuration;
+import org.wolflink.minecraft.file.Language;
+import org.wolflink.minecraft.interfaces.ILogger;
 import org.wolflink.minecraft.interfaces.IPlayer;
 import org.wolflink.minecraft.interfaces.PlatformAdapter;
 
 import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.sql.Time;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 @Singleton
 public class Network implements HttpAPI {
+
+    private boolean isWebSocketRetrying = false;
     @Inject
     private Configuration configuration;
+    @Inject
+    private Language language;
+    @Inject
+    ILogger logger;
+
     private WebSocket webSocket = null;
     private final OkHttpClient httpClient = new OkHttpClient().newBuilder()
             .callTimeout(10L, TimeUnit.SECONDS)
@@ -133,6 +141,26 @@ public class Network implements HttpAPI {
                 .type(MsgType.CHANNEL)
                 .content(globalMessage.toJson())
                 .build();
-        webSocket.send(dataPack.toJson().toString());
+        boolean sendStatus = webSocket.send(dataPack.toJson().toString());
+        if(!sendStatus) {
+            iPlayer.sendMessage(language.getSendFailed());
+            synchronized (this) {
+                if(!isWebSocketRetrying) {
+                    isWebSocketRetrying = true;
+                    retryWebSocket();
+                    new Timer().schedule(new TimerTask() {
+                        @Override
+                        public void run() {
+                            isWebSocketRetrying = false;
+                        }
+                    }, 1000L);
+                }
+            }
+        }
+    }
+    private void retryWebSocket() {
+        logger.warn(language.getIsRetrying());
+        setEnabled(false);
+        setEnabled(true);
     }
 }
