@@ -22,7 +22,12 @@ public class CommandManager implements CommandExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if(!(sender instanceof Player)) return false;
         Player player = (Player) sender;
-        if(args.length < 1) return false;
+        if(args.length < 1) {
+            for (String str : IOC.getBean(Language.class).getCmdHelp()) {
+                player.sendMessage(str);
+            }
+            return false;
+        }
         Result result = null;
         if(args[0].equalsIgnoreCase("join")) {
             result = IOC.getBean(ChannelAction.class).playerJoin(new BukkitPlayer(player));
