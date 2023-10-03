@@ -3,6 +3,7 @@ server.port: 8080
 solon.app:
   name: 'vgc-app'
   group: 'vgc'
+solon.config.add: "./app.yml,./clients.yml,./channels.yml"
 solon.config.load:
   - "clients.yml"
   - "channels.yml"
