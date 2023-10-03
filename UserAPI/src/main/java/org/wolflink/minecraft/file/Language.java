@@ -30,9 +30,11 @@ public class Language extends YamlConfiguration {
                 .replace("%server%",client.getDisplayName());
     }
     private String chatTemplate;
-    public String getChatTemplate(IPlayer sender,String content) {
+    public String getChatTemplate(String serverName,String senderName,String content) {
+
         return chatTemplate
-                .replace("%sender%",sender.getName())
+                .replace("%server%",serverName)
+                .replace("%sender%",senderName)
                 .replace("%content%",content);
     }
 //    private String announcementTemplate = "[ 全球公告 ] %content%";
@@ -62,7 +64,7 @@ public class Language extends YamlConfiguration {
         channelJoin = root.node("channel","join").getString("%prefix% 你已加入频道。").replace("%prefix%",prefix);
         serverOnline = root.node("channel","server-online").getString("%prefix% 服务器 %server% §7加入了跨服聊天。").replace("%prefix%",prefix);
         serverOffline = root.node("channel","server-offline").getString("%prefix% 服务器 %server% §7退出了跨服聊天。").replace("%prefix%",prefix);
-        chatTemplate = root.node("channel","chat-template").getString("§7[ §a%sender% §7] §8» §7%content%");
+        chatTemplate = root.node("channel","chat-template").getString("§7[ %server% §8| §a%sender% §7] §8» §7%content%");
         alreadyInChannel = root.node("channel","already-in").getString("%prefix% §e你已经处在频道中了。").replace("%prefix%",prefix);
         notInChannel = root.node("channel","not-in").getString("%prefix% §e你当前没有处于频道中。").replace("%prefix%",prefix);
         isRetrying = root.node("system","is-retrying").getString("%prefix% §c消息发送失败，正在尝试重新建立连接。").replace("%prefix%",prefix);

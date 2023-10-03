@@ -15,7 +15,8 @@ import java.nio.file.Path;
 public class Configuration extends YamlConfiguration {
 
     private String centralServerIp;
-    private String centralServerPort;
+    private String centralServerWebSocketPort;
+    private String centralServerHttpPort;
     private String account;
     private String password;
     private int channelId;
@@ -28,7 +29,8 @@ public class Configuration extends YamlConfiguration {
     public void load() {
         loadRoot();
         centralServerIp = root.node("CentralServer","Ip").getString("127.0.0.1");
-        centralServerPort = root.node("CentralServer","Port").getString("18080");
+        centralServerWebSocketPort = root.node("CentralServer","WebSocket-Port").getString("18080");
+        centralServerHttpPort = root.node("CentralServer","Http-Port").getString("8080");
         account = root.node("User","Account").getString("temp_account");
         password = root.node("User","Password").getString("temp_password");
         channelId = root.node("User","ChannelId").getInt(1);

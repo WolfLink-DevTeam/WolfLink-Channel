@@ -5,6 +5,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import okhttp3.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
@@ -15,9 +17,6 @@ import org.wolflink.minecraft.interfaces.ILogger;
 import org.wolflink.minecraft.interfaces.IPlayer;
 import org.wolflink.minecraft.interfaces.PlatformAdapter;
 
-import javax.xml.crypto.Data;
-import java.io.IOException;
-import java.sql.Time;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -46,14 +45,17 @@ public class Network implements HttpAPI {
         if(enabled) enable();
         else disable();
     }
-    private String getConnectionUrl() {
-        return "ws://"+configuration.getCentralServerIp()+":"+configuration.getCentralServerPort()+"/connection";
+    private String getHttpConnectionUrl() {
+        return "http://"+configuration.getCentralServerIp()+":"+configuration.getCentralServerHttpPort()+"/query";
+    }
+    private String getWebSocketConnectionUrl() {
+        return "ws://"+configuration.getCentralServerIp()+":"+configuration.getCentralServerWebSocketPort()+"/connection";
     }
 
     private void enable() {
         if(webSocket != null) webSocket.close(1012,"客户端网络服务重启");
         Request request = new Request.Builder()
-                .url(getConnectionUrl()
+                .url(getWebSocketConnectionUrl()
                         +"?account="+configuration.getAccount()
                         +"&password="+configuration.getPassword()
                         +"&channel_id="+configuration.getChannelId()
@@ -67,12 +69,13 @@ public class Network implements HttpAPI {
     }
 
     @Override
+    @Nullable
     public Client queryClient(String client_account) {
         RequestBody requestBody = new FormBody.Builder()
                 .add("client_account",client_account)
                 .build();
         Request request = new Request.Builder()
-                .url(getConnectionUrl())
+                .url(getHttpConnectionUrl()+"/client")
                 .post(requestBody)
                 .build();
         try {
@@ -86,12 +89,13 @@ public class Network implements HttpAPI {
     }
 
     @Override
+    @Nullable
     public Channel queryChannel(int channel_id) {
         RequestBody requestBody = new FormBody.Builder()
                 .add("channel_id", String.valueOf(channel_id))
                 .build();
         Request request = new Request.Builder()
-                .url(getConnectionUrl())
+                .url(getHttpConnectionUrl()+"/channel/info")
                 .post(requestBody)
                 .build();
         try {
@@ -105,12 +109,13 @@ public class Network implements HttpAPI {
     }
 
     @Override
+    @NotNull
     public Set<Client> queryChannelOnlineClients(int channel_id) {
         RequestBody requestBody = new FormBody.Builder()
                 .add("channel_id",String.valueOf(channel_id))
                 .build();
         Request request = new Request.Builder()
-                .url(getConnectionUrl())
+                .url(getHttpConnectionUrl()+"/channel/online_clients")
                 .post(requestBody)
                 .build();
         try {
