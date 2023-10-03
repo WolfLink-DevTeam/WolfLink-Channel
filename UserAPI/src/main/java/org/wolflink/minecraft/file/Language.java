@@ -44,7 +44,7 @@ public class Language extends YamlConfiguration {
 
     public void load() {
         loadRoot();
-        prefix = root.node("plugin","prefix").getString("[ GlobalChannel ]");
+        prefix = root.node("plugin","prefix").getString("§8[ §9绫狼网络 §8]§7");
         try {
             cmdHelp = root.node("plugin","cmdHelp").getList(String.class);
         } catch (Exception ignore) {
@@ -60,13 +60,13 @@ public class Language extends YamlConfiguration {
         }
         channelLeave = root.node("channel","leave").getString("%prefix% 你已离开跨服频道！挥挥~").replace("%prefix%",prefix);
         channelJoin = root.node("channel","join").getString("%prefix% 你已加入频道。").replace("%prefix%",prefix);
-        serverOnline = root.node("channel","server-online").getString("%prefix% 服务器 %server% 加入了跨服聊天。").replace("%prefix%",prefix);
-        serverOffline = root.node("channel","server-offline").getString("%prefix% 服务器 %server% 退出了跨服聊天。").replace("%prefix%",prefix);
+        serverOnline = root.node("channel","server-online").getString("%prefix% 服务器 %server% §7加入了跨服聊天。").replace("%prefix%",prefix);
+        serverOffline = root.node("channel","server-offline").getString("%prefix% 服务器 %server% §7退出了跨服聊天。").replace("%prefix%",prefix);
         chatTemplate = root.node("channel","chat-template").getString("§7[ §a%sender% §7] §8» §7%content%");
-        alreadyInChannel = root.node("channel","already-in").getString("%prefix% 你已经处在频道中了。").replace("%prefix%",prefix);
-        notInChannel = root.node("channel","not-in").getString("%prefix% 你当前没有处于频道中。").replace("%prefix%",prefix);
-        isRetrying = root.node("system","is-retrying").getString("%prefix% 消息发送失败，正在尝试重新建立连接。").replace("%prefix%",prefix);
-        sendFailed = root.node("system","send-failed").getString("%prefix% 消息发送失败，请稍后再尝试。").replace("%prefix%",prefix);
+        alreadyInChannel = root.node("channel","already-in").getString("%prefix% §e你已经处在频道中了。").replace("%prefix%",prefix);
+        notInChannel = root.node("channel","not-in").getString("%prefix% §e你当前没有处于频道中。").replace("%prefix%",prefix);
+        isRetrying = root.node("system","is-retrying").getString("%prefix% §c消息发送失败，正在尝试重新建立连接。").replace("%prefix%",prefix);
+        sendFailed = root.node("system","send-failed").getString("%prefix% §e消息发送失败，请稍后再尝试。").replace("%prefix%",prefix);
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }
