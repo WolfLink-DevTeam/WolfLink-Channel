@@ -32,7 +32,7 @@ public class CommandManager implements CommandExecutor {
         }
         if(result == null) return false;
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME,1f,1f);
-        player.sendMessage(lang.getPrefix()+result.getMsg());
+        player.sendMessage(result.getMsg());
         return result.isResult();
     }
 }
