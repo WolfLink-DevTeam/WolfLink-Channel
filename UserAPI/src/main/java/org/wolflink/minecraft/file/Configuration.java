@@ -14,11 +14,11 @@ import java.nio.file.Path;
 @Singleton
 public class Configuration extends YamlConfiguration {
 
-    private String centralServerIp = "";
-    private String centralServerPort = "";
-    private String account = "";
-    private String password = "";
-    private int channelId = 1;
+    private String centralServerIp;
+    private String centralServerPort;
+    private String account;
+    private String password;
+    private int channelId;
 
     public Configuration() {
         // TODO 改为 PlatformAdapter 提供的数据文件夹路径

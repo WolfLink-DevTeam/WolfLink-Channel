@@ -2,6 +2,8 @@ package org.wolflink.minecraft.file;
 
 import lombok.Getter;
 import org.wolflink.common.ioc.Singleton;
+import org.wolflink.minecraft.Client;
+import org.wolflink.minecraft.interfaces.IPlayer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,9 +15,24 @@ public class Language extends YamlConfiguration {
     private List<String> cmdHelp;
     private String channelLeave;
     private String channelJoin;
+    private String alreadyInChannel;
+    private String notInChannel;
     private String serverOnline;
+    public String getServerOnline(Client client) {
+        return serverOnline
+                .replace("%server%",client.getDisplayName());
+    }
     private String serverOffline;
+    public String getServerOffline(Client client) {
+        return serverOffline
+                .replace("%server%",client.getDisplayName());
+    }
     private String chatTemplate;
+    public String getChatTemplate(IPlayer sender,String content) {
+        return chatTemplate
+                .replace("%sender%",sender.getName())
+                .replace("%content%",content);
+    }
 //    private String announcementTemplate = "[ 全球公告 ] %content%";
 
     public Language() {
@@ -39,11 +56,13 @@ public class Language extends YamlConfiguration {
             temp.add(" ");
             cmdHelp = temp;
         }
-        channelLeave = root.node("channel","leave").getString("%prefix% 你已离开跨服频道！挥挥~");
-        channelJoin = root.node("channel","join").getString("%prefix% 你已加入频道。");
-        serverOnline = root.node("channel","server-online").getString("%prefix% 一台服务器加入了跨服聊天。");
-        serverOffline = root.node("channel","server-offline").getString("%prefix% 一台服务器退出了跨服聊天。");
+        channelLeave = root.node("channel","leave").getString("%prefix% 你已离开跨服频道！挥挥~").replace("%prefix%",prefix);
+        channelJoin = root.node("channel","join").getString("%prefix% 你已加入频道。").replace("%prefix%",prefix);
+        serverOnline = root.node("channel","server-online").getString("%prefix% 服务器 %server% 加入了跨服聊天。").replace("%prefix%",prefix);
+        serverOffline = root.node("channel","server-offline").getString("%prefix% 服务器 %server% 退出了跨服聊天。").replace("%prefix%",prefix);
         chatTemplate = root.node("channel","chat-template").getString("§7[ §a%sender% §7] §8» §7%content%");
+        alreadyInChannel = root.node("channel","already-in").getString("%prefix% 你已经处在频道中了。").replace("%prefix%",prefix);
+        notInChannel = root.node("channel","not-in").getString("%prefix% 你当前没有处于频道中。").replace("%prefix%",prefix);
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }
