@@ -1,3 +1,5 @@
+# Http端口，默认为8080，WebSocket端口则对应为18080
+# 如果Http端口为8081，则WebSocket端口为18081，以此类推
 server.port: 8080
 
 solon.app:

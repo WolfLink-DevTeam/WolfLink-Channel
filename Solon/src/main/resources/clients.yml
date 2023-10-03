@@ -1,12 +1,20 @@
+# 客户端列表，可以自行仿照格式添加客户端
 clients:
+    #客户端账户名
     "3401286177":
+      # 客户端名(无颜色)
       name: "狼与香辛料亭"
+      # 客户端显示名(有颜色)
       display_name: "§6狼与香辛料亭"
-      password: "wcnmm"
+      # 客户端密码
+      password: "test_password"
+      # 客户端白名单IP段，只允许客户端从指定IP段登录，可指定多个
+      # 如果不需要该功能，请至少添加一个通配规则 *.*.*.*
       ip_segments:
         - "127.*.*.*"
     "2333455567":
       name: "测试服务器名"
       display_name: "§e测试§a服务§b器名"
-      password: "wrnm"
-      ip_segments: []
+      password: "test_password"
+      ip_segments:
+        - "*.*.*.*"
