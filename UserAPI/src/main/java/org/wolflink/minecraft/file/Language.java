@@ -49,6 +49,7 @@ public class Language extends YamlConfiguration {
         prefix = root.node("plugin","prefix").getString("§8[ §9绫狼网络 §8]§7");
         try {
             cmdHelp = root.node("plugin","cmdHelp").getList(String.class);
+            if(cmdHelp == null || cmdHelp.isEmpty()) throw new NullPointerException();
         } catch (Exception ignore) {
             List<String> temp = new ArrayList<>();
             temp.add(" ");
