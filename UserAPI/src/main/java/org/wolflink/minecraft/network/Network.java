@@ -1,9 +1,6 @@
 package org.wolflink.minecraft.network;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -111,6 +108,30 @@ public class Network implements HttpAPI {
     }
 
     @Override
+    @Nullable
+    public Set<Channel> queryAllChannels() {
+        Request request = new Request.Builder()
+                .url(getHttpConnectionUrl()+"/channel/all")
+                .get()
+                .build();
+        try {
+            Response response = httpClient.newCall(request).execute();
+            if(response.body() == null) return null;
+            JsonElement je = JsonParser.parseString(response.body().string());
+            if(!je.isJsonArray()) return null;
+            JsonArray ja = je.getAsJsonArray();
+            Set<Channel> set = new HashSet<>();
+            for (JsonElement jo : ja) {
+                set.add(new Gson().fromJson(jo, Channel.class));
+            }
+            return set;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
     @NotNull
     public Set<Client> queryChannelOnlineClients(int channel_id) {
         RequestBody requestBody = new FormBody.Builder()
@@ -137,6 +158,31 @@ public class Network implements HttpAPI {
         }
         return null;
     }
+
+    @Override
+    @Nullable
+    public Set<Client> queryAllOnlineClients() {
+        Request request = new Request.Builder()
+                .url(getHttpConnectionUrl()+"/client/all")
+                .get()
+                .build();
+        try {
+            Response response = httpClient.newCall(request).execute();
+            if(response.body() == null) return null;
+            JsonElement je = JsonParser.parseString(response.body().string());
+            if(!je.isJsonArray()) return null;
+            JsonArray ja = je.getAsJsonArray();
+            Set<Client> set = new HashSet<>();
+            for (JsonElement jo : ja) {
+                set.add(new Gson().fromJson(jo, Client.class));
+            }
+            return set;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void sendChat(IPlayer iPlayer,String msg) {
         GlobalMessage globalMessage = GlobalMessage.builder()
                 .clientAccount(IOC.getBean(Configuration.class).getAccount())
