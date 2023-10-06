@@ -31,7 +31,8 @@ public class DataPackExecutor {
     public void execute(DataPack dataPack,boolean offlineMode) {
         if(dataPack.getType().equals(MsgType.CHANNEL)) {
             GlobalMessage globalMessage = GlobalMessage.fromJson(dataPack.getContent().getAsJsonObject());
-            Client client = serverCachePool.getClient(globalMessage.getClientAccount());
+            Client client = null;
+            if(!offlineMode)client = serverCachePool.getClient(globalMessage.getClientAccount());
             String serverName;
             if(client != null) serverName = client.getDisplayName();
             else serverName = "§7SID"+globalMessage.getClientAccount();
