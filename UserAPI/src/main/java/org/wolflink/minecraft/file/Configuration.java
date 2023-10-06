@@ -1,14 +1,7 @@
 package org.wolflink.minecraft.file;
 
 import lombok.Getter;
-import org.spongepowered.configurate.CommentedConfigurationNode;
-import org.spongepowered.configurate.yaml.YamlConfigurationLoader;
-import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Singleton;
-import org.wolflink.minecraft.interfaces.ILogger;
-
-import java.io.IOException;
-import java.nio.file.Path;
 
 @Getter
 @Singleton
@@ -20,6 +13,7 @@ public class Configuration extends YamlConfiguration {
     private String account;
     private String password;
     private int channelId;
+    private boolean forceJoinChannel;
 
     public Configuration() {
         // TODO 改为 PlatformAdapter 提供的数据文件夹路径
@@ -34,5 +28,6 @@ public class Configuration extends YamlConfiguration {
         account = root.node("User","Account").getString("temp_account");
         password = root.node("User","Password").getString("temp_password");
         channelId = root.node("User","ChannelId").getInt(1);
+        forceJoinChannel = root.node("Settings","Force-Join-Channel").getBoolean(false);
     }
 }
