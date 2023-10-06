@@ -64,6 +64,14 @@ public class HttpController implements HttpAPI {
         return IOC.getBean(SecureChannelRepository.class).find(channel_id).toChannel();
     }
 
+    @Mapping("/channel/all")
+    @Override
+    public Set<Channel> queryAllChannels() {
+        if(reachQPM()) return null;
+        IOC.getBean(Logger.class).info("接口调用：queryAllChannels");
+        return IOC.getBean(SecureChannelRepository.class).findAllChannels();
+    }
+
     /**
      * 查询频道在线客户端信息
      */
@@ -74,5 +82,13 @@ public class HttpController implements HttpAPI {
         IOC.getBean(Logger.class).info("接口调用：queryChannelOnlineClients 参数：channel_id="+channel_id);
         return IOC.getBean(OnlineClientRepository.class).filterByChannelId(channel_id).stream()
                 .map(it -> (Client) it).collect(Collectors.toSet());
+    }
+
+    @Mapping("/client/all")
+    @Override
+    public Set<Client> queryAllOnlineClients() {
+        if (reachQPM()) return null;
+        IOC.getBean(Logger.class).info("接口调用：queryAllOnlineClients");
+        return IOC.getBean(OnlineClientRepository.class).findAllClients();
     }
 }

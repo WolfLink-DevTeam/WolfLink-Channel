@@ -3,6 +3,7 @@ package org.vanillacommunity.solon.repository;
 import org.noear.solon.annotation.Component;
 import org.vanillacommunity.solon.entity.OnlineClient;
 import org.wolflink.common.ioc.Singleton;
+import org.wolflink.minecraft.Client;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -21,5 +22,8 @@ public class OnlineClientRepository extends Repository<String, OnlineClient> {
 
     public Set<OnlineClient> filterByChannelId(int channelId) {
         return findAll().stream().filter(client -> client.getChannelId() == channelId).collect(Collectors.toSet());
+    }
+    public Set<Client> findAllClients() {
+        return findAll().stream().map(Client::new).collect(Collectors.toSet());
     }
 }
