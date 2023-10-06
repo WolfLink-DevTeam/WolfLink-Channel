@@ -49,6 +49,7 @@ public class HttpController implements HttpAPI {
     @Override
     public Client queryClient(String client_account) {
         if (reachQPM()) return null;
+        if(client_account == null) return null;
         IOC.getBean(Logger.class).info("接口调用：queryClient 参数：client_account="+client_account);
         return IOC.getBean(SecureClientRepository.class).find(client_account).toClient();
     }
