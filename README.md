@@ -99,3 +99,15 @@ XXXXX搭建的频道：xx.xx.xx.xx:xxxxx
 点点繁星，终将汇成星河
 如果觉得好用，请记得回来给咱们点一个 Star 哦~
 开源不易，每一颗星星都能鼓励我们更加坚定的前行！
+
+## TODO
+
+- 新增 reload 指令
+- 进入频道自动播报频道公告
+- /channel list 查看可用频道列表
+- /channel servers 查看当前频道的所有在线服务器
+- /channel announcement 查看频道公告
+- 支持 BungeeCord 服务端
+- 支持 Nukkit 服务端
+- 支持 Velocity 服务端
+
