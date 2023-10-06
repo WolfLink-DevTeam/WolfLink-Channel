@@ -2,6 +2,7 @@ package org.vanillacommunity.solon.controller;
 
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
+import org.vanillacommunity.solon.Logger;
 import org.vanillacommunity.solon.config.MainConfig;
 import org.vanillacommunity.solon.repository.OnlineClientRepository;
 import org.vanillacommunity.solon.repository.SecureChannelRepository;
@@ -32,8 +33,13 @@ public class HttpController implements HttpAPI {
         }, 1000 * 60, 1000 * 60);
     }
 
-    private synchronized boolean verifyQPM() {
-        return (queryPerMinute++ < IOC.getBean(MainConfig.class).getQueryPerMinuteLimit());
+    /**
+     * 检查是否达到每分钟查询次数阈值
+     */
+    private synchronized boolean reachQPM() {
+        boolean result = (queryPerMinute++ >= IOC.getBean(MainConfig.class).getQueryPerMinuteLimit());
+        if(result) IOC.getBean(Logger.class).warn("已达到每分钟查询数阈值，当前查询次数："+queryPerMinute);
+        return result;
     }
 
     /**
@@ -42,7 +48,8 @@ public class HttpController implements HttpAPI {
     @Mapping("/client")
     @Override
     public Client queryClient(String client_account) {
-        if (!verifyQPM()) return null;
+        if (reachQPM()) return null;
+        IOC.getBean(Logger.class).info("接口调用：queryClient 参数：client_account="+client_account);
         return IOC.getBean(SecureClientRepository.class).find(client_account);
     }
 
@@ -52,7 +59,8 @@ public class HttpController implements HttpAPI {
     @Mapping("/channel/info")
     @Override
     public Channel queryChannel(int channel_id) {
-        if (!verifyQPM()) return null;
+        if (reachQPM()) return null;
+        IOC.getBean(Logger.class).info("接口调用：queryChannel 参数：channel_id="+channel_id);
         return IOC.getBean(SecureChannelRepository.class).find(channel_id);
     }
 
@@ -62,7 +70,8 @@ public class HttpController implements HttpAPI {
     @Mapping("/channel/online_clients")
     @Override
     public Set<Client> queryChannelOnlineClients(int channel_id) {
-        if (!verifyQPM()) return null;
+        if (reachQPM()) return null;
+        IOC.getBean(Logger.class).info("接口调用：queryChannelOnlineClients 参数：channel_id="+channel_id);
         return IOC.getBean(OnlineClientRepository.class).filterByChannelId(channel_id).stream()
                 .map(it -> (Client) it).collect(Collectors.toSet());
     }
