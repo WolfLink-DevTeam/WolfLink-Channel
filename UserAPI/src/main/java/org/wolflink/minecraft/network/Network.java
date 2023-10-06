@@ -11,6 +11,7 @@ import org.wolflink.common.ioc.IOC;
 import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.*;
+import org.wolflink.minecraft.datapack.DataPackExecutor;
 import org.wolflink.minecraft.file.Configuration;
 import org.wolflink.minecraft.file.Language;
 import org.wolflink.minecraft.interfaces.ILogger;
@@ -30,7 +31,8 @@ public class Network implements HttpAPI {
     private Language language;
     @Inject
     ILogger logger;
-
+    @Inject
+    DataPackExecutor executor;
     private WebSocket webSocket = null;
     private final OkHttpClient httpClient = new OkHttpClient().newBuilder()
             .callTimeout(10L, TimeUnit.SECONDS)
@@ -148,7 +150,11 @@ public class Network implements HttpAPI {
                 .build();
         boolean sendStatus = webSocket.send(dataPack.toJson().toString());
         if(!sendStatus) {
-            iPlayer.sendMessage(language.getSendFailed());
+            if(!configuration.isRepeatToLocalIfFailed()) {
+                iPlayer.sendMessage(language.getSendFailed());
+            } else {
+                executor.execute(dataPack,true);
+            }
             synchronized (this) {
                 if(!isWebSocketRetrying) {
                     isWebSocketRetrying = true;

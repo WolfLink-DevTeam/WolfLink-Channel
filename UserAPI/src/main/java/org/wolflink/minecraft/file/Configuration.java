@@ -14,6 +14,7 @@ public class Configuration extends YamlConfiguration {
     private String password;
     private int channelId;
     private boolean forceJoinChannel;
+    private boolean repeatToLocalIfFailed;
 
     public Configuration() {
         // TODO 改为 PlatformAdapter 提供的数据文件夹路径
@@ -29,5 +30,6 @@ public class Configuration extends YamlConfiguration {
         password = root.node("User","Password").getString("temp_password");
         channelId = root.node("User","ChannelId").getInt(1);
         forceJoinChannel = root.node("Settings","Force-Join-Channel").getBoolean(false);
+        repeatToLocalIfFailed = root.node("Settings","Repeat-To-Local-If-Failed").getBoolean(true);
     }
 }
