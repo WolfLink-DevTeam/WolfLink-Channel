@@ -20,6 +20,8 @@ public class Language extends YamlConfiguration {
     private String serverOnline;
     private String isRetrying;
     private String sendFailed;
+    private String cantGetChannelInfo;
+    private String cantGetAllOnlineClientsInfo;
     public String getServerOnline(Client client) {
         return serverOnline
                 .replace("%server%",client.getDisplayName());
@@ -70,6 +72,8 @@ public class Language extends YamlConfiguration {
         notInChannel = root.node("channel","not-in").getString("%prefix% §e你当前没有处于频道中。").replace("%prefix%",prefix);
         isRetrying = root.node("system","is-retrying").getString("%prefix% §c消息发送失败，正在尝试重新建立连接。").replace("%prefix%",prefix);
         sendFailed = root.node("system","send-failed").getString("%prefix% §e消息发送失败，请稍后再尝试。").replace("%prefix%",prefix);
+        cantGetChannelInfo = root.node("channel","cant-get-channel-info").getString("%prefix% §c未能获取到频道信息。").replace("%prefix%",prefix);
+        cantGetAllOnlineClientsInfo = root.node("channel","cant-get-all-online-clients-info").getString("%prefix% §c无法查询到当前在线的全部服务器的信息。").replace("%prefix%",prefix);
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }
