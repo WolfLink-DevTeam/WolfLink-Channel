@@ -50,7 +50,7 @@ public class HttpController implements HttpAPI {
     public Client queryClient(String client_account) {
         if (reachQPM()) return null;
         IOC.getBean(Logger.class).info("接口调用：queryClient 参数：client_account="+client_account);
-        return IOC.getBean(SecureClientRepository.class).find(client_account);
+        return IOC.getBean(SecureClientRepository.class).find(client_account).toClient();
     }
 
     /**
@@ -61,7 +61,7 @@ public class HttpController implements HttpAPI {
     public Channel queryChannel(int channel_id) {
         if (reachQPM()) return null;
         IOC.getBean(Logger.class).info("接口调用：queryChannel 参数：channel_id="+channel_id);
-        return IOC.getBean(SecureChannelRepository.class).find(channel_id);
+        return IOC.getBean(SecureChannelRepository.class).find(channel_id).toChannel();
     }
 
     /**

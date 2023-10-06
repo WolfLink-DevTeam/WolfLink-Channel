@@ -21,12 +21,15 @@ public class SecureChannel extends Channel {
     private final Set<OnlineClient> onlineClients = new HashSet<>();
 
     public SecureChannel(int id, String name, List<String> announcement) {
-        super(id, name, announcement);
+        super(id, name, announcement,new MessageContainer());
         this.password = "";
     }
 
     public SecureChannel(int id, String name, String password, List<String> announcement) {
-        super(id, name, announcement);
+        super(id, name, announcement,new MessageContainer());
         this.password = password;
+    }
+    public Channel toChannel() {
+        return new Channel(this);
     }
 }

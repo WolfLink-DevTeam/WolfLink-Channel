@@ -16,6 +16,11 @@ public class Channel {
     // 频道置顶公告
     private final List<String> announcement;
     // 消息容器，存储消息历史记录
-    private final MessageContainer messageContainer = new MessageContainer();
-
+    private final MessageContainer messageContainer;
+    public Channel(Channel channel) {
+        this.id = channel.id;
+        this.name = channel.name;
+        this.announcement = channel.announcement;
+        this.messageContainer = channel.messageContainer;
+    }
 }

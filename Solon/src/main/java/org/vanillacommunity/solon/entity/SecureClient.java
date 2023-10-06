@@ -16,4 +16,7 @@ public class SecureClient extends Client {
         this.password = password;
         this.ipSegments = ipSegments;
     }
+    public Client toClient() {
+        return new Client(this);
+    }
 }
