@@ -4,6 +4,7 @@ import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.Channel;
 import org.wolflink.minecraft.Client;
+import org.wolflink.minecraft.Result;
 import org.wolflink.minecraft.file.Configuration;
 import org.wolflink.minecraft.file.Language;
 import org.wolflink.minecraft.interfaces.IPlayer;
@@ -20,10 +21,10 @@ public class QueryAction {
     Configuration configuration;
     @Inject
     Language language;
-    public void listChannels(IPlayer player) {
+    public Result listChannels() {
         Set<Channel> allChannels = network.queryAllChannels();
         if(allChannels == null || allChannels.isEmpty()) {
-            player.sendMessage(language.getCantGetAllOnlineClientsInfo());
+            return new Result(false,language.getCantGetChannelInfo());
         } else {
             StringBuilder buffer = new StringBuilder();
             buffer.append(language.getPrefix());
@@ -35,13 +36,13 @@ public class QueryAction {
                 buffer.append(channel.getName());
                 buffer.append("\n");
             }
-            player.sendMessage(buffer.toString());
+            return new Result(true,buffer.toString());
         }
     }
-    public void listServers(IPlayer player) {
+    public Result listServers() {
         Set<Client> allServers = network.queryAllOnlineClients();
         if(allServers == null || allServers.isEmpty()) {
-            player.sendMessage(language.getCantGetAllOnlineClientsInfo());
+            return new Result(false,language.getCantGetAllOnlineClientsInfo());
         } else {
             StringBuilder buffer = new StringBuilder();
             buffer.append(language.getPrefix());
@@ -53,18 +54,21 @@ public class QueryAction {
                 buffer.append(server.getAccount());
                 buffer.append("\n");
             }
-            player.sendMessage(buffer.toString());
+            return new Result(true,buffer.toString());
         }
     }
-    public void showAnnouncements(IPlayer player) {
+    public Result showAnnouncements(IPlayer player) {
         Channel channel = network.queryChannel(configuration.getChannelId());
         if(channel == null) {
-            player.sendMessage(language.getCantGetChannelInfo());
+            return new Result(false,language.getCantGetChannelInfo());
         } else {
+            StringBuilder builder = new StringBuilder();
             List<String> announcements = channel.getAnnouncement();
             for (String text : announcements) {
-                player.sendMessage(text);
+                builder.append(text);
+                builder.append('\n');
             }
+            return new Result(true,builder.toString());
         }
     }
 }
