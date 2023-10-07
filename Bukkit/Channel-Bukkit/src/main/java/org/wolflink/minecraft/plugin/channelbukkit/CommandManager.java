@@ -12,8 +12,11 @@ import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.Result;
 import org.wolflink.minecraft.actions.ChannelAction;
 import org.wolflink.minecraft.actions.PluginAction;
+import org.wolflink.minecraft.actions.QueryAction;
 import org.wolflink.minecraft.file.Language;
 import org.wolflink.minecraft.plugin.channelbukkit.impl.BukkitPlayer;
+
+import javax.management.Query;
 
 @Singleton
 public class CommandManager implements CommandExecutor {
@@ -38,6 +41,12 @@ public class CommandManager implements CommandExecutor {
         }
         else if (args[0].equalsIgnoreCase("reload")) {
             result = IOC.getBean(PluginAction.class).reloadFiles();
+        }
+        else if(args[0].equalsIgnoreCase("channels")) {
+            result = IOC.getBean(QueryAction.class).listChannels();
+        }
+        else if(args[0].equalsIgnoreCase("servers")) {
+            result = IOC.getBean(QueryAction.class).listServers();
         }
         if(result == null) return false;
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME,1f,1f);
