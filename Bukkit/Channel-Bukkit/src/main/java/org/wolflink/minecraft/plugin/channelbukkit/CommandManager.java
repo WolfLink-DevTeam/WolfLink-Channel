@@ -11,6 +11,7 @@ import org.wolflink.common.ioc.Inject;
 import org.wolflink.common.ioc.Singleton;
 import org.wolflink.minecraft.Result;
 import org.wolflink.minecraft.actions.ChannelAction;
+import org.wolflink.minecraft.actions.PluginAction;
 import org.wolflink.minecraft.file.Language;
 import org.wolflink.minecraft.plugin.channelbukkit.impl.BukkitPlayer;
 
@@ -34,6 +35,9 @@ public class CommandManager implements CommandExecutor {
         }
         else if(args[0].equalsIgnoreCase("leave")) {
             result = IOC.getBean(ChannelAction.class).playerLeave(new BukkitPlayer(player));
+        }
+        else if (args[0].equalsIgnoreCase("reload")) {
+            result = IOC.getBean(PluginAction.class).reloadFiles();
         }
         if(result == null) return false;
         player.playSound(player.getLocation(), Sound.BLOCK_NOTE_BLOCK_CHIME,1f,1f);

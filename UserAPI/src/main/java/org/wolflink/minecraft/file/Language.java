@@ -22,6 +22,7 @@ public class Language extends YamlConfiguration {
     private String sendFailed;
     private String cantGetChannelInfo;
     private String cantGetAllOnlineClientsInfo;
+    public String reloadSuccess;
     public String getServerOnline(Client client) {
         return serverOnline
                 .replace("%server%",client.getDisplayName());
@@ -74,6 +75,7 @@ public class Language extends YamlConfiguration {
         sendFailed = root.node("system","send-failed").getString("%prefix% §e消息发送失败，请稍后再尝试。").replace("%prefix%",prefix);
         cantGetChannelInfo = root.node("channel","cant-get-channel-info").getString("%prefix% §c未能获取到频道信息。").replace("%prefix%",prefix);
         cantGetAllOnlineClientsInfo = root.node("channel","cant-get-all-online-clients-info").getString("%prefix% §c无法查询到当前在线的全部服务器的信息。").replace("%prefix%",prefix);
+        reloadSuccess = root.node("system","reload-success").getString("%prefix% §a插件重载完成。").replace("%prefix%",prefix);
 //        announcementTemplate = root.node("channel").node("announcement-template").getString("");
     }
 }
