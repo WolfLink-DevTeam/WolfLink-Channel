@@ -20,7 +20,7 @@ public class MessageContainer {
     public void add(GlobalMessage globalMessage) {
         history.add(globalMessage);
     }
-
+    public void clear() {history.clear();}
     /**
      * 查看最近发送的消息
      *

@@ -18,6 +18,10 @@ public class SecureChannelRepository extends Repository<Integer, SecureChannel> 
         super(SecureChannel::getId);
     }
     public Set<Channel> findAllChannels() {
-        return findAll().stream().map(SecureChannel::toChannel).collect(Collectors.toSet());
+        return findAll().stream().map(it -> {
+            Channel channel = it.toChannel();
+            channel.getMessageContainer().clear();
+            return channel;
+        }).collect(Collectors.toSet());
     }
 }
