@@ -61,6 +61,9 @@ public class Language extends YamlConfiguration {
             temp.add("§b/channel §8- §7查询指令帮助");
             temp.add("§b/channel join §8- §7加入默认频道");
             temp.add("§b/channel leave §8- §7离开当前频道");
+            temp.add("§b/channel channels §8- §7查看所有跨服频道");
+            temp.add("§b/channel servers §8- §7查看当前在线的所有服务器");
+            temp.add("§b/channel announcements §8- §7查看当前服务器归属的频道公告");
             temp.add(" ");
             cmdHelp = temp;
         }

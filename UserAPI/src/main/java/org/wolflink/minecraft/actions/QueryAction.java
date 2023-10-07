@@ -57,7 +57,7 @@ public class QueryAction {
             return new Result(true,buffer.toString());
         }
     }
-    public Result showAnnouncements(IPlayer player) {
+    public Result showAnnouncements() {
         Channel channel = network.queryChannel(configuration.getChannelId());
         if(channel == null) {
             return new Result(false,language.getCantGetChannelInfo());

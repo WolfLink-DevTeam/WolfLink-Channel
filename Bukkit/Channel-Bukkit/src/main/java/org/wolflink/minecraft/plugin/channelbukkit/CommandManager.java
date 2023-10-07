@@ -1,5 +1,6 @@
 package org.wolflink.minecraft.plugin.channelbukkit;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -35,6 +36,12 @@ public class CommandManager implements CommandExecutor {
         Result result = null;
         if(args[0].equalsIgnoreCase("join")) {
             result = IOC.getBean(ChannelAction.class).playerJoin(new BukkitPlayer(player));
+            if(result.isResult()) {
+                Bukkit.dispatchCommand(player,"channel announcements");
+            }
+        }
+        else if(args[0].equalsIgnoreCase("announcements")) {
+            result = IOC.getBean(QueryAction.class).showAnnouncements();
         }
         else if(args[0].equalsIgnoreCase("leave")) {
             result = IOC.getBean(ChannelAction.class).playerLeave(new BukkitPlayer(player));

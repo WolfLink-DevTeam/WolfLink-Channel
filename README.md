@@ -102,11 +102,6 @@ XXXXX搭建的频道：xx.xx.xx.xx:xxxxx
 
 ## TODO
 
-- 新增 reload 指令
-- 进入频道自动播报频道公告
-- /channel list 查看可用频道列表
-- /channel servers 查看当前频道的所有在线服务器
-- /channel announcement 查看频道公告
 - 支持 BungeeCord 服务端
 - 支持 Nukkit 服务端
 - 支持 Velocity 服务端
