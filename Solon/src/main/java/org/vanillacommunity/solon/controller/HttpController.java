@@ -62,7 +62,9 @@ public class HttpController implements HttpAPI {
     public Channel queryChannel(int channel_id) {
         if (reachQPM()) return null;
         IOC.getBean(Logger.class).info("接口调用：queryChannel 参数：channel_id="+channel_id);
-        return IOC.getBean(SecureChannelRepository.class).find(channel_id).toChannel();
+        Channel channel = IOC.getBean(SecureChannelRepository.class).find(channel_id).toChannel();
+        channel.getMessageContainer().clear();
+        return channel;
     }
 
     @Mapping("/channel/all")
